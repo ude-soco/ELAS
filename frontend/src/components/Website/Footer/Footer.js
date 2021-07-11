@@ -38,21 +38,6 @@ export default function Footer(props) {
                   <Typography variant="body2" className={classes.gutterBottom}>
                     <b>About Social Computing Group</b>
                   </Typography>
-                  <Typography variant="body2" gutterBottom>At the intersection of computer science and social science,
-                    we conduct applied research into intelligent data-intensive systems and their application in social
-                    media, technology-enhanced learning, and knowledge management domains.
-                  </Typography>
-                  <Typography variant="body2" gutterBottom>
-                    Headed by Prof. Dr. Mohamed Amine Chatti, we design, implement, and evaluate new analytics-driven
-                    theories, methods and systems for tomorrow’s smart learning and working environments. We offer
-                    lectures, seminars, and practical courses in learning technologies, web technologies, data science
-                    and visual analytics, following a technology-enhanced, student-centered learning approach.
-                  </Typography>
-                  <Typography variant="body2" gutterBottom>
-                    We're part of the Department of Computer Science and Applied Cognitive Science, Faculty of
-                    Engineering at the University of Duisburg-Essen, one of the top universities worldwide younger than
-                    50 years.
-                  </Typography>
                   <Button variant="contained" color="primary" size="small"
                           onClick={() => window.open("https://www.uni-due.de/soco/")}
                           style={{marginTop: 16}}>
