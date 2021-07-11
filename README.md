@@ -15,7 +15,7 @@ The aim of this IDEA lab is to provide the foundation for an Exploratory Learnin
 1. Using Docker
    - Download and install [Docker](https://www.docker.com/products/docker-desktop)
    - Open command prompt/terminal in the `ELAS` directory and type `docker-compose up --build`
-2. Local installation
+2. Manual installation
    - Backend installation
      - Download and install [Python](https://www.python.org/downloads/release/python-387/)
      - Download and install [MongoDB Community Server](https://www.mongodb.com/try/download/community)
