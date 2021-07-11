@@ -1,0 +1,8 @@
+venv
+example.env
+example.flaskenv
+Dockerfile
+.env
+.flaskenv
+.dockerignore
+README.md

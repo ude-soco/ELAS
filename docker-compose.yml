@@ -1,0 +1,49 @@
+version: "3"
+
+services:
+  mongoDB:
+    image: mongo:4.4-bionic
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodbdata:/data/db
+    networks:
+      - backend
+
+  elas-backend:
+    image: elas-backend
+    build: ./backend
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - mongoDB
+    networks:
+      - backend
+      - frontend
+
+  elas-frontend:
+    image: elas-frontend
+    build: ./frontend
+    restart: unless-stopped
+    stdin_open: true
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - elas-backend
+    networks:
+      - frontend
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+
+volumes:
+  mongodbdata:
+    driver: local
