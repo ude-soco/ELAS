@@ -1,17 +1,21 @@
-# Exploratory Learning Analytics Toolkit for Students (ELAS) - Frontend
+<p align="center">
+<a href="https://www.uni-due.de/soco/research/projects/openlap.php" target="_blank" rel="noopener noreferrer">
+<img height="100px" src="public/images/logos/cover.png" alt="re-frame logo">
+</a>
+</p>
+# ELAS - Frontend
 
 ## Table of Contents
 
-* [Project info](#project-info)
-* [Project structure](#project-structure)
-* [Technologies](#technologies)
-* [Additional applications](#Additional-applications)
-* [Setup](#setup)
+- [Project info](#project-info)
+- [Project structure](#project-structure)
+- [Technologies](#technologies)
+- [Additional applications](#Additional-applications)
 
 ## Project info
 
 This repository consists of the web application made with ReactJS library for the ELAS Lab Project. Each group will
-receive access to a branch and should only work on the project inside ```Projects``` folder they are assigned to.
+receive access to a branch and should only work on the project inside `Projects` folder they are assigned to.
 
 ## Project structure
 
@@ -86,27 +90,12 @@ receive access to a branch and should only work on the project inside ```Project
 
 Project is created with:
 
-* [React](https://reactjs.org/docs/getting-started.html) (v17.0.2)
-* [Material Design](https://material-ui.com/getting-started/installation/) (v4.11.3)
-* [NodeJS](https://nodejs.org/dist/v14.15.3/) (v14.15.3)
+- [React](https://reactjs.org/docs/getting-started.html) (v17.0.2)
+- [Material Design](https://material-ui.com/getting-started/installation/) (v4.11.3)
+- [NodeJS](https://nodejs.org/dist/v14.15.3/) (v14.15.3)
 
 ## Additional applications
 
-* [Visual Studio Code](https://code.visualstudio.com/download)
+- [Visual Studio Code](https://code.visualstudio.com/download)
   or [Intellij Ultimate](https://www.jetbrains.com/de-de/idea/download/#section=windows)
-* [Google Chrome Browser](https://www.google.com/intl/de_de/chrome/)
-
-## Setup
-
-Step 1:- Download the latest LTS version of Node from [NodeJS official website](https://nodejs.org/de/download/).
-
-Step 2:- Rename the file ```example.env``` to ```.env```.
-
-Step 3:- Run the project, install it locally using npm:
-
-```
-$ npm install
-$ npm start
-```
-
-Open [localhost:3000](http://localhost:3000) to view it in the browser.
+- [Google Chrome Browser](https://www.google.com/intl/de_de/chrome/)

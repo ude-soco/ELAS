@@ -1,4 +1,9 @@
-# Exploratory Learning Analytics Toolkit for Students (ELAS) - Backend
+<p align="center">
+<a href="https://www.uni-due.de/soco/research/projects/openlap.php" target="_blank" rel="noopener noreferrer">
+<img height="100px" src="../frontend/public/images/logos/cover.png" alt="re-frame logo">
+</a>
+</p>
+# ELAS - Backend
 
 ## Table of Contents
 
@@ -6,7 +11,6 @@
 - [Project structure](#project-structure)
 - [Technologies](#technologies)
 - [Additional applications](#Additional-applications)
-- [Setup](#setup)
 
 ## Project Info
 
@@ -65,37 +69,3 @@ Project is created with:
 - [Visual Studio Code](https://code.visualstudio.com/download)
   or [Pycharm Professional](https://www.jetbrains.com/de-de/pycharm/download/#section=windows)
 - Mongo Compass (check the box to install when installing MongoDB Community Server)
-
-## Setup
-
-Step 1:- Download the latest version of Python from [Python official website](https://www.python.org/downloads/).
-
-Step 2:- Download and install MongoDB Community Server
-from [MongoDB official website](https://www.mongodb.com/try/download/community).
-
-Step 3:- Type the following commands in either a command prompt, powershell or terminal
-
-```sh
-$ python -m venv venv                       # Installs a python virtual environment
-$ .\venv\Scripts\activate                   # Activates the python virtual environment
-$ python -m pip install --upgrade pip       # Upgrades pip version
-$ pip install -r requirements.txt           # Installs the required packages
-```
-
-Step 4:- Rename the file `example.env` to `.env`.
-
-Step 5:- Rename the file `example.flaskenv` to `.flaskenv`.
-
-Step 6:- Run the project either from a terminal or command prompt or powershell:
-
-```
-$ flask run
-```
-
-or
-
-```
-$ python -m flask run --host=0.0.0.0
-```
-
-Web server should start running at localhost:5000.
