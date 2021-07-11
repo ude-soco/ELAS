@@ -30,6 +30,7 @@ The aim of this IDEA lab is to provide the foundation for an Exploratory Learnin
      - Type `python -m flask run --host=0.0.0.0` to run server
    - Frontend installation
      - Download and install [NodeJS](https://nodejs.org/en/)
+     - Move to `frontend` folder and rename `example.env` to `.env`
      - Open command prompt/terminal, move to `frontend` folder, and type the following commands:
      ```sh
      $ npm install                           # Downloads and installs node packages
