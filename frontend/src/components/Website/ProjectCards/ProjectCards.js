@@ -15,7 +15,6 @@ import clsx from 'clsx';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: "100%",
     display: "block",
     transition: "all .35s linear",
     boxShadow: " 0px 8px 9px 0px rgba(0,0,0,0.4)",
