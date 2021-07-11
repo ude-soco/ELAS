@@ -15,32 +15,67 @@ The aim of this IDEA lab is to provide the foundation for an Exploratory Learnin
 1. Using Docker 🐳
 
    - Make sure you have downloaded and installed [Docker](https://www.docker.com/products/docker-desktop)
-   - Open a command prompt/terminal and move to the `ELAS` directory. Then type the following command:
+   - Make sure to add your project folder `ELAS` in the file sharing settings of Docker as shown [here](img/docker-issue-windows.jpg)
+   - Make sure you have downloaded and installed [NodeJS](https://nodejs.org/en/)
+   - Open a command prompt/terminal and move to the `ELAS\frontend` directory. Then type the following command:
 
-     `docker-compose up --build`
+     ```sh
+     npm install
+     ```
+     
+   - Move back to `ELAS` directory and type the following command in the command prompt/terminal:
 
-   - Troubleshoot Docker file sharing issue
-     - Add your project folder as shown [here](img/docker-issue-windows.jpg)
+     ```sh
+     docker-compose up --build
+     ```
+
 
 2. Manual installation 🔨
    - Backend installation
      - Download and install [Python](https://www.python.org/downloads/release/python-387/)
      - Download and install [MongoDB Community Server](https://www.mongodb.com/try/download/community)
-     - Open command prompt/terminal, move to `backend` folder, and type the following commands
-     ```sh
-     $ python -m venv venv                   # Installs a python virtual environment
-     $ .\venv\Scripts\activate               # Activates the python virtual environment
-     $ python -m pip install --upgrade pip   # Upgrades pip version
-     $ pip install -r requirements.txt       # Installs the required packages
-     ```
+     - Open command prompt/terminal, move to `backend` folder
+       - Install a python virtual environment
+
+         ```sh
+         python -m venv venv  
+         ```
+       - Activate the python virtual environment
+
+         ```sh
+         .\venv\Scripts\activate  
+         ```
+       - Upgrade pip version
+
+         ```sh
+         python -m pip install --upgrade pip  
+         ```
+       - Install the required packages
+
+         ```sh
+         pip install -r requirements.txt 
+         ```
      - Rename `example.env` and `example.flaskenv` to `.env` and `.flaskenv` respectively
-     - Type `python -m flask run --host=0.0.0.0` to run server
+     - Type the following command in a command prompt/terminal to run server 
+     
+       ```sh
+       python -m flask run --host=0.0.0.0
+       ```
+     
    - Frontend installation
      - Download and install [NodeJS](https://nodejs.org/en/)
      - Move to `frontend` folder and rename `example.env` to `.env`
-     - Open command prompt/terminal, move to `frontend` folder, and type the following commands:
-     ```sh
-     $ npm install                           # Downloads and installs node packages
-     $ npm start                             # Runs the script and starts the application
-     ```
+     - Open command prompt/terminal, move to `frontend` folder
+       
+       - Download and install node packages
+       
+         ```sh
+         npm install
+         ```
+        
+       - Run the script and starts the application
+       
+         ```sh
+         npm start
+         ```
      - Application will start automatically in [http://localhost:3000](http://localhost:3000)
