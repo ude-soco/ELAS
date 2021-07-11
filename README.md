@@ -10,16 +10,19 @@ The Interactive Data Exploration and Analytics (IDEA) lab course offered at the 
 
 The aim of this IDEA lab is to provide the foundation for an Exploratory Learning Analytics Toolkit for Students (ELAS) to support UDE students in their learning activities. In the previous iterations of the Learning Analytics (LA), Advanced Web Technologies (AdvWebTech), and Learning Analytics and Visual Analytics (LAVA) courses offered at the SoCo Group, different LA applications were developed as part of student projects. The task in IDEA lab will be to improve, adapt, and integrate selected applications into the ELAS platform.
 
-## How to get started?
+## 🚀 Get Started
 
-1. Using Docker
+1. Using Docker 🐳
 
-   - Download and install [Docker](https://www.docker.com/products/docker-desktop)
-   - Open command prompt/terminal in the `ELAS` directory and type `docker-compose up --build`
+   - Make sure you have downloaded and installed [Docker](https://www.docker.com/products/docker-desktop)
+   - Open a command prompt/terminal and move to the `ELAS` directory. Then type the following command:
+
+     `docker-compose up --build`
+
    - Troubleshoot Docker file sharing issue
      - Add your project folder as shown [here](img/docker-issue-windows.jpg)
 
-2. Manual installation
+2. Manual installation 🔨
    - Backend installation
      - Download and install [Python](https://www.python.org/downloads/release/python-387/)
      - Download and install [MongoDB Community Server](https://www.mongodb.com/try/download/community)
