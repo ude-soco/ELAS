@@ -3,6 +3,7 @@
 <img height="100px" src="public/images/logos/cover.png" alt="re-frame logo">
 </a>
 </p>
+
 # ELAS - Frontend
 
 ## Table of Contents
