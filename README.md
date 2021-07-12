@@ -26,7 +26,7 @@ The aim of this IDEA lab is to provide the foundation for an Exploratory Learnin
    - Move back to `ELAS` directory and type the following command in the command prompt/terminal:
 
      ```sh
-     docker-compose up --env-file docker.env --build
+     docker-compose up --build
      ```
 
 

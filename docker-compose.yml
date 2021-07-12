@@ -15,10 +15,10 @@ services:
     build: ./backend
     restart: unless-stopped
     environment: 
-      - FLASK_APP=${FLASK_APP}
-      - FLASK_ENV=${FLASK_ENV}
-      - MONGO_URI=${MONGO_URI}
-      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - FLASK_APP=application
+      - FLASK_ENV=development
+      - MONGO_URI=mongodb://mongoDB:27017/ELAS
+      - JWT_SECRET_KEY=secret
     ports:
       - "5000:5000"
     volumes:
@@ -35,8 +35,8 @@ services:
     restart: unless-stopped
     stdin_open: true
     environment: 
-      - REACT_APP_BASE_URL=${REACT_APP_BASE_URL}
-      - CHOKIDAR_USEPOLLING=${CHOKIDAR_USEPOLLING}
+      - REACT_APP_BASE_URL=http://localhost:5000
+      - CHOKIDAR_USEPOLLING=true
     ports:
       - "3000:3000"
     volumes:
