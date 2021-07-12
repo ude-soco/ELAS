@@ -1,6 +1,6 @@
 <p align="center">
 <a href="https://www.uni-due.de/soco/teaching/courses/lab-idea-ss21.php" target="_blank" rel="noopener noreferrer">
-<img height="130px" src="../img/cover.png" alt="re-frame logo">
+<img height="110px" src="../img/cover.png" alt="re-frame logo">
 </a>
 </p>
 
