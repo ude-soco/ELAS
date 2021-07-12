@@ -32,9 +32,9 @@ The aim of this IDEA lab is to provide the foundation for an Exploratory Learnin
 
 2. Manual installation 🔨
    - Backend installation
-     - Download and install [Python](https://www.python.org/downloads/release/python-387/)
-     - Download and install [MongoDB Community Server](https://www.mongodb.com/try/download/community)
-     - Open command prompt/terminal, move to `backend` folder
+     - Make sure you have downloaded and installed [Python](https://www.python.org/downloads/release/python-387/)
+     - Make sure you have downloaded and installed [MongoDB Community Server](https://www.mongodb.com/try/download/community)
+     - Open a command prompt/terminal, move to `backend` folder, and follow the steps below:
        - Install a python virtual environment
 
          ```sh
