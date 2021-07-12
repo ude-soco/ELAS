@@ -34,7 +34,7 @@ The aim of this IDEA lab is to provide the foundation for an Exploratory Learnin
    - Backend installation
      - Make sure you have downloaded and installed [Python](https://www.python.org/downloads/release/python-387/)
      - Make sure you have downloaded and installed [MongoDB Community Server](https://www.mongodb.com/try/download/community)
-     - Open a command prompt/terminal, move to `backend` folder, and follow the steps below:
+     - Open a command prompt/terminal, move inside `backend` folder, and follow the steps below:
        - Install a python virtual environment
 
          ```sh
@@ -45,17 +45,17 @@ The aim of this IDEA lab is to provide the foundation for an Exploratory Learnin
          ```sh
          .\venv\Scripts\activate  
          ```
-       - Upgrade pip version
+       - Upgrade the pip version
 
          ```sh
          python -m pip install --upgrade pip  
          ```
-       - Install the required packages
+       - Install the required packages from the `requirements.txt` file
 
          ```sh
          pip install -r requirements.txt 
          ```
-     - Rename `example.env` and `example.flaskenv` to `.env` and `.flaskenv` respectively
+     - Rename the files `example.env` to `.env` and `example.flaskenv` to `.flaskenv` respectively
      - Type the following command in a command prompt/terminal to run server 
      
        ```sh
@@ -64,10 +64,10 @@ The aim of this IDEA lab is to provide the foundation for an Exploratory Learnin
      
    - Frontend installation
      - Download and install [NodeJS](https://nodejs.org/en/)
-     - Move to `frontend` folder and rename `example.env` to `.env`
-     - Open command prompt/terminal, move to `frontend` folder
+     - Move to `frontend` folder and rename the file `example.env` to `.env`
+     - Open command prompt/terminal and follow the steps below:
        
-       - Download and install node packages
+       - Make sure you have downloaded and installed node packages
        
          ```sh
          npm install

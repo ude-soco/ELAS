@@ -14,6 +14,11 @@ services:
     image: elas-backend
     build: ./backend
     restart: unless-stopped
+    environment: 
+      - FLASK_APP=${FLASK_APP}
+      - FLASK_ENV=${FLASK_ENV}
+      - MONGO_URI=${MONGO_URI}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
     ports:
       - "5000:5000"
     volumes:
@@ -29,6 +34,9 @@ services:
     build: ./frontend
     restart: unless-stopped
     stdin_open: true
+    environment: 
+      - REACT_APP_BASE_URL=${REACT_APP_BASE_URL}
+      - CHOKIDAR_USEPOLLING=${CHOKIDAR_USEPOLLING}
     ports:
       - "3000:3000"
     volumes:

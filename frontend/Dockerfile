@@ -1,8 +1,5 @@
 FROM node:14-slim
 
-ENV REACT_APP_BASE_URL='http://localhost:5000' \
-    CHOKIDAR_USEPOLLING=true
-
 COPY package*.json .
 
 RUN npm install
