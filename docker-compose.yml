@@ -22,7 +22,7 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - ./backend:/app:ro
+      - ./backend/application:/app/application:ro
     depends_on:
       - mongoDB
     networks:
@@ -40,7 +40,8 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./frontend:/app:ro
+      - ./frontend/src:/app/src:ro
+      - ./frontend/public:/app/public:ro
     depends_on:
       - elas-backend
     networks:
