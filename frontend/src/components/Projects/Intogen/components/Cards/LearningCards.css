@@ -1,0 +1,14 @@
+.learningCard:hover {
+    color: rgb(255, 102, 0);
+    font-weight: bold;
+}
+
+.cardsSubTitle {
+    font-size: 75%;
+}
+
+.cardsDiv {
+    margin-top: -60px;
+    padding-left: 30px;
+    border-left: 1px solid rgb(255, 102, 0);
+}
