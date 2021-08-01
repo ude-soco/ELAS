@@ -31,7 +31,36 @@ export default function ProgramSelector(props) {
     const[sem,setSem] = useState(false);
     const[prog,setProg] = useState(false);
 
-    const semesters = [{semester: 'WiSe 2018/19'},{semester: 'SoSe 2019'}];
+    /* Retrieving all semester to which data is contained in the data file(studyprograms), stored in semesters */
+    const createSemesters = () => {
+        const testsemester = [];
+        for (let study of props.studyprograms) {
+            for (let subject of study.categories) {
+                for (let sub of subject.subjects) {
+                    if (!testsemester.includes(sub.semesters[0]))
+                        testsemester.push(sub.semesters[0])
+                }
+
+                for (let cat of subject.categories) {
+                    for (let sub2 of cat.subjects) {
+                        if (!testsemester.includes(sub2.semesters[0])) {
+                            testsemester.push(sub2.semesters[0])
+                        }
+
+                    }
+                    for (let cats of cat.categories) {
+                        for (let sub3 of cats.subjects) {
+                            if (!testsemester.includes(sub3.semesters[0])) {
+                                testsemester.push(sub3.semesters[0])
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return testsemester;
+    }
+    const [semesters, setSemesters] = useState(createSemesters);
 
     /* Setting the the state of sem to true when a semester is selected (as indicator for the next button) and false when no semester is selected*/
     const handleSemesterSet = (newValue) => {
@@ -82,7 +111,7 @@ export default function ProgramSelector(props) {
                                 style={{fontVariant: "small-caps", width: "100%"}}
                                 id="semester-selection"
                                 options={semesters}
-                                getOptionLabel={(option) => option.semester}
+                                getOptionLabel={(option) => option}
                                 renderInput={(params) => <TextField {...params} 
                                                             label="Select your Semester"
                                                             variant="outlined" color="secondary"/>}

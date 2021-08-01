@@ -318,7 +318,7 @@ export default function CourseSelector(props) {
       const subjectnames = [];
       for (let subject of studyprogram.categories) {
           for (let sub of subject.subjects) {
-              if (sub.semesters.includes(props.semester.semester)) {
+              if (sub.semesters.includes(props.semester)) {
                   if(!subjectnames.includes(sub.name)) {
                       subjectslist.push(sub);
                       subjectnames.push(sub.name);
@@ -327,7 +327,7 @@ export default function CourseSelector(props) {
           }
           for (let cat of subject.categories) {
               for (let sub2 of cat.subjects) {
-                  if (sub2.semesters.includes(props.semester.semester)) {
+                  if (sub2.semesters.includes(props.semester)) {
                       if(!subjectnames.includes(sub2.name)){
                           subjectslist.push(sub2);
                           subjectnames.push(sub2.name);
@@ -337,7 +337,7 @@ export default function CourseSelector(props) {
               }
               for (let cats of cat.categories){
                   for(let sub3 of cats.subjects){
-                      if(sub3.semesters.includes(props.semester.semester) && !subjectnames.includes(sub3.name)){
+                      if(sub3.semesters.includes(props.semester) && !subjectnames.includes(sub3.name)){
                           subjectslist.push(sub3);
                           subjectnames.push(sub3.name);
                       }
@@ -634,7 +634,7 @@ export default function CourseSelector(props) {
                           <Typography color="secondary" className={classes.lilcaptions}> Your selected
                               semester: </Typography>
                           <Typography
-                              className={classes.content}>{props.semester.semester}</Typography>
+                              className={classes.content}>{props.semester}</Typography>
                       </CardContent>
                   </Card>
                 </Grid>

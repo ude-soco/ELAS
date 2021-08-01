@@ -524,7 +524,7 @@ export default function ComparePage(props) {
                                     <Typography className={classes.lilcaptions}> Your selected studyprogram: </Typography>
                                     <Typography className={classes.content}>{props.studyprogram.name}</Typography>
                                     <Typography className={classes.lilcaptions}> Your selected semester: </Typography>
-                                    <Typography className={classes.content}>{props.semester.semester}</Typography>
+                                    <Typography className={classes.content}>{props.semester}</Typography>
                                     <Typography className={classes.lilcaptions}> Your total SWS: </Typography>
                                     <Typography className={classes.content}>{calculateSWS(markedSubjects)} </Typography>
                                 </CardContent>

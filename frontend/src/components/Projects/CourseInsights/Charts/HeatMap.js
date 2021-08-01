@@ -21,7 +21,7 @@ function generateHeatMapData(subjectsAndOverlapping) {
 function generateData(subject, subjectsAndOverlapping) {
     let xydata = [];
     for (let sub of subjectsAndOverlapping) {
-        console.log(sub);
+
         if (subject === sub.subjectA.name) {
             if (sub.overlaps.length === 0) {
                 if (sub.subjectA.name === sub.subjectB.name) {
