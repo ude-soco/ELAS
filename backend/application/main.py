@@ -48,3 +48,29 @@ def register():
 
     else:
         return jsonify({"error": "User is already registered"})
+
+
+@main.route('/commence_scraping', methods=['GET', 'POST'])
+def scrape():
+    import os
+    import yaml
+    from multiprocessing import Process
+    from .scraper.scrape_control import run
+
+    with open(os.path.join(os.path.dirname(__file__), "scraper", "config.yaml"), "r") as file:
+        config = file.read()
+    config = yaml.safe_load(config)
+
+    if request.method == 'GET':
+        return {"statusMessage": config["statusMessage"]}
+
+    e3_url = request.json["e3"]
+    insight_url = request.json["insight"]
+
+    config["statusMessage"] = "running..."
+    with open(os.path.join(os.path.dirname(__file__), "scraper", "config.yaml"), "w") as file:
+        file.write(yaml.dump(config))
+
+    scraper = Process(target=run, args=(config, insight_url, e3_url,))
+    scraper.start()
+    return ""

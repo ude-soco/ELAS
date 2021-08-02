@@ -1,0 +1,191 @@
+.info-table
+	width: 100%
+
+	table
+		margin: 0 auto
+
+	th
+		font-style: normal
+		font-weight: normal
+		font-size: 14px
+		line-height: 16px
+		text-align: right
+		letter-spacing: 1.25px
+		color: rgba(0, 0, 0, 0.6)
+		padding-right: 12px
+
+	td
+		font-style: normal
+		font-weight: 500
+		font-size: 14px
+		line-height: 16px
+		text-align: left
+		letter-spacing: 1.25px
+
+	a, a:hover, a:active, a:visited
+		color: #333
+		text-align: center
+		width: 100%
+		display: inline-block
+
+.expand-icon
+	float: right
+	cursor: pointer
+
+	svg
+		transform: translateY(4px)
+		width: 45px
+		height: 45px
+
+.select-icon
+	position: absolute
+	top: -2px
+	left: -62px
+	svg
+		width: 40px
+		height: 40px
+		color: #333
+
+.lang-flag
+	transform: translateY(3px)
+
+.hr-lighter
+	color: #C0C0C0
+	height: 1px
+
+.lecExBorder
+	background-color: #90EE90
+
+.lectureBorder
+	background-color: #B0E0E6
+
+.seminarBorder
+	background-color: #FFDAB9
+
+.blockBorder
+	background-color: #FA8072
+
+.elearnBorder
+	background-color: #D8BFD8
+
+.share-modal
+	position: absolute
+	top: 50%
+	left: 50%
+	transform: translate(-50%, -50%)
+
+.time-table
+	margin: 0 auto
+	th
+		padding-right: 8px
+
+	tr
+		&:first-child
+			td
+				text-align: center
+				font-weight: bold
+	.timeTableCheckbox
+		width: 40px
+		height: 40px
+		margin: 2px
+		background-color: #E0E0E0
+		cursor: pointer
+
+		&.checked-true
+			background-color: #F2994A
+
+	@media screen and (max-width: 505px)
+		transform: scale(0.8)
+		margin: 0 -40px
+
+.time-table-selectable
+	@media screen and (max-width: 600px)
+		transform: scale(0.8)
+		margin: -40px
+
+	@media screen and (max-width: 500px)
+		transform: scale(0.7)
+		margin: -45px -80px
+
+.vertical-filter
+	text-transform: uppercase
+	color: #999
+	font-size: 18px
+	font-weight: bold
+	margin: 0 12px
+	cursor: pointer
+
+	&.vertical-checked
+		color: #0057A7
+
+	@media screen and (max-width: 600px)
+		font-size: 16px
+		margin: 0 6px 16px 6px
+
+#overview
+	padding: 0 40px 12px 40px
+	h1
+		font-size: 96px
+		font-weight: 500
+		color: #333
+		display: inline-block
+		position: relative
+		margin: 0
+
+		&:before, &:after
+			position: absolute
+			left: calc(100% + 4px)
+			line-height: 16px
+			letter-spacing: 1.25px
+
+		&:before
+			top: 28px
+			color: #00000060
+			font-size: 18px
+
+		&:after
+			bottom: 41px
+			font-size: 36px
+
+	h1.on-ok
+			color: #27AE60
+
+	h1.on-warn
+			color: #F2994A
+
+	#overview-credit-count:before
+		content: "credits\Aselected"
+
+	#overview-workload-count
+		&:before
+			content: "weekly\Aworkload"
+
+		&:after
+			content: "hrs"
+
+	.overview-notification
+		display: flex
+		align-items: center
+
+		font-weight: 500
+		font-size: 18px
+		color: #00000060
+
+		svg
+			margin: -2px 4px 0 0
+
+	.on-ok svg
+		color: #27AE60
+
+	.on-warn svg
+		color: #F2994A
+
+.chart
+	width: 100%
+
+	@media screen and (max-width: 505px)
+		margin: -12px
+
+	svg
+		margin: 0 auto
+		display: block
