@@ -18,7 +18,9 @@ function Diagram(props) {
         min: 0,
         max: 100,
         title: {
-            text: 'Percentage (%)'
+            // Comment: Wrong representation of label
+            // text: 'Percentage (%)'
+            text: 'Average Amount'
         }
     },
     tooltip: {
@@ -36,24 +38,29 @@ function Diagram(props) {
             borderWidth: 0
         }
     },
+    // Comment: Wrong representation of labels
     series: [{
-        name: 'Male',
+        // name: 'Male',
+        name: 'Male (M)',
         data: props.males,
         color: Highcharts.getOptions().colors[1] 
     },
     {
-        name: 'Female',
+        // name: 'Female',
+        name: 'Female (F)',
         data: props.females,
         color: Highcharts.getOptions().colors[3]
     }, 
     {
-        name: 'Other',
-        data: [],
+        // name: 'Other',
+        name: 'Other (O)',
+        data: props.others,
         color: Highcharts.getOptions().colors[6]
     },
     {
         type: 'spline',
-        name: 'Average',
+        // name: 'Average',
+        name: 'Average (M/F/O)',
         data: props.average,
         marker: {
             lineWidth: 2,
