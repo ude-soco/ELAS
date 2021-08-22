@@ -3,6 +3,8 @@ import ProjectCards from "../ProjectCards/ProjectCards";
 import {Divider, Grid, InputAdornment, TextField} from "@material-ui/core";
 import {projectDetails} from "../../../assets/data/data";
 import SearchIcon from "@material-ui/icons/Search";
+import Box from "@material-ui/core/Box";
+
 
 export default function Home(props) {
   const [projectSearch, setProjectSearch] = useState("");
@@ -15,6 +17,7 @@ export default function Home(props) {
   return (
     <>
       <TextField
+        className={classes.container}
         id="outlined-basic"
         label="Search for projects"
         value={projectSearch}
@@ -28,8 +31,8 @@ export default function Home(props) {
           ),
         }}
       />
-      <Divider className={classes.gridHeader}/>
-      <Grid container spacing={3} className={classes.gridHeader}>
+      <Divider className={classes.containerHeader}/>
+      <Grid container spacing={3} className={classes.containerHeader}>
         {projectDetails.map((details, index) => {
           let nameToSearch = details.name.toLowerCase();
           const found = nameToSearch.includes(projectSearch);

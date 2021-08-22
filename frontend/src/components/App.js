@@ -17,14 +17,18 @@ import StudySoon from "./Projects/StudySoon/StudySoon";
 import Footer from "./Website/Footer/Footer";
 
 const useStyles = makeStyles(theme => ({
-  gridHeader: {
+  containerHeader: {
     marginTop: theme.spacing(4),
+    paddingRight: theme.spacing(4),
+    paddingLeft: theme.spacing(4)
   },
   gridContainer: {
-    marginTop: theme.spacing(13),
-    padding: theme.spacing(0, 4, 0, 4),
+    marginTop: theme.spacing(8),
     position: "relative",
     minHeight: "100vh"
+  },
+  container: {
+    margin: theme.spacing(5, 4, 0, 4),
   }
 }))
 
@@ -59,8 +63,6 @@ export default function App() {
             </>
           )}
           <Route render={() => <Redirect to={{pathname: "/"}}/>}/>
-
-
         </Grid>
       </Switch>
       <Footer />

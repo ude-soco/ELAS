@@ -83,7 +83,7 @@ export default function E3Selector() {
     // View 2: study program already selected. This is the main view.
     } else {
         return (
-            <div style={{marginTop: "-40px"}}>
+            <div>
                 <StylesProvider>
                     <ThemeProvider theme={theme}>
                         <CssBaseline />

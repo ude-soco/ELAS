@@ -6,21 +6,27 @@ import Diagram from '../Diagrams/Diagram'
 import data from '../Diagrams/Data/out';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import {dataCollection} from "../Reusable/functions";
 
 export default function Nationality() {
   const [females, setFemales] = useState([]);
   const [males, setMales] = useState([]);
   const [others, setOthers] = useState([]);
   const [average, setAverage] = useState([]);
-  // Comment: Naming convention should be camelCase
-  // const [amountales, setAmountmales] = useState();
+
+  // Comment: JS naming convention should be camelCase
+  // const [amountmales, setAmountmales] = useState();
   // const [amountfemales, setAmountfemales] = useState();
   const [amountMales, setAmountMales] = useState();
   const [amountFemales, setAmountFemales] = useState();
+
+  // Comment: unnecessary usage of state
   // const [category, setCategory] = useState([]);
   const category = ['Activist', 'Reflector', 'Theorist', 'Pragmatist'];
-  // const uniqueNationalities = getUnique(data, 'Nationality');
+
   const uniqueNationalities = getUnique();
+  // const uniqueNationalities = getUnique(data, 'Nationality');
+
   // Comment: Sorting is done inside the getUnique function
   // uniqueNationalities.sort((a, b) => (a.Nationality > b.Nationality) ? 1 : -1)
 
@@ -158,90 +164,17 @@ export default function Nationality() {
       averagePragmatist = pragmatistAverageFemales
     }
     */
+    const filteredData = data.filter(a => a.Nationality === values);
 
-    const nationalityData = data.filter(a => a.Nationality === values);
-    const amountMale = nationalityData.filter(a => a.Gender === 'Male').length;
-    const amountFemale = nationalityData.filter(a => a.Gender === 'Female').length;
-    const amountOther = nationalityData.filter(a => a.Gender === 'Other').length;
+    const array = dataCollection(filteredData);
 
-    let activistSumMale = 0;
-    let reflectorSumMales = 0;
-    let theoristSumMales = 0;
-    let pragmatistSumMales = 0;
-    let activistAverageMales = 0;
-    let reflectorAverageMales = 0;
-    let theoristAverageMales = 0;
-    let pragmatistAverageMales = 0;
-
-    let activistSumFemales = 0;
-    let reflectorSumFemales = 0;
-    let theoristSumFemales = 0;
-    let pragmatistSumFemales = 0;
-    let activistAverageFemales = 0;
-    let reflectorAverageFemales = 0;
-    let theoristAverageFemales = 0;
-    let pragmatistAverageFemales = 0;
-
-    let activistSumOther = 0;
-    let reflectorSumOther = 0;
-    let theoristSumOther = 0;
-    let pragmatistSumOther = 0;
-    let activistAverageOther = 0;
-    let reflectorAverageOther = 0;
-    let theoristAverageOther = 0;
-    let pragmatistAverageOther = 0;
-
-
-    for (let i = 0; i < nationalityData.length; i++) {
-      if (nationalityData[i].Gender === "Male") {
-        activistSumMale += nationalityData[i].Activist;
-        reflectorSumMales += nationalityData[i].Reflector;
-        theoristSumMales += nationalityData[i].Theorist;
-        pragmatistSumMales += nationalityData[i].Pragmatist;
-      } else if (nationalityData[i].Gender === "Female") {
-        activistSumFemales += nationalityData[i].Activist;
-        reflectorSumFemales += nationalityData[i].Reflector;
-        theoristSumFemales += nationalityData[i].Theorist;
-        pragmatistSumFemales += nationalityData[i].Pragmatist;
-      } else {
-        activistSumOther += nationalityData[i].Activist;
-        reflectorSumOther += nationalityData[i].Reflector;
-        theoristSumOther += nationalityData[i].Theorist;
-        pragmatistSumOther += nationalityData[i].Pragmatist;
-      }
-    }
-
-    if (amountMale) {
-      activistAverageMales = activistSumMale / amountMale;
-      reflectorAverageMales = reflectorSumMales / amountMale;
-      theoristAverageMales = theoristSumMales / amountMale;
-      pragmatistAverageMales = pragmatistSumMales / amountMale;
-    }
-    if (amountFemale) {
-      activistAverageFemales = activistSumFemales / amountFemale;
-      reflectorAverageFemales = reflectorSumFemales / amountFemale;
-      theoristAverageFemales = theoristSumFemales / amountFemale;
-      pragmatistAverageFemales = pragmatistSumFemales / amountFemale;
-    }
-    if (amountOther) {
-      activistAverageOther = activistSumOther / amountOther;
-      reflectorAverageOther = reflectorSumOther / amountOther;
-      theoristAverageOther = theoristSumOther / amountOther;
-      pragmatistAverageOther = pragmatistSumOther / amountOther;
-    }
-
-    let averageActivist = (activistAverageMales + activistAverageFemales + activistAverageOther) / 3;
-    let averageReflector = (reflectorAverageMales + reflectorAverageFemales + reflectorAverageOther) / 3;
-    let averageTheorist = (theoristAverageMales + theoristAverageFemales + theoristAverageOther) / 3;
-    let averagePragmatist = (pragmatistAverageMales + pragmatistAverageFemales + pragmatistAverageOther) / 3;
-
-    setMales([activistAverageMales, reflectorAverageMales, theoristAverageMales, pragmatistAverageMales]);
-    setFemales([activistAverageFemales, reflectorAverageFemales, theoristAverageFemales, pragmatistAverageFemales]);
-    setOthers([activistAverageOther, reflectorAverageOther, theoristAverageOther, pragmatistAverageOther]);
-    setAverage([averageActivist, averageReflector, averageTheorist, averagePragmatist]);
-    setAmountMales(amountMale);
-    setAmountFemales(amountFemale);
-    // Comment: Unnecessary setting of category
+    setMales(array.malesArray);
+    setFemales(array.femalesArray);
+    setOthers(array.othersArray);
+    setAverage(array.averageArray);
+    setAmountMales(array.countMale);
+    setAmountFemales(array.countFemale);
+    // Comment: Unnecessary set value of category
     // setCategory(['Activist', 'Reflector', 'Theorist', 'Pragmatist'])
   }
 
