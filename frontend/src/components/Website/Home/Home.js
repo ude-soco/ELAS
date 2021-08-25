@@ -3,7 +3,6 @@ import ProjectCards from "../ProjectCards/ProjectCards";
 import {Divider, Grid, InputAdornment, TextField} from "@material-ui/core";
 import {projectDetails} from "../../../assets/data/data";
 import SearchIcon from "@material-ui/icons/Search";
-import Box from "@material-ui/core/Box";
 
 
 export default function Home(props) {

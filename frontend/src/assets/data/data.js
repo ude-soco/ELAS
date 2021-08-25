@@ -19,16 +19,16 @@ export const projectDetails = [
     deploy: "https://mariebexte.github.io/E3_Selector/Application/0-landing-page/landing-page.html",
     description: "E3 courses make up a special course catalog relevant to all Bachelor students of the University of Duisburg-Essen. This project determined issues students have with the selection of these courses via the universities course management portal. Following the Human Centered Indicator Design approach, a web application was developed in cooperation with its possible future users, aiming to arrive at a solution that improves course handling over the system provided by the university."
   },
-  {
-    name: "Study Program Organization Assistant",
-    image: "images/spoa.png",
-    shortName: "spoa",
-    teamMembers: "Ilia Nassif, Deniz Glawenda",
-    github1: "https://github.com/ilia5/Study-Program-Organization-Assistant",
-    youtube: "https://www.youtube.com/watch?v=eRVgT8SM7EY",
-    deploy: "https://ilia5.github.io/",
-    description: "This tool was developed to help students decide which courses to pick in the upcoming semester. Also, it provides information about the courses and shows how the semester is shaping up. In the end, it gives the student the time table."
-  },
+  // {
+  //   name: "Study Program Organization Assistant",
+  //   image: "images/spoa.png",
+  //   shortName: "spoa",
+  //   teamMembers: "Ilia Nassif, Deniz Glawenda",
+  //   github1: "https://github.com/ilia5/Study-Program-Organization-Assistant",
+  //   youtube: "https://www.youtube.com/watch?v=eRVgT8SM7EY",
+  //   deploy: "https://ilia5.github.io/",
+  //   description: "This tool was developed to help students decide which courses to pick in the upcoming semester. Also, it provides information about the courses and shows how the semester is shaping up. In the end, it gives the student the time table."
+  // },
   {
     name: "INTOGEN",
     image: "images/intogen.png",

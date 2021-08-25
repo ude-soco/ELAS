@@ -56,7 +56,8 @@ export default function ProjectCards(props) {
 
     <Card className={styles.root}>
       <Tooltip arrow placement="bottom" title={<Typography>Click to view project</Typography>}>
-        <CardActionArea onClick={isLoggedIn ? () => history.push('/' + shortName) : () => history.push('/login')}>
+        {/*<CardActionArea onClick={isLoggedIn ? () => history.push('/' + shortName) : () => history.push('/login')}>*/}
+        <CardActionArea onClick={() => history.push('/' + shortName)}>
           <CardMedia
             className={styles.media}
             image={image}

@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 import YouTubeIcon from "@material-ui/icons/YouTube";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import Box from "@material-ui/core/Box";
+import {useHistory} from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   footerContainer: {
@@ -13,7 +14,10 @@ const useStyles = makeStyles(theme => ({
   },
   gutterBottom: {
     marginBottom: theme.spacing(2)
-  }
+  },
+  button: {
+    borderRadius: theme.spacing(1, 0.25, 1, 0.25),
+  },
 }))
 
 export default function Footer(props) {
@@ -38,7 +42,7 @@ export default function Footer(props) {
                   <Typography variant="body2" className={classes.gutterBottom}>
                     <b>About Social Computing Group</b>
                   </Typography>
-                  <Button variant="contained" color="primary" size="small"
+                  <Button variant="contained" color="primary" size="small" className={classes.button}
                           onClick={() => window.open("https://www.uni-due.de/soco/")}
                           style={{marginTop: 16}}>
                     Visit Us

@@ -13,6 +13,7 @@ import {useHistory} from "react-router-dom";
 import Backend from "../../../assets/functions/Backend";
 import {Backdrop, CircularProgress} from "@material-ui/core";
 import ErrorIcon from '@material-ui/icons/Error';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 function Copyright() {
   return (
@@ -55,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    borderRadius: theme.spacing(1, 0.25, 1, 0.25),
   },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
@@ -126,20 +128,18 @@ export default function Login() {
   const handleSignIn = (event) => {
     event.preventDefault();
     if (validate()) {
+      setOpenLoading(!openLoading);
       Backend.post('/login', {
         email: formFields.email,
         password: formFields.password,
       }).then(response => {
-        setOpenLoading(true);
         if (response.data.token) {
           sessionStorage.setItem("elas_userLoggedIn", true);
           sessionStorage.setItem("elas_user", JSON.stringify(response.data));
-          setTimeout(() => {
-            window.location.href = "/";
-          }, 1000)
+          window.location.href = "/";
         }
         if (response.data.error) {
-          setOpenLoading(false);
+          setOpenLoading(!openLoading);
           setErrorLoginMessage(response.data.error)
         }
       }).catch(error => {
@@ -151,8 +151,9 @@ export default function Login() {
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline/>
-      <Grid item xs={false} md={7} className={classes.image}/>
-      <Grid item xs={12} md={5} square>
+      {/*<Grid item xs={false} md={7} className={classes.image}/>*/}
+      <Grid item xs={false} md={2} lg={3} xl={4}/>
+      <Grid item xs={12} md={8} lg={6} xl={4} square>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon/>
@@ -203,15 +204,20 @@ export default function Login() {
               color="primary"
               className={classes.submit}
             >
-              Sign In
-            </Button>
-            <Grid container justify="flex-end">
-              <Grid item>
-                <Link href="#" variant="body2" onClick={() => history.push('/register')}>
-                  {"Don't have an account? Sign Up"}
-                </Link>
+              <Grid container alignItems="center" style={{height: 32}}>
+                <Grid item xs>
+                  Login
+                </Grid>
+                <ArrowForwardIcon/>
               </Grid>
-            </Grid>
+            </Button>
+            {/*<Grid container justify="flex-end">*/}
+            {/*  <Grid item>*/}
+            {/*    <Link href="#" variant="body2" onClick={() => history.push('/register')}>*/}
+            {/*      {"Don't have an account? Sign Up"}*/}
+            {/*    </Link>*/}
+            {/*  </Grid>*/}
+            {/*</Grid>*/}
             <Box mt={5}>
               <Copyright/>
             </Box>
@@ -224,10 +230,11 @@ export default function Login() {
             <CircularProgress color="inherit" size={60}/>
           </Grid>
           <Grid item>
-            <Typography>Signing in!</Typography>
+            <Typography>Login Successful!</Typography>
           </Grid>
         </Grid>
       </Backdrop>
+      <Grid item xs={false} md={2} lg={3} xl={4}/>
     </Grid>
   );
 }

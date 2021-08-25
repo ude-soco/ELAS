@@ -10,11 +10,9 @@ import Registration from "./Website/Registration/Registration";
 import AuthorizedRoute from "../assets/functions/AuthorizedRoute";
 import CourseInsights from "./Projects/CourseInsights/CourseInsights";
 import E3Selector from "./Projects/E3Selector/E3Selector";
-import InEval from "./Projects/InEval/InEval";
 import Intogen from "./Projects/Intogen/Intogen";
-import Spoa from "./Projects/Spoa/Spoa";
-import StudySoon from "./Projects/StudySoon/StudySoon";
 import Footer from "./Website/Footer/Footer";
+import Admin from "./Website/Admin/Admin";
 
 const useStyles = makeStyles(theme => ({
   containerHeader: {
@@ -42,30 +40,21 @@ export default function App() {
       <NavigationBar/>
       <Switch>
         <Grid container direction="column" className={classes.gridContainer}>
-          {!isLoggedIn ? (
-            <>
-              <Route exact path='/' render={() => <Home classes={classes}/>}/>
-              <Route exact path='/login' render={() => <Login classes={classes}/>}/>
-              <Route exact path='/register' render={() => <Registration classes={classes}/>}/>
-            </>
-          ) : (
-            <>
-              <Route exact path='/' render={() => <Home classes={classes}/>}/>
-              <Route exact path='/login' render={() => <Login classes={classes}/>}/>
-              <Route exact path='/register' render={() => <Registration classes={classes}/>}/>
-              {/*<AuthorizedRoute isAuth={isLoggedIn} path='/scrape' component={Scrape} classes={classes}/>*/}
-              <AuthorizedRoute isAuth={isLoggedIn} path='/courseinsights' component={CourseInsights} classes={classes}/>
-              <AuthorizedRoute isAuth={isLoggedIn} path='/e3selector' component={E3Selector} classes={classes}/>
-              <AuthorizedRoute isAuth={isLoggedIn} path='/ineval' component={InEval} classes={classes}/>
-              <AuthorizedRoute isAuth={isLoggedIn} path='/intogen' component={Intogen} classes={classes}/>
-              <AuthorizedRoute isAuth={isLoggedIn} path='/spoa' component={Spoa} classes={classes}/>
-              <AuthorizedRoute isAuth={isLoggedIn} path='/studysoon' component={StudySoon} classes={classes}/>
-            </>
-          )}
+          <Route exact path='/' render={() => <Home classes={classes}/>}/>
+          <Route exact path='/login' render={() => <Login classes={classes}/>}/>
+          {/*<Route exact path='/register' render={() => <Registration classes={classes}/>}/>*/}
+          <Route exact path='/courseinsights' render={() => <CourseInsights classes={classes}/>}/>
+          <Route exact path='/e3selector' render={() => <E3Selector classes={classes}/>}/>
+          <Route exact path='/intogen' render={() => <Intogen classes={classes}/>}/>
+
+          {!isLoggedIn ?
+            <Route render={() => <Redirect to={{pathname: "/"}}/>}/> :
+            <AuthorizedRoute isAuth={isLoggedIn} path='/admin' component={Admin} classes={classes}/>
+          }
           <Route render={() => <Redirect to={{pathname: "/"}}/>}/>
         </Grid>
       </Switch>
-      <Footer />
+      <Footer/>
       <ScrollToTop/>
     </>
   );
