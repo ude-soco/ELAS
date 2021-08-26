@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY requirements.txt .
 
-RUN apt-get update && apt-get install curl -y && pip install -r requirements.txt
+RUN apt-get update && apt-get install curl -y && pip3 install -r requirements.txt && pip3 install Scrapy
 
 COPY . .
 

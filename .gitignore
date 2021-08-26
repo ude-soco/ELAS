@@ -107,4 +107,4 @@ dist
 .idea
 */venv/*
 .flaskenv
-*.pyc
+__pycache__/

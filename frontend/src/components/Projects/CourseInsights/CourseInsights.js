@@ -10,7 +10,7 @@ import Startpage from './StepperComponents/Startpage';
 import ProgramSelector from './StepperComponents/ProgramSelector';
 import CourseSelector from './StepperComponents/CourseSelector';
 import ComparePage from './StepperComponents/ComparePage';
-import studyprogram from "./data/studyprograms";
+import {studyprogram} from "./data/studyprograms";
 
 const theme = createMuiTheme({
   palette: {

@@ -1,8 +1,8 @@
-courseInsightsTargetFile: /home/.../ci_clean.json
-courseScraper: /home/.../uni-due-course-catalog-scraper/
-e3RatingsFile: /home/.../avg_ratings.json
-e3TargetFile: /home/.../e3_courses.json
-ratingsEmail: YOUR EMAIL
-ratingsPassword: YOUR PASSWORD
-ratingsScraper: /home/.../course-ratings/
-statusMessage: 2021-08-02 11:03
+courseInsightsTargetFile: /app/bin/studyprograms.js
+courseScraper: /app/uni-due-course-catalog-scraper/
+e3RatingsFile: /app/bin/avg_ratings.json
+e3TargetFile: /app/bin/e3_courses.json
+ratingsEmail:
+ratingsPassword:
+ratingsScraper: /app/course-ratings/
+statusMessage: 2021-08-26 10:43

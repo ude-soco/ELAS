@@ -22,7 +22,7 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - ./backend/application:/app/application:ro
+      - ./backend/:/app/
     depends_on:
       - mongoDB
     networks:

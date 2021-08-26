@@ -109,10 +109,11 @@ def process_e3(courses, ratings):
             for key, item in avg_ratings.items():
                 avg_ratings[key] += course_ratings[key]
 
-            processed_course = processed_course | course_ratings
+            # processed_course = processed_course | course_ratings
+            processed_course = {**processed_course, **course_ratings}
 
         else:
-            processed_course = processed_course | {
+            processed_course = {**processed_course, **{
                 "fairness": "",
                 "support": "",
                 "material": "",
@@ -120,7 +121,7 @@ def process_e3(courses, ratings):
                 "comprehensibility": "",
                 "interesting": "",
                 "grade_effort": ""
-            }
+            }}
 
         # append the processed course to the list
         processed_courses.append(processed_course)
@@ -288,4 +289,5 @@ if __name__ == "__main__":
         config = file.read()
     config = yaml.safe_load(config)
 
-    run(config, "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120211=280741%7C276367&P.vx=kurz", "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120211=280741%7C276221%7C276682&P.vx=kurz")
+    run(config, "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120211=280741%7C276367&P.vx=kurz", 
+    "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120211=280741%7C276221%7C276682&P.vx=kurz")

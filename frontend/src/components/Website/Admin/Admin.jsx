@@ -58,10 +58,18 @@ export default function Admin(props) {
         <Grid item xs={12} md={8} square>
           <Typography gutterBottom variant="h3">Welcome, Admin!</Typography>
 
-          <Button variant="contained" color="primary" size="small" className={classes.button}
-                  onClick={() => setOpenScrapeDialog(!openScrapeDialog)}>
-            Scrape courses
-          </Button>
+          <Grid container alignItems="center">
+            <Grid item>
+              <Button variant="contained" color="primary" size="small" className={classes.button}
+                      onClick={() => setOpenScrapeDialog(!openScrapeDialog)}>
+                Scrape courses
+              </Button>
+            </Grid>
+            <Grid item>
+              {scrapeState === "running..." ? <Typography variant="body1" style={{paddingLeft: 12}}>Last scraped: {scrapeState}</Typography> : <></>}
+            </Grid>
+          </Grid>
+
         </Grid>
         <Grid item xs={false} md={2}/>
       </Grid>
@@ -84,7 +92,7 @@ export default function Admin(props) {
                            disabled={(scrapeState === "running..." || scrapeState === "checking...")}/>
                 <Grid container direction="row" spacing={5} alignItems="center" justify="flex-start"
                       style={{marginTop: 36, paddingLeft: 18}}>
-                  <Button variant="contained" color="primary" className={classes.button} endIcon={<ArrowForwardIcon />}
+                  <Button variant="contained" color="primary" className={classes.button} endIcon={<ArrowForwardIcon/>}
                           disabled={(scrapeState === "running..." || scrapeState === "checking...")}
                           type="submit">Scrape Now</Button>
                   <p style={{paddingLeft: 12}}>Last scraped: {scrapeState}</p>
