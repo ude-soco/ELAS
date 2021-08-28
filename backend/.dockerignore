@@ -6,4 +6,4 @@ Dockerfile
 .flaskenv
 .dockerignore
 README.md
-**/*.pyc
+__pycache__/
