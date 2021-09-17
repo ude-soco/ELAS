@@ -12,9 +12,11 @@ services:
 
   elas-backend:
     image: elas-backend
-    build: ./backend
+    build:
+      context: ./backend
+      dockerfile: dev.Dockerfile
     restart: unless-stopped
-    environment: 
+    environment:
       - FLASK_APP=application
       - FLASK_ENV=development
       - MONGO_URI=mongodb://mongoDB:27017/ELAS
@@ -31,10 +33,12 @@ services:
 
   elas-frontend:
     image: elas-frontend
-    build: ./frontend
+    build:
+      context: ./frontend
+      dockerfile: dev.Dockerfile
     restart: unless-stopped
     stdin_open: true
-    environment: 
+    environment:
       - REACT_APP_BASE_URL=http://localhost:5000
       - CHOKIDAR_USEPOLLING=true
     ports:

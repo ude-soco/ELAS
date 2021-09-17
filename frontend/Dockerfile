@@ -1,13 +1,18 @@
 FROM node:14-slim
-
-EXPOSE 3000
-
 WORKDIR /app
 
-COPY package*.json .
+COPY ./package*.json ./
+RUN  npm ci --production 2>&1
 
-RUN npm install
+COPY ./nodejs ./
 
-COPY . .
+FROM nginxinc/nginx-unprivileged:1.19
+USER root
+WORKDIR /usr/share/nginx/html
+RUN chown -R nginx:nginx .
 
-CMD ["npm", "start"]
+USER 101
+COPY --from=build --chown=101 /app/build/ ./
+COPY ./nginx/conf.d/* /etc/nginx/conf.d/
+COPY ./nginx/docker-entrypoint.d/* /docker-entrypoint.d/
+EXPOSE 8080
