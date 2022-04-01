@@ -1,8 +1,9 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import TextField from "@material-ui/core/TextField";
 import {Autocomplete} from "@material-ui/lab";
 import {Button, Grid, makeStyles, createMuiTheme, ThemeProvider} from "@material-ui/core";
 import BarChartApex from "../Charts/BarChartApex";
+import Backend from "../../../../assets/functions/Backend";
 
 const theme = createMuiTheme({
   palette: {
@@ -30,6 +31,14 @@ export default function ProgramSelector(props) {
   const classes = useStyles();
   const [sem, setSem] = useState(false);
   const [prog, setProg] = useState(false);
+  const [studyPrograms, setStudyPrograms] = useState([]);
+
+  useEffect(() => {
+    Backend.get("/courseinsights/get_studyprograms")
+        .then(response => {
+          setStudyPrograms(response.data);
+        })
+  }, []);
 
   /* Retrieving all semester to which data is contained in the data file(studyprograms), stored in semesters */
   const createSemesters = () => {
@@ -94,7 +103,8 @@ export default function ProgramSelector(props) {
                 }}
                 style={{fontVariant: "small-caps", width: "100%"}}
                 id="search-box"
-                options={props.studyprograms}
+                options={studyPrograms}
+                // options={props.studyprograms}
                 getOptionLabel={(option) => option.name}
                 renderInput={(params) => <TextField {...params}
                                                     label="Search for your studyprogram here"

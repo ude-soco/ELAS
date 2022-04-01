@@ -130,28 +130,28 @@ function calculateSWS(markedSubjects) {
 function checkForOverlapping(subjectA, subjectB) {
   const durationA = subjectA.duration;
   const durationB = subjectB.duration;
-  if (durationB.to > durationA.to && durationB.from > durationA.to) {
+  if (durationB.to > durationA.to && durationB.from > durationA.to) { //if subject B starts after subject A
     return false;
   }
 
-  if (durationB.to < durationA.to && durationB.to < durationA.from) {
+  if (durationB.to < durationA.to && durationB.to < durationA.from) { //if subject B ends before subject A
     return false;
   }
 
-  if (subjectB.day !== subjectA.day) {
+  if (subjectB.day !== subjectA.day) { // if they are not on the same day
     return false;
   }
-
+  // if until now nothing has been returned, check the times
   const timeA = subjectA.time;
   const timeB = subjectB.time;
 
-  if ((timeB.from < timeA.from && timeB.to < timeA.from) || (timeB.from > timeA.to && timeB.to > timeA.to)) {
+  if ((timeB.from < timeA.from && timeB.to < timeA.from) || (timeB.from > timeA.to && timeB.to > timeA.to)) { //if the times don't clash, i.e., they're after or befor each other
     return false;
   }
-  if (timeB.from === timeA.to || timeB.to === timeA.from) {
+  if (timeB.from === timeA.to || timeB.to === timeA.from) { //if either time begins at the end of the other, return "edge"
     return "edge";
   }
-  return "critical";
+  return "critical"; //if nothing has been returned until now, return critical
 }
 
 /**

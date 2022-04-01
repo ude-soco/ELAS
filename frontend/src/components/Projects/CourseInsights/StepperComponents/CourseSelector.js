@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Button, Card, makeStyles, Typography, TableBody, TableCell, TableContainer,
   createMuiTheme, ThemeProvider, lighten, Table, TableHead, TablePagination,
@@ -11,6 +11,10 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import Backend from "../../../../assets/functions/Backend";
+import SubjectIcon from '@material-ui/icons/Subject';
+import Popup from "./DetailsPage";
+import {studyprogram} from "../data/studyprograms";
 
 
 const theme = createMuiTheme({
@@ -117,6 +121,7 @@ function stableSort(array, comparator) {
 const headCellsSub = [
   {id: 'name', numeric: true, disablePadding: true, label: 'Subject-name'},
   {id: 'subject_type', numeric: false, disablePadding: true, label: 'Subject-type'},
+  {id: 'details', numeric: false, disablePadding: false, label: 'More details'},
 ];
 
 /* TableHead, TableToolbar and Toolbar Styles for All-Subjects-Table */
@@ -235,7 +240,7 @@ function EnhancedTableHeadSel(props) {
         <TableCell padding="checkbox">
 
         </TableCell>
-        {headCellsSub.map((headCell) => (
+        {headCellsSub.slice(0,2).map((headCell) => (
 
           <TableCell
             key={headCell.id}
@@ -309,6 +314,11 @@ export default function CourseSelector(props) {
   const [denseSel, setDenseSel] = React.useState(false);
   const [rowsPerPageSel, setRowsPerPageSel] = React.useState(5);
 
+  /* variable for popup */
+
+  const [openPopup, setOpenPopup] = React.useState(false);
+  const [popupLecture, setPopupLecture] = React.useState([]);
+
   /* generateSubjects function to generate all available subjecs according to given props
       (studyprogram and semester)
       @param studyprogram:an arbitrary studyprogram given from prop
@@ -350,7 +360,19 @@ export default function CourseSelector(props) {
     return subjectslist;
   }
   /* subjects contains all subjects matching the current criteria, i.e. filters and studyprogram + semester from props  */
-  const [subjects, setSubjects] = React.useState(generateSubjects(props.studyprogram));
+  const [subjects, setSubjects] = React.useState([]);
+  // const [subjects, setSubjects] = React.useState(generateSubjects(props.studyprogram));
+
+  useEffect(() => {
+    Backend.get("/courseinsights/get_lectures_with_root_id", {params: {"id": props.studyprogram.id}})
+        .then(response => {
+          setSubjects(response.data);
+        });
+  }, []);
+
+  useEffect(() => {
+    console.log('selected lectures: ', selected);
+  }, []);
 
   /* All functions for the All-Subjects-Table */
 
@@ -380,7 +402,9 @@ export default function CourseSelector(props) {
     2. when not already selected concat row to selected var */
 
   const handleClick = (event, row) => {
+    console.log(row);
     const selectedIndex = selected.indexOf(row);
+    console.log(selectedIndex);
     let newSelected = [];
 
     if (selectedIndex === -1) {
@@ -470,6 +494,15 @@ export default function CourseSelector(props) {
 
     setSelected(newSelected);
     props.changeSubs(newSelected);
+  }
+
+  const handleClickDetails = (event, lecture) => {
+    setPopupLecture(lecture);
+    setOpenPopup(true);
+  }
+
+  const closePopup = () => {
+    setOpenPopup(false);
   }
 
   const emptyRowsSel = rowsPerPageSel - Math.min(rowsPerPageSel, selected.length - pageSel * rowsPerPageSel);
@@ -931,20 +964,22 @@ export default function CourseSelector(props) {
                           return (
                             <TableRow
                               hover
-                              onClick={(event) => handleClick(event, row)}
+                              // onClick={(event) => handleClick(event, row)}
                               role="checkbox"
                               aria-checked={isItemSelected}
                               tabIndex={-1}
                               key={row.name}
                               selected={isItemSelected}
                             >
-                              <TableCell padding="checkbox">
+                              <TableCell padding="checkbox"
+                                         onClick={(event) => handleClick(event, row)}>
                                 <Checkbox
                                   checked={isItemSelected}
                                   inputProps={{"aria-labelledby": labelId}}
                                 />
                               </TableCell>
                               <TableCell
+                                  onClick={(event) => handleClick(event, row)}
                                 component="th"
                                 id={labelId}
                                 scope="row"
@@ -952,7 +987,16 @@ export default function CourseSelector(props) {
                               >
                                 {row.name}
                               </TableCell>
-                              <TableCell align="left">{row.subject_type}</TableCell>
+                              <TableCell align="left"
+                                         onClick={(event) => handleClick(event, row)}>{row.subject_type}</TableCell>
+                              <TableCell>
+                                <Tooltip title="More details">
+                                  <IconButton aria-label="delete" style={{padding: 0}}
+                                              onClick={(event) => handleClickDetails(event, row)}>
+                                    < SubjectIcon/>
+                                  </IconButton>
+                                </Tooltip>
+                              </TableCell>
                             </TableRow>
                           );
                         })}
@@ -1024,7 +1068,10 @@ export default function CourseSelector(props) {
                               <TableCell>
                                 <Tooltip title="Delete">
                                   <IconButton aria-label="delete" style={{padding: 0}}
-                                              onClick={(event) => handleDelete(event, row)}>
+                                              onClick={(event) => {
+                                                handleDelete(event, row);
+                                                console.log('clicked delete');
+                                              }}>
                                     < DeleteIcon/>
                                   </IconButton>
                                 </Tooltip>
@@ -1081,6 +1128,11 @@ export default function CourseSelector(props) {
           </Grid>
         </Grid>
       </Grid>
+      <Popup
+        openPopup={openPopup}
+        closePopup={closePopup}
+        popupLecture={popupLecture}>
+      </Popup>
     </ThemeProvider>
   );
 }
