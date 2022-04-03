@@ -80,7 +80,7 @@ branch and should only work on project inside `resources` folder they are assign
 
 1. Navigate to ELAS/backend directory.
 2. Make sure you've installed the latest version of Postgres, along with pgAdmin. You can do this from https://www.postgresql.org/download/
-3. Run `pip install requirments.txt`. This should install all requirements.
+3. Run `pip install requirements.txt`. This should install all requirements.
 4. Set up a database with a name and a password.
 5. Add this name and password to ELAS/backend/orm_interface/base.py
 6. Start the frontend by running `npm start` in ELAS/frontend
