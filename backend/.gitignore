@@ -142,3 +142,6 @@ scrapers/vdb_scraper/vdb_scraper/description_results.json
 
 scrapers/merged_data.json
 scrapers/study_programs.json
+
+#test scripts
+orm_interface/query_test.py

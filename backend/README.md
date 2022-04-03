@@ -52,9 +52,39 @@ branch and should only work on project inside `resources` folder they are assign
 │               spoa.py                 # SPOA project REST APIs
 │               __init__.py
 │
+│───bin                                 # files containing, ratings, studyprograms data
+│
+│───course-ratings                      # Scrapy web crawler for scraping data from meinprof.de
+│
+│───Keyword_Extractor                   # Libraries and algorithms for extracting keywords from lecture descriptions
+│
+│───orm_interface                       # Package to be able to interact with a relational database through ORM
+│       │   entities                    # package containing all data types to be stored in each table and their relationship with each other 
+│       │   base.py                     # declarative base of the ORM schema
+│       │   upload_orm_data.py          # main script to upload all scraped data to the database
+│
+│───scrapers                            # LSF and Vorlesungsdatenbank scrapers
+│       ├───lsf_scraper                 # scraper to extract lecture data from LSF
+│       │
+│       ├───vdb_scraper                 # scraper to extract descriptions from Vorlesungsdatenbank
+│       │
+│       │   merge_lsf_and_vdb.py        # script that merges data from LSF and VDB and extracts keywords from each description
+│
+│───uni-due-course-catalog-scraper      # scraper that extracts E3 course data
+│
 ├───static
 └───templates
 ```
+
+## How to use
+
+1. Navigate to ELAS/backend directory.
+2. Make sure you've installed the latest version of Postgres, along with pgAdmin. You can do this from https://www.postgresql.org/download/
+3. Run `pip install requirments.txt`. This should install all requirements.
+4. Set up a database with a name and a password.
+5. Add this name and password to ELAS/backend/orm_interface/base.py
+6. Start the frontend by running `npm start` in ELAS/frontend
+7. After the frontend is running, run `flask run` in ELAS/backend
 
 ## Technologies
 
