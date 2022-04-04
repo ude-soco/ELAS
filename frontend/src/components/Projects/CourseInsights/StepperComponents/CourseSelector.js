@@ -319,54 +319,18 @@ export default function CourseSelector(props) {
   const [openPopup, setOpenPopup] = React.useState(false);
   const [popupLecture, setPopupLecture] = React.useState([]);
 
-  /* generateSubjects function to generate all available subjecs according to given props
-      (studyprogram and semester)
-      @param studyprogram:an arbitrary studyprogram given from prop
-      @return subjectlist: all available courses for the given studyprogram and the according semester from prop
-      */
-
-  const generateSubjects = (studyprogram) => {
-    const subjectslist = [];
-    const subjectnames = [];
-    for (let subject of studyprogram.categories) {
-      for (let sub of subject.subjects) {
-        if (sub.semesters.includes(props.semester)) {
-          if (!subjectnames.includes(sub.name)) {
-            subjectslist.push(sub);
-            subjectnames.push(sub.name);
-          }
-        }
-      }
-      for (let cat of subject.categories) {
-        for (let sub2 of cat.subjects) {
-          if (sub2.semesters.includes(props.semester)) {
-            if (!subjectnames.includes(sub2.name)) {
-              subjectslist.push(sub2);
-              subjectnames.push(sub2.name);
-            }
-
-          }
-        }
-        for (let cats of cat.categories) {
-          for (let sub3 of cats.subjects) {
-            if (sub3.semesters.includes(props.semester) && !subjectnames.includes(sub3.name)) {
-              subjectslist.push(sub3);
-              subjectnames.push(sub3.name);
-            }
-          }
-        }
-      }
-    }
-    return subjectslist;
-  }
-  /* subjects contains all subjects matching the current criteria, i.e. filters and studyprogram + semester from props  */
+  /* contains all the subjects that are fetched when the component is initially loaded. This always remains the same through the whole program*/
   const [subjects, setSubjects] = React.useState([]);
-  // const [subjects, setSubjects] = React.useState(generateSubjects(props.studyprogram));
 
+  /* this contains all subjects matching the current criteria, i.e. filters and studyprogram + semester from props  */
+  const [displayedLectures, setDisplayedLectures] = React.useState([]);
+
+  /* this is called when the component is loaded. It gets all lectures and sets the subjects and displayedLectures */
   useEffect(() => {
     Backend.get("/courseinsights/get_lectures_with_root_id", {params: {"id": props.studyprogram.id}})
         .then(response => {
           setSubjects(response.data);
+          setDisplayedLectures(response.data);
         });
   }, []);
 
@@ -402,25 +366,34 @@ export default function CourseSelector(props) {
     2. when not already selected concat row to selected var */
 
   const handleClick = (event, row) => {
-    console.log(row);
-    const selectedIndex = selected.indexOf(row);
-    console.log(selectedIndex);
+    const matchingLecture = selected.filter(lecture => {
+      return lecture.id === row.id;
+    });
     let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, row);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
-      );
+    if (matchingLecture.length === 0) { // if the lecture is not already in the selected lectures array
+      newSelected = newSelected.concat(selected, row); // then add it to the selected lectures
     }
-    setSelected(newSelected);
-    props.changeSubs(newSelected);
+    else { // if the lecture is already there, that means it needs to be deleted from the selected lectures
+      let indices = [];
+      selected.forEach(lecture => {
+        indices.push(lecture.id);
+      });
+      const selectedIndex = indices.indexOf(row.id); // get the index of the clicked lecture
+      if (selectedIndex === 0) { // if the lecture is the first element in the selected array
+        newSelected = newSelected.concat(selected.slice(1)); // select all lectures except the first one
+      }
+      else if (selectedIndex === selected.length - 1) { // if the lecture is the last element in the selected array
+        newSelected = newSelected.concat(selected.slice(0, -1)); // select all the lectures except the last one
+      }
+      else if (selectedIndex > 0) { // if the lecture is somewhere in the middle
+        newSelected = newSelected.concat(
+            selected.slice(0, selectedIndex), // select all the lectures until one index before the lecture
+            selected.slice(selectedIndex + 1), // select all the lectures after the index
+        );
+      }
+    }
+    setSelected(newSelected); // at the end, set the new selected lectures to the selected lectures
+    props.changeSubs(newSelected); // change the props as well
   };
 
   const handleChangePage = (event, newPage) => {
@@ -440,9 +413,15 @@ export default function CourseSelector(props) {
     setDense(event.target.checked);
   };
 
-  const isSelected = (row) => selected.indexOf(row) !== -1;
+  function isSelected (row) {
+    let indices = []
+    selected.forEach(lecture => {
+      indices.push(lecture.id);
+    });
+    return indices.indexOf(row.id) !== -1;
+  }
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, subjects.length - page * rowsPerPage);
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, displayedLectures.length - page * rowsPerPage);
 
   /* All functions for the Subject Table with all selected subjects from the other table */
 
@@ -556,7 +535,7 @@ export default function CourseSelector(props) {
     @return count: the amount of courses to the given subject type */
 
   const findCount = (subtype) => {
-    const count = subjects.filter(el => el.subject_type === subtype).length
+    const count = displayedLectures.filter(el => el.subject_type === subtype).length
     return count;
   }
 
@@ -569,19 +548,26 @@ export default function CourseSelector(props) {
   */
 
   const filterSubjects = (event, cond, comp) => {
+    // console.log("cond: " +  cond);
+    // console.log("comp: " + comp);
+    // console.log("state: " + event.target.name + " checked: " + event.target.checked);
     setState({...state, [event.target.name]: event.target.checked});
     if (cond === true) {
-      const filteredArray = subjects.filter(el => el.subject_type !== comp);
-      setSubjects(filteredArray);
-    } else {
-      const old = generateSubjects(props.studyprogram).filter(el => el.subject_type === comp);
-      if (filterN) {
-        const test = subjects.concat(old.filter(el => el.name.toUpperCase().includes(filterN)));
-        setSubjects(test);
+      const filteredArray = displayedLectures.filter(subject => subject.subject_type !== comp);
+      setDisplayedLectures(filteredArray);
+    }
+    else {
+      const oldLectures = subjects.filter(subject => subject.subject_type === comp); // lectures that were removed by the filter earlier, now they need to be added back to the displayed lectures
+      if (filterN) { // if there is text in the search box below the filters
+        const toBeDisplayedLectures = displayedLectures.concat(oldLectures.filter(lecture => lecture.name.toUpperCase().includes(filterN)));
+        // if there is text in the search box, then only those lectures should be added back that contain the search text AND were removed by the filter earlier
+        setDisplayedLectures(toBeDisplayedLectures);
 
-      } else {
-        const test2 = subjects.concat(old);
-        setSubjects(test2);
+      }
+      else {
+        const toBeDisplayedLectures = displayedLectures.concat(oldLectures);
+        // if there is no text in the search box, just add all the lectures back that were removed earlier
+        setDisplayedLectures(toBeDisplayedLectures);
       }
     }
     setPage(0);
@@ -596,13 +582,14 @@ export default function CourseSelector(props) {
     const input = event.target.value.toUpperCase();
     if (input.length > 0) {
       setFilterN(input);
-    } else {
+    }
+    else {
       setFilterN(undefined);
     }
     setFilterN(input);
     if (input.length > check) {
-      const filtered = subjects.filter(el => el.name.toUpperCase().includes(input));
-      setSubjects(filtered);
+      const filtered = subjects.filter(subject => subject.name.toUpperCase().includes(input));
+      setDisplayedLectures(filtered);
       if (filtered < 1) {
         setErrorS(true);
       } else {
@@ -634,8 +621,8 @@ export default function CourseSelector(props) {
         wahlpflichtVeranstaltung: true,
         keineAngabe: true,
       });
-      const old = generateSubjects(props.studyprogram).filter(el => el.name.toUpperCase().includes(input));
-      setSubjects(old);
+      const old = subjects.filter(el => el.name.toUpperCase().includes(input));
+      setDisplayedLectures(old);
       if (old < 1) {
         setErrorS(true);
       } else {
@@ -952,10 +939,10 @@ export default function CourseSelector(props) {
                       orderBy={orderBy}
                       onSelectAllClick={handleSelectAllClick}
                       onRequestSort={handleRequestSort}
-                      rowCount={subjects.length}
+                      rowCount={displayedLectures.length}
                     />
                     <TableBody>
-                      {stableSort(subjects, getComparator(order, orderBy))
+                      {stableSort(displayedLectures, getComparator(order, orderBy))
                         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                         .map((row, index) => {
                           const isItemSelected = isSelected(row);
@@ -1011,7 +998,7 @@ export default function CourseSelector(props) {
                 <TablePagination
                   rowsPerPageOptions={[5, 10, 25]}
                   component="div"
-                  count={subjects.length}
+                  count={displayedLectures.length}
                   rowsPerPage={rowsPerPage}
                   page={page}
                   onChangePage={handleChangePage}
