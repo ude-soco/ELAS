@@ -143,7 +143,8 @@ export default function Login() {
           setErrorLoginMessage(response.data.error)
         }
       }).catch(error => {
-        console.log(error);
+        setOpenLoading(false);
+        setErrorLoginMessage("Network error")
       })
     }
   };
@@ -211,13 +212,13 @@ export default function Login() {
                 <ArrowForwardIcon/>
               </Grid>
             </Button>
-            {/*<Grid container justify="flex-end">*/}
-            {/*  <Grid item>*/}
-            {/*    <Link href="#" variant="body2" onClick={() => history.push('/register')}>*/}
-            {/*      {"Don't have an account? Sign Up"}*/}
-            {/*    </Link>*/}
-            {/*  </Grid>*/}
-            {/*</Grid>*/}
+            <Grid container justifyContent="center">
+              <Grid item>
+                <Link href="#" variant="body2" onClick={() => history.push('/register')}>
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid>
             <Box mt={5}>
               <Copyright/>
             </Box>
@@ -225,7 +226,7 @@ export default function Login() {
         </div>
       </Grid>
       <Backdrop className={classes.backdrop} open={openLoading}>
-        <Grid container direction="column" justify="center" alignItems="center">
+        <Grid container direction="column" justifyContent="center" alignItems="center">
           <Grid item>
             <CircularProgress color="inherit" size={60}/>
           </Grid>
