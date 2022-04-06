@@ -145,3 +145,4 @@ scrapers/study_programs.json
 
 #test scripts
 orm_interface/query_test.py
+test.py

@@ -1,27 +1,30 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import create_access_token
+from .extensions import bcrypt
 
-from .extensions import mongo, bcrypt
+from orm_interface.entities.user import User
+from orm_interface.base import Base, Session, engine
 
 main = Blueprint("main", __name__)
 
+Base.metadata.create_all(engine)
+session = Session()
 
 @main.route('/login', methods=['POST'])
 def login():
     email = request.get_json()['email']
     password = request.get_json()['password']
-    user_collection = mongo.db.users
-    query = user_collection.find_one({'email': email})
+    user = session.query(User).filter(User.email==email).first()
 
-    if query is None:
+    if user is None:
         return jsonify({"error": "User not registered"})
 
-    elif query:
-        if bcrypt.check_password_hash(query['password'], password):
+    else:
+        if bcrypt.check_password_hash(user.password, password):
             access_token = create_access_token(identity={
-                'firstname': query['firstname'],
-                'lastname': query['lastname'],
-                'email': query['email'],
+                'firstname': user.firstname,
+                'lastname': user.lastname,
+                'email': user.email,
             })
             return jsonify({'token': access_token})
         else:
@@ -35,15 +38,18 @@ def register():
     firstname = request.get_json()['firstname']
     lastname = request.get_json()['lastname']
 
-    user_collection = mongo.db.users
-    query = user_collection.find_one({'email': email})
+    user = session.query(User).filter(User.email==email).first()
 
-    if query is None:
+    if user is None:
         hash_password = bcrypt.generate_password_hash(password).decode('utf-8')
-        user_collection.insert({'firstname': firstname,
-                                'lastname': lastname,
-                                'email': email,
-                                'password': hash_password})
+        new_user = User(
+            firstname=firstname,
+            lastname=lastname,
+            email=email,
+            password=hash_password
+        )
+        session.add(new_user)
+        session.commit()
         return jsonify({"success": "User registered"})
 
     else:
