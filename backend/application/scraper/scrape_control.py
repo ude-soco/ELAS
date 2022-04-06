@@ -7,6 +7,10 @@ import pprint
 import subprocess
 from datetime import datetime
 from difflib import SequenceMatcher
+from scrapers.merge_lsf_and_vdb import MergeData
+from orm_interface.upload_orm_data import Uploader
+from scrapers.lsf_scraper.lsf_scraper.post_processing.process_data import ProcessLsfData
+from scrapers.vdb_scraper.vdb_scraper.post_processing.process_data import ProcessVdbData
 
 pp = pprint.PrettyPrinter(indent=4)
 
@@ -43,20 +47,20 @@ def run(config, insight_url, e3_url):
     os.chdir(vdb_scraper_directory)
     subprocess.call(f"scrapy crawl vdb-scraper -o description_results.json", shell=True)
 
-    # 2a. post-process and save the insight data
-    # os.chdir(os.path.join(config["courseScraper"], "course_catalog", "post_processing"))
-    # subprocess.call(f"python process_data.py {temp_catalog} {config['courseInsightsTargetFile']}", shell=True)
-    os.chdir(lsf_post_processing_directory)
-    subprocess.call(f"python process_data.py", shell=True)
+    # 2. process both sets of data
+    LsfDataProcessing = ProcessLsfData()
+    LsfDataProcessing.run()
 
-    os.chdir(vdb_post_processing_directory)
-    subprocess.call(f"python process_data.py", shell=True)
+    VdbDataProcessing = ProcessVdbData()
+    VdbDataProcessing.run()
 
-    os.chdir(merge_data_post_processing_directory)
-    subprocess.call(f"python merge_lsf_and_vdb.py", shell=True)
+    # 3. merge both sets of data
+    merge_script = MergeData()
+    merge_script.run()
 
-    os.chdir(upload_orm_data_directory)
-    subprocess.call(f"python upload_orm_data.py", shell=True)
+    # 4. upload all the data to the database
+    uploader = Uploader()
+    uploader.upload_data()
 
     # end of new data
 
@@ -71,18 +75,14 @@ def run(config, insight_url, e3_url):
 
     clean_files([temp_e3, temp_ratings_raw, temp_ratings])
 
-    # 1. run all three scrapers: course-catalog for e3 and courseInsights, and course-ratings
+    # 1. run both scrapers: course-catalog for e3 and course-ratings
     os.chdir(course_scraper_directory)
     subprocess.call(f'scrapy crawl course-catalog -a url="{e3_url}" -a e3=True -o temp_e3.json', shell=True)
 
     os.chdir(ratings_scraper_directory)
     subprocess.call(f"scrapy crawl -a email=\"{config['ratingsEmail']}\" -a password=\"{config['ratingsPassword']}\" course-ratings -o temp_ratings_raw.json", shell=True)
 
-    # 2a. post-process and save the insight data
-    # os.chdir(os.path.join(course_scraper_directory, "course_catalog", "post_processing"))
-    # subprocess.call(f"python process_data.py {temp_catalog} {config['courseInsightsTargetFile']}", shell=True)
-
-    # 2b. post-process and save the ratings data
+    # 2. post-process and save the ratings data
     os.chdir(os.path.join(ratings_scraper_directory, "course_ratings", "post_processing"))
     subprocess.call(f"python derive_attributes.py {temp_ratings_raw} {temp_ratings}", shell=True)
 
