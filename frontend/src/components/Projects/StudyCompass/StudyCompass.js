@@ -72,7 +72,7 @@ function getSteps() {
   return ['Welcome to StudyCompass!', 'Select your studyprogram!', 'Select your subjects!', 'Compare your selected subjects!'];
 }
 
-export default function CourseInsights() {
+export default function StudyCompass() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
@@ -101,7 +101,7 @@ export default function CourseInsights() {
 
   return (
     <ThemeProvider theme={theme}>
-      {/* Comment: Style property "all" was not defined in CourseInsights component */}
+      {/* Comment: Style property "all" was not defined in StudyCompass component */}
       <Grid container direction="column" justify="center" alignItems="center" className={classes.all}>
         <Box className={classes.box}>
           <Grid container direction="column" alignItems="center" justify="space-evenly"

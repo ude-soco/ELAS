@@ -169,9 +169,8 @@ export default function Registration() {
 
 
   return (
-    <Grid container component="main" className={classes.root}>
+    <Grid container component="main" justify="center" className={classes.root}>
       <CssBaseline/>
-      <Grid item xs={false} md={7} className={classes.image}/>
       <Grid item xs={12} md={5} square>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>

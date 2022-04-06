@@ -6,13 +6,13 @@ import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import ScrollToTop from "./Reuseable/ScrollToTop/ScrollToTop";
 import Login from "./Website/Login/Login";
-import Registration from "./Website/Registration/Registration";
 import AuthorizedRoute from "../assets/functions/AuthorizedRoute";
-import CourseInsights from "./Projects/CourseInsights/CourseInsights";
+import StudyCompass from "./Projects/StudyCompass/StudyCompass";
 import E3Selector from "./Projects/E3Selector/E3Selector";
 import Intogen from "./Projects/Intogen/Intogen";
 import Footer from "./Website/Footer/Footer";
 import Admin from "./Website/Admin/Admin";
+import Registration from "./Website/Registration/Registration";
 
 const useStyles = makeStyles(theme => ({
   containerHeader: {
@@ -42,8 +42,8 @@ export default function App() {
         <Grid container direction="column" className={classes.gridContainer}>
           <Route exact path='/' render={() => <Home classes={classes}/>}/>
           <Route exact path='/login' render={() => <Login classes={classes}/>}/>
-          {/*<Route exact path='/register' render={() => <Registration classes={classes}/>}/>*/}
-          <Route exact path='/courseinsights' render={() => <CourseInsights classes={classes}/>}/>
+          <Route exact path='/register' render={() => <Registration classes={classes}/>}/>
+          <Route exact path='/studycompass' render={() => <StudyCompass classes={classes}/>}/>
           <Route exact path='/e3selector' render={() => <E3Selector classes={classes}/>}/>
           <Route exact path='/intogen' render={() => <Intogen classes={classes}/>}/>
 

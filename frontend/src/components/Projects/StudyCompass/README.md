@@ -70,7 +70,7 @@ StudyCompass gives you an overview of all available courses for a selectable stu
 
 ## Scraper
 
-In collaboration with the LivewareProblem-Group, the [Scraper from the original CourseInsights-Project](https://github.com/FloRich/uni-due-course-catalog-scraper) got adapted to the needs of both our groups' new projects.
+In collaboration with the LivewareProblem-Group, the [Scraper from the original StudyCompass-Project](https://github.com/FloRich/uni-due-course-catalog-scraper) got adapted to the needs of both our groups' new projects.
 
 ### How to run the Scraper
 

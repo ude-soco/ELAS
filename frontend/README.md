@@ -44,8 +44,8 @@ receive access to a branch and should only work on the project inside `Projects`
         │   App.js
         │
         ├───Projects                        # Projects folder consists of all projects
-        │   ├───CourseInsights
-        │   │   │   CourseInsights.js       # CourseInsights project component
+        │   ├───StudyCompass
+        │   │   │   StudyCompass.js       # StudyCompass project component
         │   │   │
         │   │   └───components              # Additional CourseInsight project components goes inside this folder
         │   ├───E3Selector
@@ -80,8 +80,8 @@ receive access to a branch and should only work on the project inside `Projects`
             ├───NavigationBar
             │       NavigationBar.js        # Navigation bar component
             │
-            ├───ProjectCards
-            │       ProjectCards.js         # Project card component
+            ├───ProjectCard
+            │       ProjectCard.js         # Project card component
             │
             └───Registration
                     Registration.js         # Registration component

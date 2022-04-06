@@ -30,11 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
   primaryButton: {
     margin: theme.spacing(0, 1, 0, 1),
-  },
-  secondaryButton: {
-    margin: theme.spacing(0, 1, 0, 1),
     borderRadius: theme.spacing(1, 0.5, 1, 0.5),
-    color: theme.palette.primary.main,
   },
   avatarName: {
     cursor: "pointer",
@@ -66,11 +62,11 @@ export default function NavigationBar(props) {
 
   return (
     <Box className={classes.root}>
-      <CssBaseline />
+      <CssBaseline/>
       <AppBar
         position="fixed"
         color="inherit"
-        style={{ backgroundColor: "#fff" }}
+        style={{backgroundColor: "#fff"}}
       >
         <Toolbar>
           <Grid container>
@@ -80,7 +76,7 @@ export default function NavigationBar(props) {
                 height="35"
                 alt="ELAS Logo"
                 onClick={() => history.push("/")}
-                style={{ cursor: "pointer" }}
+                style={{cursor: "pointer"}}
               />
             </Grid>
             {isLoggedIn ? (
@@ -98,41 +94,43 @@ export default function NavigationBar(props) {
                       anchorEl={openProfile}
                       getContentAnchorEl={null}
                       keepMounted
-                      anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-                      transformOrigin={{ vertical: "top", horizontal: "left" }}
+                      anchorOrigin={{vertical: "bottom", horizontal: "left"}}
+                      transformOrigin={{vertical: "top", horizontal: "left"}}
                       open={Boolean(openProfile)}
                       onClose={() => setOpenProfile(null)}
                     >
                       <MenuItem onClick={openAdmin}>
                         <ListItemIcon>
-                          {" "}
-                          <SettingsIcon color="primary" />{" "}
+                          <SettingsIcon color="primary"/>{" "}
                         </ListItemIcon>
-                        <ListItemText primary="Settings" />
+                        <ListItemText primary="Settings"/>
                       </MenuItem>
 
-                      <Divider />
+                      <Divider/>
 
                       <MenuItem onClick={handleSignOut}>
                         <ListItemIcon>
-                          {" "}
-                          <PowerSettingsNewIcon color="primary" />{" "}
+                          <PowerSettingsNewIcon color="primary"/>{" "}
                         </ListItemIcon>
-                        <ListItemText primary="Sign-out" />
+                        <ListItemText primary="Sign-out"/>
                       </MenuItem>
                     </Menu>
                   </Grid>
-                  <Grid item style={{ marginLeft: 16 }}>
+                  <Grid item style={{marginLeft: 16}}>
                     <Typography variant="h6">Admin</Typography>
                   </Grid>
                 </Grid>
               </Grid>
             ) : (
               <Grid item>
-                {/* <Button variant="outlined" className={classes.secondaryButton}
-                        onClick={() => history.push('/login')}>Login</Button> */}
-                {/*<Button variant="contained" color="primary" className={classes.primaryButton}*/}
-                {/*        onClick={() => history.push('/register')}>Register</Button>*/}
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.primaryButton}
+                  onClick={() => history.push('/login')}
+                >
+                  Login
+                </Button>
               </Grid>
             )}
           </Grid>

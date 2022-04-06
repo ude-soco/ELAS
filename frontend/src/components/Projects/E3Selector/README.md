@@ -94,7 +94,7 @@ These have to be cloned into a user-owned directory alongside ELAS; they do not 
 	```yaml
     courseScraper: absolute path to the cloned course scraper repo, ending in [...]/uni-due-course-catalog-scraper/
     ratingsScraper: absolute path to the cloned ratings scraper repo, ending in [...]/course-ratings/
-    courseInsightsTargetFile: absolute path to the StudyCompass data, ending in [...]/src/components/Projects/CourseInsights/data/studyprograms.js
+    courseInsightsTargetFile: absolute path to the StudyCompass data, ending in [...]/src/components/Projects/StudyCompass/data/studyprograms.js
     e3RatingsFile: absolute path to the E3 ratings data, ending in [...]/src/components/Projects/E3Selector/data/avg_ratings.json
     e3TargetFile: absolute path to the E3 course data, ending in [...]/src/components/Projects/E3Selector/data/e3_courses.json
     ratingsEmail: email address of account used to access meinprof.de
@@ -129,7 +129,7 @@ You will be greeted by something like this:
 
 Input **both** URLs to start scraping. For example, for SoSe2021 these would be:
 
-- `https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120211=280741%7C276367&P.vx=kurz` for CourseInsights / StudyCompass, and
+- `https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120211=280741%7C276367&P.vx=kurz` for StudyCompass / StudyCompass, and
 - `https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120211=280741%7C276221%7C276682&P.vx=kurz` for E3 Selector.
 
 Hitting "scrape" will start a total of three scrapers, for more information see [Architecture](#architecture).
