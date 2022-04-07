@@ -1,6 +1,9 @@
 import json
 import io
-from orm_interface.entities.lecture import Lecture, Professor, StudyProgram, Timetable
+from orm_interface.entities.lecture import Lecture
+from orm_interface.entities.studyprogram import StudyProgram
+from orm_interface.entities.professor import Professor
+from orm_interface.entities.timetable import Timetable
 from orm_interface.base import Base, Session, engine
 import datetime
 import os

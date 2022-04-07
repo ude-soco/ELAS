@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from orm_interface.base import Session
-from orm_interface.entities.lecture import StudyProgram, Lecture
+from orm_interface.entities.lecture import Lecture
+from orm_interface.entities.studyprogram import StudyProgram
 
 course_insights = Blueprint("course_insights", __name__)
 
@@ -50,6 +51,32 @@ def get_lecture_with_id():
         "url": professor.url
     } for professor in lecture_professors]
 
+    lecture_studyprograms = lecture.root_id
+    study_programs = [{
+        "name": studyprogram.name,
+        "url": studyprogram.url
+    } for studyprogram in lecture_studyprograms]
+
+    lecture_timetables = lecture.timetables
+    timetables = [{
+        "id": timetable.id,
+        "comment": timetable.comment,
+        "day": timetable.day,
+        "duration": {
+            "from": timetable.duration_from,
+            "to": timetable.duration_to
+        },
+        "elearn": timetable.elearn,
+        "rhythm": timetable.rhythm,
+        "room": timetable.room,
+        "dates": timetable.dates,
+        "status": timetable.status,
+        "time": {
+            "from": timetable.time_from,
+            "to": timetable.time_to
+        }
+    } for timetable in lecture_timetables]
+
     response = {
         "id": lecture.id,
         "url": lecture.url,
@@ -61,7 +88,9 @@ def get_lecture_with_id():
         "language": lecture.language,
         "description": lecture.description,
         "keywords": lecture.keywords,
-        "professors": professors
+        "professors": professors,
+        "study_programs": study_programs,
+        "timetables": timetables
     }
 
     return jsonify(response)
