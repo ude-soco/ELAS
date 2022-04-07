@@ -54,7 +54,7 @@ class Uploader:
                     studyprograms_dict[studyprogram['id']] = StudyProgram(studyprogram['id'], studyprogram['name'], studyprogram['url'])
             studyprograms_data.close()
 
-        with io.open(DATA_DIRECTORY, 'r') as data_file:
+        with io.open(DATA_DIRECTORY, 'r', encoding='utf8') as data_file:
             data_json = json.load(data_file)
             print(len(data_json))
             for lecture in data_json:

@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Admin(props) {
   const classes = useStyles();
-  const [scrapeState, handleScrape] = useState("checking...");
+  // const [scrapeState, handleScrape] = useState("checking...");
   const [openScrapeDialog, setOpenScrapeDialog] = useState(false);
   const [e3, sete3] = useState("");
   const [insight, setinsight] = useState("");
@@ -28,7 +28,7 @@ export default function Admin(props) {
     fetch("http://localhost:5000/commence_scraping")
       .then(response => response.json())
       .then(data => {
-        handleScrape(data.statusMessage);
+        // handleScrape(data.statusMessage);
       })
       .catch(error => {
         console.log(error)
@@ -47,7 +47,7 @@ export default function Admin(props) {
         insight: insight
       })
     });
-    handleScrape("running...");
+    // handleScrape("running...");
   }
 
   return (
@@ -65,9 +65,9 @@ export default function Admin(props) {
                 Scrape courses
               </Button>
             </Grid>
-            <Grid item>
-              {scrapeState === "running..." ? <Typography variant="body1" style={{paddingLeft: 12}}>Last scraped: {scrapeState}</Typography> : <></>}
-            </Grid>
+            {/*<Grid item>*/}
+            {/*  {scrapeState === "running..." ? <Typography variant="body1" style={{paddingLeft: 12}}>Last scraped: {scrapeState}</Typography> : <></>}*/}
+            {/*</Grid>*/}
           </Grid>
 
         </Grid>
@@ -86,16 +86,18 @@ export default function Admin(props) {
               <form onSubmit={doScrape}>
                 <TextField id="e3url" label="E3 Courses Tree URL (LSF)" required fullWidth
                            onChange={(e) => sete3(e.target.value)}
-                           disabled={(scrapeState === "running..." || scrapeState === "checking...")}/>
+                           // disabled={(scrapeState === "running..." || scrapeState === "checking...")}
+                />
                 <TextField id="insighturl" label="Course Insights Tree URL (LSF)" required fullWidth
                            onChange={(e) => setinsight(e.target.value)}
-                           disabled={(scrapeState === "running..." || scrapeState === "checking...")}/>
+                           // disabled={(scrapeState === "running..." || scrapeState === "checking...")}
+                />
                 <Grid container direction="row" spacing={5} alignItems="center" justify="flex-start"
                       style={{marginTop: 36, paddingLeft: 18}}>
                   <Button variant="contained" color="primary" className={classes.button} endIcon={<ArrowForwardIcon/>}
-                          disabled={(scrapeState === "running..." || scrapeState === "checking...")}
+                          // disabled={(scrapeState === "running..." || scrapeState === "checking...")}
                           type="submit">Scrape Now</Button>
-                  <p style={{paddingLeft: 12}}>Last scraped: {scrapeState}</p>
+                  {/*<p style={{paddingLeft: 12}}>Last scraped: {scrapeState}</p>*/}
                 </Grid>
               </form>
             </Grid>

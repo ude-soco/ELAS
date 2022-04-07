@@ -95,7 +95,7 @@ class Timetable(Base):
     comment = Column(String)
     elearn = Column(String)
     link = Column(String)
-    lecture_id = Column(Integer, ForeignKey('lecture.id'))
+    lecture_id = Column(String, ForeignKey('lecture.id'))
     dates = Column(ARRAY(Date))
 
     def __init__(self, id, day, time_from, time_to, rhythm, duration, duration_from, duration_to, room, status, comment, elearn, link, lecture_id, dates=[""]):

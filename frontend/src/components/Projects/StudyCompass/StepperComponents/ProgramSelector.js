@@ -146,7 +146,7 @@ export default function ProgramSelector(props) {
             </Grid>
             <Grid item>
               <Button
-                disabled={prog !== true || sem !== true}
+                disabled={prog !== true}
                 variant="contained"
                 color="primary"
                 onClick={props.handleNext()}
