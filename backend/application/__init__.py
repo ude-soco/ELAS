@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
 
-from .extensions import mongo, jwt
+from .extensions import jwt
 from .main import main
 from .resources.course_insights.course_insights import course_insights
 from .resources.e3_selector.e3_selector import e3_selector
@@ -17,7 +17,6 @@ def create_app(config_object="application.settings"):
 
     app.config.from_object(config_object)
 
-    mongo.init_app(app)
     jwt.init_app(app)
 
     app.register_blueprint(main)

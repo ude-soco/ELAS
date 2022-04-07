@@ -7,9 +7,12 @@ from sqlalchemy.orm import sessionmaker
 
 load_dotenv()
 
+DB_USER = os.environ.get('POSTGRES_USER')
+DB_PASS = os.environ.get('POSTGRES_PASS')
+DB_HOST = os.environ.get('POSTGRES_HOST')
+DB_PORT = os.environ.get('POSTGRES_PORT')
 DB_NAME = os.environ.get('POSTGRES_DB')
-DB_PASSWORD = os.environ.get('POSTGRES_PASS')
-DATABASE_URI = f'postgresql+psycopg2://postgres:{DB_PASSWORD}@localhost:5432/{DB_NAME}'
+DATABASE_URI = f'postgresql+psycopg2://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
 engine = create_engine(DATABASE_URI)
 Session = sessionmaker(bind=engine)
 
