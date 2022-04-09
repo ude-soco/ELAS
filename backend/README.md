@@ -12,7 +12,7 @@
 4. Activate the virtual environment `.\venv\Scripts\activate`
 5. Run `pip install requirements.txt`. This should install all requirements.
 6. Set up a database with a name and a password
-   1. Make a copy of `exmaple.env` file and rename to `.env`
+   1. Make a duplicate of `exmaple.env` and `example.flaskenv` file in the same directory and rename to `.env`
    2. Update the `.env` file with the password of your postgres database
 7. After the frontend is running, run `python -m flask run --host=0.0.0.0` in ELAS/backend
 
