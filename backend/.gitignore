@@ -133,15 +133,19 @@ dmypy.json
 .flaskenv
 
 #JSON files
-# scrapers/lsf_scraper/lecture_results.json
-# scrapers/vdb_scraper/description_results.json
+scrapers/lsf_scraper/lecture_results.json
+scrapers/vdb_scraper/description_results.json
 
-# scrapers/lsf_scraper/lsf_scraper/Data/post_processed_lectures.json
-# scrapers/vdb_scraper/vdb_scraper/Data/post_processed_descriptions.json
-# scrapers/vdb_scraper/vdb_scraper/description_results.json
+scrapers/lsf_scraper/lsf_scraper/Data/post_processed_lectures.json
+scrapers/vdb_scraper/vdb_scraper/Data/post_processed_descriptions.json
+scrapers/vdb_scraper/vdb_scraper/description_results.json
 
-# scrapers/merged_data.json
-# scrapers/study_programs.json
+scrapers/merged_data.json
+scrapers/study_programs.json
+
+bin/avg_ratings.json
+bin/e3_courses.json
+bin/study_programs.js
 
 #test scripts
 orm_interface/query_test.py
