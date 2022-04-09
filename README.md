@@ -40,10 +40,10 @@ The aim of this IDEA lab is to provide the foundation for an Exploratory Learnin
          python -m pip install --upgrade pip
          ```
 
-       - Install the required packages from the `requirements.txt` file
+       - Install the required packages from the `requirements_new.txt` file
 
          ```sh
-         pip install -r requirements.txt
+         pip install -r requirements_new.txt
          ```
 
      - Rename the files `example.env` to `.env` and `example.flaskenv` to `.flaskenv` respectively
