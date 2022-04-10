@@ -3,11 +3,11 @@ from orm_interface.base import Session
 from orm_interface.entities.lecture import Lecture
 from orm_interface.entities.studyprogram import StudyProgram
 
-course_insights = Blueprint("course_insights", __name__)
+study_compass = Blueprint("study_compass", __name__)
 
 session = Session()
 
-@course_insights.route("/get_studyprograms", methods=["GET"])
+@study_compass.route("/get_studyprograms", methods=["GET"])
 def get_studyprograms():
     all_studyprograms = session.query(StudyProgram).all()
     response = []
@@ -38,7 +38,7 @@ def get_studyprograms():
         })
     return jsonify(response)
 
-@course_insights.route("/get_lecture_with_id", methods=["GET"])
+@study_compass.route("/get_lecture_with_id", methods=["GET"])
 def get_lecture_with_id():
     args = request.args
     lecture = session.query(Lecture).filter(Lecture.id==args.get('id')).first()
@@ -95,7 +95,7 @@ def get_lecture_with_id():
 
     return jsonify(response)
 
-@course_insights.route("/get_lectures_with_root_id", methods=["GET"])
+@study_compass.route("/get_lectures_with_root_id", methods=["GET"])
 def get_lectures_with_root_id():
     args = request.args
     root_id = args.get('id')

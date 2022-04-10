@@ -327,7 +327,7 @@ export default function CourseSelector(props) {
 
   /* this is called when the component is loaded. It gets all lectures and sets the subjects and displayedLectures */
   useEffect(() => {
-    Backend.get("/courseinsights/get_lectures_with_root_id", {params: {"id": props.studyprogram.id}})
+    Backend.get("/studycompass/get_lectures_with_root_id", {params: {"id": props.studyprogram.id}})
         .then(response => {
           setSubjects(response.data);
           setDisplayedLectures(response.data);
@@ -478,7 +478,7 @@ export default function CourseSelector(props) {
   const handleClickDetails = (event, lecture) => {
     setOpenPopup(true);
     // setPopupLecture(response.data);
-    Backend.get("/courseinsights/get_lecture_with_id", {params: {"id": lecture.id}})
+    Backend.get("/studycompass/get_lecture_with_id", {params: {"id": lecture.id}})
         .then(response => {
           console.log(response.data);
           setPopupLecture(response.data);

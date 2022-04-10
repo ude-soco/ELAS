@@ -18,10 +18,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const professorCell = (professor) => {
-    return <div><td><a href={professor.url}>{professor.name}</a></td></div>;
-}
-
 const timetableRow = (timetable) => {
     return(
         <tr>
@@ -62,10 +58,10 @@ export default function Popup(props) {
                                 <div>
                                     <table>
                                         <tr>
-                                            {/*<th>Professors:</th>*/}
-                                            {/*{professors.map(professor => {*/}
-                                            {/*    return professorCell(professor);*/}
-                                            {/*})}*/}
+                                            <th>Professors:</th>
+                                            {professors?.map(professor => {
+                                                return <tr>{professor.name}</tr>;
+                                            })}
                                         </tr>
                                         <br></br>
                                         <tr>
@@ -89,14 +85,14 @@ export default function Popup(props) {
                             <Paper className={classes.paper} style={{"text-align": "-webkit-center"}}>
                                 <table>
                                     <th>Assigned study courses</th>
-                                    <tr>{studyPrograms.map(studyProgram => {
+                                    {studyPrograms?.map(studyProgram => {
                                         return <tr>{studyProgram.name}</tr>;
-                                    })}</tr>
+                                    })}
                                 </table>
                             </Paper>
                         </Grid>
                     </Grid>
-                    <Grid container spacing={0} style={{"padding-top": "10px"}}>
+                    <Grid container spacing={0} style={{"paddingTop": "10px"}}>
                         <Grid item xs={3}>
                             <Paper className={classes.paper}>Day</Paper>
                         </Grid>

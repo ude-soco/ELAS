@@ -34,7 +34,7 @@ export default function ProgramSelector(props) {
   const [studyPrograms, setStudyPrograms] = useState([]);
 
   useEffect(() => {
-    Backend.get("/courseinsights/get_studyprograms")
+    Backend.get("/studycompass/get_studyprograms")
         .then(response => {
           setStudyPrograms(response.data);
         })
