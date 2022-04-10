@@ -1,23 +1,17 @@
 export const projectDetails = [
   {
-    name: "Course Insights",
+    name: "Study Compass",
     image: "images/courseInsights.png",
-    shortName: "courseinsights",
-    teamMembers: "Florian Richtscheid, Ghulam Dawood Nasimi, Ritesh Damera, Amin Shahin",
-    github1: "https://github.com/FloRich/uni-due-visual-study-planer",
-    youtube: "https://github.com/FloRich/uni-due-visual-study-planer/blob/master/screencast/Project%20video",
-    deploy: "https://florich.github.io/uni-due-visual-study-planer/src/start-page/start-page.html",
-    description: "The idea of this project is to help students in the planning of subjects they can take in a semester by visually showing an overview of all the courses offered by their study program in that semester. Students can select the courses they like and see their comparison based on course ratings and time overlapping."
+    shortName: "studycompass",
+    teamMembers: "Joshua Redmann, Christoph Vorer, Sofie Kalthof",
+    description: "The project idea is to provide a platform for students at the University of Duisburg-Essen to select the university’s courses within a few easy steps. Furthermore, the platform lets students easily make a schedule by observing various details such as overlapping course schedules, ratings of the courses, and links to LSF."
   },
   {
     name: "E3 Selector",
     image: "images/e3Selector.png",
     shortName: "e3selector",
-    teamMembers: "Yuewei Ma, Marie Bexte, Aynaz Khoshkhoo",
-    github1: "https://github.com/mariebexte/E3_Selector",
-    youtube: "",
-    deploy: "https://mariebexte.github.io/E3_Selector/Application/0-landing-page/landing-page.html",
-    description: "E3 courses make up a special course catalog relevant to all Bachelor students of the University of Duisburg-Essen. This project determined issues students have with the selection of these courses via the universities course management portal. Following the Human Centered Indicator Design approach, a web application was developed in cooperation with its possible future users, aiming to arrive at a solution that improves course handling over the system provided by the university."
+    teamMembers: "Charlotte Hartmann Paludo, Rouchda Pepouna Makwet, Nassim Guelbi",
+    description: "The project aims to help students choose a suitable course from the E3 Module and provide insightful information that will help orientation and perhaps further specialization at the University of Duisburg-Essen. This project consists of powerful filtering, searching, and sorting capabilities to make it easy for the students to search for interesting courses that fit their needs."
   },
   // {
   //   name: "Study Program Organization Assistant",
@@ -33,12 +27,8 @@ export const projectDetails = [
     name: "INTOGEN",
     image: "images/intogen.png",
     shortName: "intogen",
-    teamMembers: "Yixin Haung, Jaleh Ghorbani, Aalli Mahmood",
-    github1: "https://github.com/aallimahmood/IntogenFrontend",
-    github2: "https://github.com/aallimahmood/Intogen",
-    youtube: "https://www.youtube.com/watch?v=9O9Os2UsS_o",
-    deploy: "https://intogen-f-app.herokuapp.com/",
-    description: "Every human being learns from experiences, everyone has his/her preferred learning styles by which they learn in their everyday life. In this project, we aim at improving students learning experiences by identifying students learning styles through David kolb’s learning cycle. The Idea was to identify students learning styles by kolb’s questionnaire in order to suggest them courses according to their preferred learning styles."
+    teamMembers: "Dilara Ince, Clarissa Kümhof, Willi Dick",
+    description: "This project aims to identify and improve students’ learning styles through David Kolb’s learning cycle (Kolb’s 40-item questionnaire) to suggest courses according to their preferred learning styles. In addition, this project allows the students to overview their learning types present in other courses, study programs, and countries."
   },
   // {
   //   name: "studySoon",

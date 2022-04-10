@@ -4,57 +4,17 @@
 </a>
 </p>
 
-# ELAS - Backend
+## How to get started with ELAS - Backend
 
-## Table of Contents
-
-- [Project Info](#project-info)
-- [Project structure](#project-structure)
-- [Technologies](#technologies)
-- [Additional applications](#Additional-applications)
-
-## Project Info
-
-This repository consists of the web server made with Flask for ELAS Lab Project. Each group will receive access to a
-branch and should only work on project inside `resources` folder they are assigned to.
-
-## Project structure
-
-```
-│   .gitignore
-│   example.env                         # rename to .env
-│   example.flaskenv                    # rename to .flaskenv
-│   README.md
-│   requirements.txt                    # necessary python libraries to install
-│
-├───application
-│   │   extensions.py                   # initialization of libraries
-│   │   main.py                         # application REST APIs
-│   │   settings.py                     # global constants
-│   │   __init__.py                     # application script file
-│   │
-│   └───resources                       # resources folder consists of all projects
-│       │   __init__.py
-│       │
-│       ├───course_insights
-│       │       course_insights.py      # Course Insights project REST APIs
-│       │       __init__.py
-│       │
-│       ├───e3_selector
-│       │       e3_selector.py          # E3 Selector project REST APIs
-│       │       __init__.py
-│       │
-│       ├───intogen
-│       │       intogen.py              # Intogen project REST APIs
-│       │       __init__.py
-│       │
-│       └───spoa
-│               spoa.py                 # SPOA project REST APIs
-│               __init__.py
-│
-├───static
-└───templates
-```
+1. Navigate to ELAS/backend directory.
+2. Make sure you've installed the [latest version (ver.14) of Postgres](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
+3. Create a virtual environment `python -m venv venv`
+4. Activate the virtual environment `.\venv\Scripts\activate`
+5. Run `pip install requirements.txt`. This should install all requirements.
+6. Set up a database with a name and a password
+   1. Make a duplicate of `exmaple.env` and `example.flaskenv` file in the same directory and rename to `.env`
+   2. Update the `.env` file with the password of your postgres database
+7. After the frontend is running, run `python -m flask run --host=0.0.0.0` in ELAS/backend
 
 ## Technologies
 
@@ -62,11 +22,11 @@ Project is created with:
 
 - [Python](https://www.python.org/downloads/release/python-387/) (v3.8.7)
 - [Flask](https://flask.palletsprojects.com/en/1.1.x/) (v1.1.2)
-- [MongoDB Community Server](https://www.mongodb.com/try/download/community) (v4.4.4)
+- [PostgresSQL](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads) (v14)
 
 ## Additional applications
 
 - [Postman](https://www.postman.com/downloads/)
-- [Visual Studio Code](https://code.visualstudio.com/download)
-  or [Pycharm Professional](https://www.jetbrains.com/de-de/pycharm/download/#section=windows)
-- Mongo Compass (check the box to install when installing MongoDB Community Server)
+- IDE of your choice
+  - [Visual Studio Code](https://code.visualstudio.com/download)
+  - [IntelliJ](https://www.jetbrains.com/de-de/idea/download/#section=windows)

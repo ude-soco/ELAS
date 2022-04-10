@@ -131,3 +131,13 @@ dmypy.json
 # Custom
 .idea/
 .flaskenv
+
+#JSON files
+
+bin/avg_ratings.json
+bin/e3_courses.json
+bin/study_programs.js
+
+#test scripts
+orm_interface/query_test.py
+test.py

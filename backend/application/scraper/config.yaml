@@ -1,8 +1,22 @@
-courseInsightsTargetFile: /app/bin/studyprograms.js
-courseScraper: /app/uni-due-course-catalog-scraper/
-e3RatingsFile: /app/bin/avg_ratings.json
-e3TargetFile: /app/bin/e3_courses.json
-ratingsEmail:
-ratingsPassword:
-ratingsScraper: /app/course-ratings/
-statusMessage: 2021-08-26 10:43
+courseInsightsTargetFile: bin/studyprograms.js
+courseScraper: uni-due-course-catalog-scraper
+e3RatingsFile: bin/avg_ratings.json
+e3TargetFile: bin/e3_courses.json
+lsf_post_processing: scrapers/lsf_scraper/lsf_scraper/post_processing
+lsf_scraper_directory: scrapers/lsf_scraper
+merge_data_post_processing_directory: scrapers
+merged_data_directory: scrapers/merged_data.json
+post_processed_lsf_data_directory: scrapers/lsf_scraper/lsf_scraper/Data/post_processed_lectures.json
+post_processed_vdb_data_directory: scrapers/vdb_scraper/vdb_scraper/Data/post_processed_descriptions.json
+ratingsEmail: nefapiw920@yeafam.com
+ratingsPassword: bachelor_thesis
+ratingsScraper: course-ratings
+scraped_lsf_data_directory: scrapers/lsf_scraper/lecture_results.json
+scraped_vdb_data_directory: scrapers/vdb_scraper/description_results.json
+statusMessage: 2022-04-07 15:12
+temp_e3_directory: uni-due-course-catalog-scraper/temp_e3.json
+temp_ratings: course-ratings/course_ratings/data/temp_ratings.json
+temp_ratings_raw: course-ratings/temp_ratings_raw.json
+upload_orm_data: orm_interface
+vdb_post_processing: scrapers/vdb_scraper/vdb_scraper/post_processing
+vdb_scraper_directory: scrapers/vdb_scraper

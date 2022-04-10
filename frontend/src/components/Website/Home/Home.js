@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import ProjectCards from "../ProjectCards/ProjectCards";
+import ProjectCard from "../ProjectCards/ProjectCard";
 import {Divider, Grid, InputAdornment, TextField} from "@material-ui/core";
 import {projectDetails} from "../../../assets/data/data";
 import SearchIcon from "@material-ui/icons/Search";
@@ -18,27 +18,28 @@ export default function Home(props) {
       <TextField
         className={classes.container}
         id="outlined-basic"
-        label="Search for projects"
+        placeholder="Search for projects"
         value={projectSearch}
         onChange={handleProjectSearch}
         variant="outlined"
+        style={{backgroundColor: "#fff"}}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <SearchIcon/>
+              <SearchIcon style={{color: "#909090"}}/>
             </InputAdornment>
           ),
         }}
       />
       <Divider className={classes.containerHeader}/>
-      <Grid container spacing={3} className={classes.containerHeader}>
+      <Grid container justify="center" className={classes.containerHeader}>
         {projectDetails.map((details, index) => {
           let nameToSearch = details.name.toLowerCase();
           const found = nameToSearch.includes(projectSearch);
           if (found) {
             return (
-              <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-                <ProjectCards
+              <Grid item xs={12} style={{maxWidth: "450px", margin: 8}} key={index}>
+                <ProjectCard
                   name={details.name}
                   image={details.image}
                   description={details.description}

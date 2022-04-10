@@ -7,31 +7,84 @@ import pprint
 import subprocess
 from datetime import datetime
 from difflib import SequenceMatcher
+from scrapers.merge_lsf_and_vdb import MergeData
+from orm_interface.upload_orm_data import Uploader
+from scrapers.lsf_scraper.lsf_scraper.post_processing.process_data import ProcessLsfData
+from scrapers.vdb_scraper.vdb_scraper.post_processing.process_data import ProcessVdbData
 
 pp = pprint.PrettyPrinter(indent=4)
 
+def clean_files(file_directories): # clears existing data in a file and creates it if it doesn't exist
+    for file in file_directories:
+        open(file, 'w').close()
 
 def run(config, insight_url, e3_url):
+    backend_directory = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+    # new data
+
+    lsf_data = os.path.abspath(os.path.join(backend_directory, config['scraped_lsf_data_directory']))
+    lsf_data_post_processed = os.path.abspath(os.path.join(backend_directory, config['post_processed_lsf_data_directory']))
+    vdb_data = os.path.abspath(os.path.join(backend_directory, config['scraped_vdb_data_directory']))
+    vdb_data_post_processed = os.path.abspath(os.path.join(backend_directory, config['post_processed_vdb_data_directory']))
+    study_programs_json = os.path.abspath(os.path.join(backend_directory, "scrapers", "study_programs.json"))
+
+    merged_data_directory = os.path.abspath(os.path.join(backend_directory, config['merged_data_directory']))
+    merge_data_post_processing_directory = os.path.abspath(os.path.join(backend_directory, config['merge_data_post_processing_directory']))
+
+    clean_files([lsf_data, lsf_data_post_processed, vdb_data, vdb_data_post_processed, merged_data_directory, study_programs_json])
+
+    lsf_scraper_directory = os.path.abspath(os.path.join(backend_directory, config['lsf_scraper_directory']))
+    vdb_scraper_directory = os.path.abspath(os.path.join(backend_directory, config['vdb_scraper_directory']))
+
+    lsf_post_processing_directory = os.path.abspath(os.path.join(backend_directory, config['lsf_post_processing']))
+    vdb_post_processing_directory = os.path.abspath(os.path.join(backend_directory, config['vdb_post_processing']))
+
+    upload_orm_data_directory = os.path.abspath(os.path.join(backend_directory, config['upload_orm_data']))
+
+    # 1. run both scrapers: lsf_scraper for LSF data and vdb_scraper for Vorlesungsdatenbank data
+    os.chdir(lsf_scraper_directory)
+    subprocess.call(f"scrapy crawl main -a url=\"{insight_url}\" -o lecture_results.json", shell=True)
+
+    os.chdir(vdb_scraper_directory)
+    subprocess.call(f"scrapy crawl vdb-scraper -o description_results.json", shell=True)
+
+    # 2. process both sets of data
+    LsfDataProcessing = ProcessLsfData()
+    LsfDataProcessing.run()
+
+    VdbDataProcessing = ProcessVdbData()
+    VdbDataProcessing.run()
+
+    # 3. merge both sets of data
+    merge_script = MergeData()
+    merge_script.run()
+
+    # 4. upload all the data to the database
+    uploader = Uploader()
+    uploader.upload_data()
+
+    # end of new data
+
     # 0. define temp files
-    temp_catalog = os.path.abspath(os.path.join(os.path.dirname(__file__), "temp_catalog.json"))
-    temp_e3 = os.path.abspath(os.path.join(os.path.dirname(__file__), "temp_e3.json"))
-    temp_ratings_raw = os.path.abspath(os.path.join(os.path.dirname(__file__), "temp_ratings_raw.json"))
-    temp_ratings = os.path.abspath(os.path.join(os.path.dirname(__file__), "temp_ratings.json"))
+    # temp_catalog = os.path.abspath(os.path.join(os.path.dirname(__file__), "temp_catalog.json"))
+    temp_e3 = os.path.abspath(os.path.join(backend_directory, config['temp_e3_directory']))
+    temp_ratings_raw = os.path.abspath(os.path.join(backend_directory, config['temp_ratings_raw']))
+    temp_ratings = os.path.abspath(os.path.join(backend_directory, config['temp_ratings']))
 
-    # 1. run all three scrapers: course-catalog for e3 and courseInsights, and course-ratings
-    os.chdir(config["courseScraper"])
-    subprocess.call(f"scrapy crawl course-catalog -a url='{insight_url}' -o {temp_catalog}", shell=True)
-    subprocess.call(f"scrapy crawl course-catalog -a url='{e3_url}' -a e3=True -o {temp_e3}", shell=True)
+    course_scraper_directory = os.path.abspath(os.path.join(backend_directory, config["courseScraper"]))
+    ratings_scraper_directory = os.path.abspath(os.path.join(backend_directory, config["ratingsScraper"]))
 
-    os.chdir(config["ratingsScraper"])
-    subprocess.call(f"scrapy crawl -a email=\"{config['ratingsEmail']}\" -a password=\"{config['ratingsPassword']}\" course-ratings -o {temp_ratings_raw}", shell=True)
+    clean_files([temp_e3, temp_ratings_raw, temp_ratings])
 
-    # 2a. post-process and save the insight data
-    os.chdir(os.path.join(config["courseScraper"], "course_catalog", "post_processing"))
-    subprocess.call(f"python process_data.py {temp_catalog} {config['courseInsightsTargetFile']}", shell=True)
+    # 1. run both scrapers: course-catalog for e3 and course-ratings
+    os.chdir(course_scraper_directory)
+    subprocess.call(f'scrapy crawl course-catalog -a url="{e3_url}" -a e3=True -o temp_e3.json', shell=True)
 
-    # 2b. post-process and save the ratings data
-    os.chdir(os.path.join(config["ratingsScraper"], "course_ratings", "post_processing"))
+    os.chdir(ratings_scraper_directory)
+    subprocess.call(f"scrapy crawl -a email=\"{config['ratingsEmail']}\" -a password=\"{config['ratingsPassword']}\" course-ratings -o temp_ratings_raw.json", shell=True)
+
+    # 2. post-process and save the ratings data
+    os.chdir(os.path.join(ratings_scraper_directory, "course_ratings", "post_processing"))
     subprocess.call(f"python derive_attributes.py {temp_ratings_raw} {temp_ratings}", shell=True)
 
     # 3. load the data from the temp files
@@ -44,17 +97,21 @@ def run(config, insight_url, e3_url):
     # 4. process e3 data & ratings, write to target files
     e3_processed, avg_ratings = process_e3(e3_courses, ratings)
 
-    with open(config["e3TargetFile"], "w") as file:
+    e3_target_file = os.path.abspath(os.path.join(backend_directory, config["e3TargetFile"]))
+    with open(e3_target_file, "w") as file:
         file.write(json.dumps(e3_processed))
 
-    with open(config["e3RatingsFile"], "w") as file:
+    e3_ratings_file = os.path.abspath(os.path.join(backend_directory, config["e3RatingsFile"]))
+    with open(e3_ratings_file, "w") as file:
         file.write(json.dumps(avg_ratings))
 
     # 5. remove temp files
-    os.remove(temp_catalog)
+    # os.remove(temp_catalog)
     os.remove(temp_e3)
     os.remove(temp_ratings)
     os.remove(temp_ratings_raw)
+
+    clean_files([lsf_data, lsf_data_post_processed, vdb_data, vdb_data_post_processed, merged_data_directory, study_programs_json])
 
     # 6. update statusMessage in config
     config["statusMessage"] = datetime.now().strftime("%Y-%m-%d %H:%M")
@@ -283,11 +340,15 @@ def get_excluded(text):
 
     return ";".join(excluded) if len(excluded) else "-"
 
-
 if __name__ == "__main__":
     with open("config.yaml", "r") as file:
         config = file.read()
     config = yaml.safe_load(config)
 
-    run(config, "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120211=280741%7C276367&P.vx=kurz", 
-    "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120211=280741%7C276221%7C276682&P.vx=kurz")
+    # run(config, "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120211=280741%7C276367&P.vx=kurz",
+    # "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120211=280741%7C276221%7C276682&P.vx=kurz")
+
+    run(config, "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C290850&P.vx=kurz",
+        "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120211=280741%7C276221%7C276682&P.vx=kurz")
+
+    # test_function(config, "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C290850&P.vx=kurz")
