@@ -10,6 +10,13 @@ The Interactive Data Exploration and Analytics (IDEA) lab course offered at the 
 
 The aim of this IDEA lab is to provide the foundation for an Exploratory Learning Analytics Toolkit for Students (ELAS) to support UDE students in their learning activities. In the previous iterations of the Learning Analytics (LA), Advanced Web Technologies (AdvWebTech), and Learning Analytics and Visual Analytics (LAVA) courses offered at the SoCo Group, different LA applications were developed as part of student projects. The task in IDEA lab will be to improve, adapt, and integrate selected applications into the ELAS platform.
 
+# Student projects
+
+- [E3Selector](https://github.com/ude-soco/ELAS/tree/main/frontend/src/components/Projects/E3Selector)
+- [StudyCompass](https://github.com/ude-soco/ELAS/tree/main/frontend/src/components/Projects/CourseInsights)
+- [Intogen](https://github.com/ude-soco/ELAS/tree/main/frontend/src/components/Projects/Intogen)
+
+
 ## 🚀 Get Started
 
 1. Installation guide 🔨
