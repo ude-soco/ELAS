@@ -4,7 +4,6 @@
 import scrapy
 import re
 from ..items import StudyProgram, Category, Subject, TimeEntry, Person, Einzeltermin
-from datetime import date
 
 
 class CourseCatalogSpider(scrapy.Spider):
@@ -40,7 +39,7 @@ class CourseCatalogSpider(scrapy.Spider):
             request.meta["root_id"] = self.extract_category_id(page)
             yield request
 
-    def extract_studyprograms(self, response): #extract studyprograms
+    def extract_studyprograms(self, response):  # extract studyprograms
         link = response.meta['faculty'].attrib['href']
         number_of_layers = link.count('%7C')
         studyprograms = []
@@ -71,7 +70,7 @@ class CourseCatalogSpider(scrapy.Spider):
                 request.meta['parent'] = program
                 yield request
             else:
-                self.log("No type for: "+name)
+                self.log("No type for: " + name)
                 page = response.urljoin(link)
                 request = scrapy.Request(page, callback=self.extract_studyprograms)
                 request.meta['faculty'] = studyprogram
@@ -89,7 +88,7 @@ class CourseCatalogSpider(scrapy.Spider):
             url = category_link.attrib['href']
             name = category_link.css('::text').get()
             id = self.extract_category_id(url)
-            category = Category(url = url, name=name, categories = [], id=id, parent_id=studyprogram['id'])
+            category = Category(url=url, name=name, categories=[], id=id, parent_id=studyprogram['id'])
             studyprogram['categories'].append(category['id'])
             page = response.urljoin(url)
             request = scrapy.Request(page, callback=self.extract_categories)
@@ -102,7 +101,7 @@ class CourseCatalogSpider(scrapy.Spider):
     def extract_categories(self, response):
         try:
             parent = response.meta['parent']
-        except Exception: # main study programs (first layer in the lecture tree)
+        except Exception:  # main study programs (first layer in the lecture tree)
             parent = {
                 "url": response.meta['faculty'].attrib['href'],
                 "catalog": response.meta["catalog"],
@@ -121,7 +120,8 @@ class CourseCatalogSpider(scrapy.Spider):
                 url = category_link.attrib['href']
                 name = category_link.css('::text').get()
                 id = self.extract_category_id(url)
-                category = Category(url=url, name=name, categories=[], id=id, parent_id=parent['id'], root_id=parent['root_id'])
+                category = Category(url=url, name=name, categories=[], id=id, parent_id=parent['id'],
+                                    root_id=parent['root_id'])
                 page = response.urljoin(url)
                 request = scrapy.Request(page, callback=self.extract_categories)
                 request.meta['parent'] = category
@@ -161,16 +161,16 @@ class CourseCatalogSpider(scrapy.Spider):
         hyperlink = response.xpath("//table[1]//tr[7]/td[1]/text()").get()
 
         # timetable links
-        table_xpath = "//table[@summary=\""+ self.table_summary_for_time+"\"]"
+        table_xpath = "//table[@summary=\"" + self.table_summary_for_time + "\"]"
         tables = response.xpath(table_xpath)
         for table_index, table in enumerate(tables):
             timetable_links = []
             number_entries = int(float(table.xpath("count(tr)").get()) - 1)
-            for index in range(2, 2+number_entries):
-                link = table.xpath('tr['+ str(index)+']/td[1]/a[1]')
+            for index in range(2, 2 + number_entries):
+                link = table.xpath('tr[' + str(index) + ']/td[1]/a[1]')
                 timetable_links.append(link.attrib['href'])
 
-            for index,link in enumerate(timetable_links):
+            for index, link in enumerate(timetable_links):
                 request = scrapy.Request(link, callback=self.extract_einzeltermine)
                 request.meta['index'] = index
                 request.meta['table_index'] = table_index
@@ -189,11 +189,12 @@ class CourseCatalogSpider(scrapy.Spider):
         # provide timetable entries
         subject['timetable'] = self.extract_timetable(response)
 
-        #provide persons
+        # provide persons
         subject['persons'] = self.extract_persons(response)
 
         path = "//table[@summary=\"" + self.table_summary_for_more + "\"]"
-        subject['description'] = " ".join(response.xpath(path + "/*/th[contains(text(),'Kommentar')]/following-sibling::*//text()").getall())
+        subject['description'] = " ".join(
+            response.xpath(path + "/*/th[contains(text(),'Kommentar')]/following-sibling::*//text()").getall())
 
         yield subject
 
@@ -204,36 +205,36 @@ class CourseCatalogSpider(scrapy.Spider):
         :return: list of time entries
         '''
         entries = []
-        table_xpath = "//table[@summary=\""+ self.table_summary_for_time+"\"]"
+        table_xpath = "//table[@summary=\"" + self.table_summary_for_time + "\"]"
         tables = response.xpath(table_xpath)
         einzeltermine_links = []
         for table in tables:
-            number_entries = int(float(table.xpath("count(tr)").get())-1)
-            for index in range(2, 2+number_entries):
-                entry_element_str = "tr["+str(index) + "]"
-                link_selector = table.xpath(entry_element_str+"/td[1]/a[1]")
+            number_entries = int(float(table.xpath("count(tr)").get()) - 1)
+            for index in range(2, 2 + number_entries):
+                entry_element_str = "tr[" + str(index) + "]"
+                link_selector = table.xpath(entry_element_str + "/td[1]/a[1]")
                 id = self.extract_einzeltermin_id(link_selector.attrib['href'])
-                day = self.clear_string(table.xpath(entry_element_str+"/td[2]/text()").get())
-                time = self.clear_string(table.xpath(entry_element_str+"/td[3]/text()").get())
-                rhythm = self.clear_string(table.xpath(entry_element_str+"/td[4]/text()").get())
-                duration = self.clear_string(table.xpath(entry_element_str+"/td[5]/text()").get())
-                room = self.clear_string(table.xpath(entry_element_str+"/td[6]/text()").get())
-                status = self.clear_string(table.xpath(entry_element_str+"/td[8]/text()").get())
-                comment = self.clear_string(table.xpath(entry_element_str+"/td[9]/text()").get())
-                elearn = self.clear_string(table.xpath(entry_element_str+"/td[12]/text()").get())
+                day = self.clear_string(table.xpath(entry_element_str + "/td[2]/text()").get())
+                time = self.clear_string(table.xpath(entry_element_str + "/td[3]/text()").get())
+                rhythm = self.clear_string(table.xpath(entry_element_str + "/td[4]/text()").get())
+                duration = self.clear_string(table.xpath(entry_element_str + "/td[5]/text()").get())
+                room = self.clear_string(table.xpath(entry_element_str + "/td[6]/text()").get())
+                status = self.clear_string(table.xpath(entry_element_str + "/td[8]/text()").get())
+                comment = self.clear_string(table.xpath(entry_element_str + "/td[9]/text()").get())
+                elearn = self.clear_string(table.xpath(entry_element_str + "/td[12]/text()").get())
                 einzeltermine_link = ''
-                if "expand" in table.xpath(entry_element_str+"/td[1]/a[1]/@href").get():
-                    einzeltermine_link = table.xpath(entry_element_str+"/td[1]/a[1]/@href").get()
+                if "expand" in table.xpath(entry_element_str + "/td[1]/a[1]/@href").get():
+                    einzeltermine_link = table.xpath(entry_element_str + "/td[1]/a[1]/@href").get()
                 entries.append(TimeEntry(id=id,
                                          day=day,
                                          time=time,
                                          rhythm=rhythm,
-                                         duration = duration,
-                                         room = room,
-                                         status = status,
-                                         comment = comment,
-                                         elearn = elearn,
-                                         einzeltermine_link = einzeltermine_link)
+                                         duration=duration,
+                                         room=room,
+                                         status=status,
+                                         comment=comment,
+                                         elearn=elearn,
+                                         einzeltermine_link=einzeltermine_link)
                                )
                 einzeltermine_links.append(einzeltermine_link)
         return {'entries': entries, 'links': einzeltermine_links}
@@ -262,7 +263,6 @@ class CourseCatalogSpider(scrapy.Spider):
         )
         yield scraped_einzeltermine
 
-
     def extract_persons(self, response):
         '''
         Extracts all listed persons for a subject
@@ -270,18 +270,17 @@ class CourseCatalogSpider(scrapy.Spider):
         :return: list of persons
         '''
         persons = []
-        table_xpath = "//table[@summary=\""+ self.table_summary_for_persons + "\"]"
-        number_persons = int(float(response.xpath("count("+table_xpath+"/tr)").get()) - 1)
+        table_xpath = "//table[@summary=\"" + self.table_summary_for_persons + "\"]"
+        number_persons = int(float(response.xpath("count(" + table_xpath + "/tr)").get()) - 1)
 
-        for index in range(2,2+number_persons):
-            person = response.xpath(table_xpath+"/tr["+str(index)+"]/td/a")
+        for index in range(2, 2 + number_persons):
+            person = response.xpath(table_xpath + "/tr[" + str(index) + "]/td/a")
             uid = self.extract_professor_id(person.attrib['href'])
             name = self.clear_string(person.css("::text").get())
             url = person.attrib['href']
             persons.append(Person(id=uid, name=name, url=url))
 
         return persons
-
 
     def filter_links_by_layer(self, links, symbol, count):
         filtered_links = []
@@ -292,11 +291,11 @@ class CourseCatalogSpider(scrapy.Spider):
                 if href.count(symbol) >= count and href.endswith("&P.vx=kurz"):
                     filtered_links.append(link)
             except:
-                #self.log('excluded link with no href')
+                # self.log('excluded link with no href')
                 # do nothing
                 link_elements_without_href.append(link)
 
-        #self.log("links without href: " +str(len(link_elements_without_href)))
+        # self.log("links without href: " +str(len(link_elements_without_href)))
         return filtered_links
 
     def filter_links_by_subjects(self, link_elements):
@@ -308,11 +307,11 @@ class CourseCatalogSpider(scrapy.Spider):
                 if href.find("publishSubDir=veranstaltung") > 0:
                     filtered_links.append(link)
             except:
-                #self.log('excluded link with no href')
+                # self.log('excluded link with no href')
                 link_elements_without_href.append(link)
                 # do nothing
 
-        #self.log("links without href: " + str(len(link_elements_without_href)))
+        # self.log("links without href: " + str(len(link_elements_without_href)))
         return filtered_links
 
     def extract_category_id(self, href):
@@ -325,7 +324,7 @@ class CourseCatalogSpider(scrapy.Spider):
         return str(href).split('=')[-1]
 
     def clear_string(self, string_to_clear):
-        return string_to_clear.replace("\t","").replace("\n","").strip(' ')
+        return string_to_clear.replace("\t", "").replace("\n", "").strip(' ')
 
     def extract_einzeltermin_id(self, einzeltermin_link: str):
         if einzeltermin_link.split('#')[-1].isnumeric():

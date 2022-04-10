@@ -5,6 +5,7 @@ from orm_interface.base import Base
 from orm_interface.entities.timetable import Timetable
 from orm_interface.entities.professor import Professor
 
+
 class Lecture(Base):
     __tablename__ = 'lecture'
 
@@ -27,7 +28,8 @@ class Lecture(Base):
                            back_populates='lectures')
     keywords = Column(ARRAY(JSONB))
 
-    def __init__(self, id, url, name, subject_type, semester, sws, longtext, shorttext, language, hyperlink, description, keywords):
+    def __init__(self, id, url, name, subject_type, semester, sws, longtext, shorttext, language, hyperlink,
+                 description, keywords):
         self.id = id
         self.url = url
         self.name = name

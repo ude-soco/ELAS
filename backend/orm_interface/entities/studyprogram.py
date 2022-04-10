@@ -2,11 +2,13 @@ from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
 from orm_interface.base import Base
 
+
 class Lecture_Studyprogram(Base):
     __tablename__ = 'lecture_studyprogram'
 
     lecture_id = Column(String, ForeignKey('lecture.id'), primary_key=True)
     studyprogram_id = Column(String, ForeignKey('study_program.id'), primary_key=True)
+
 
 class StudyProgram(Base):
     __tablename__ = 'study_program'

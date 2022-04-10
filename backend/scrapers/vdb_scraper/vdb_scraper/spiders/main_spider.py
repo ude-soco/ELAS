@@ -2,8 +2,9 @@
 # scrapy crawl vdb-scraper -o temp_results.json
 # -*- coding: utf-8 -*-
 import scrapy
-from ..items import VdbCatalogItem, StudyCourse, Lecture
+from ..items import StudyCourse, Lecture
 import re
+
 
 class CourseCatalogSpider(scrapy.Spider):
     name = 'vdb-scraper'
@@ -12,27 +13,34 @@ class CourseCatalogSpider(scrapy.Spider):
         'https://www.uni-due.de/vdb/en_EN/studiengang/liste'
     ]
 
-    #start_url_en = https://www.uni-due.de/vdb/en_EN/studiengang/liste
-    #start_url_de = 'https://www.uni-due.de/vdb/studiengang/liste'
+    # start_url_en = https://www.uni-due.de/vdb/en_EN/studiengang/liste
+    # start_url_de = 'https://www.uni-due.de/vdb/studiengang/liste'
 
-    def __init__(self, keywords_DE=["angewandte informatik", "angewandte kognitions- und medienwissenschaft", "computer engineering"], keywords_EN=['applied cognitive and media science', 'applied computer sience', 'computer engineering']):
+    def __init__(self, keywords_DE=None,
+                 keywords_EN=None):
+        if keywords_EN is None:
+            keywords_EN = ['applied cognitive and media science', 'applied computer sience',
+                           'computer engineering']
+        if keywords_DE is None:
+            keywords_DE = ["angewandte informatik", "angewandte kognitions- und medienwissenschaft",
+                           "computer engineering"]
         self.keywords = keywords_EN
 
     def parse(self, response):
         return self.get_links(response)
 
-    def get_links(self, response): # function called on startURL
-        links = response.xpath("//div[@class='highlight-blue']/ul/li/a") # extract links to study courses
+    def get_links(self, response):  # function called on startURL
+        links = response.xpath("//div[@class='highlight-blue']/ul/li/a")  # extract links to study courses
         study_courses = []
         for link in links:
             name = link.css("::text").get()
             url = response.urljoin(link.attrib["href"])
-            id_regex = "(studiengang/)(\d{1,})(/detail)" # regex to detect id of study course from its URL
+            id_regex = "(studiengang/)(\d{1,})(/detail)"  # regex to detect id of study course from its URL
             url_groups = re.search(id_regex, url)
             id = url_groups.group(2)
             for phrase in self.keywords:
                 print(phrase)
-                if phrase in name.lower(): # getting only those courses that we want, in this case: INKO courses
+                if phrase in name.lower():  # getting only those courses that we want, in this case: INKO courses
                     study_courses.append(StudyCourse(name=name, url=url, id=id, type="StudyCourse"))
                     break
 
@@ -53,18 +61,20 @@ class CourseCatalogSpider(scrapy.Spider):
                 "id": "UNKNOWN",
                 "type": "StudyCourse"
             }
-        all_links = response.xpath("//a") # getting all links from a study course page
-        filtered_links = self.filter_links_by_lecture_katalog(all_links) # getting only lecture links
+        all_links = response.xpath("//a")  # getting all links from a study course page
+        filtered_links = self.filter_links_by_lecture_katalog(all_links)  # getting only lecture links
         lecture_links = filtered_links["lecture_links"]
         katalog_links = filtered_links["katalog_links"]
 
         for lecture_link in lecture_links:
-            request = scrapy.Request(response.urljoin(lecture_link.attrib["href"]), callback=self.extract_lecture_details)
+            request = scrapy.Request(response.urljoin(lecture_link.attrib["href"]),
+                                     callback=self.extract_lecture_details)
             request.meta["parent_course"] = parent_course
             yield request
 
         for katalog_link in katalog_links:
-            request = scrapy.Request(response.urljoin(katalog_link.attrib['href']), callback=self.extract_katalog_details)
+            request = scrapy.Request(response.urljoin(katalog_link.attrib['href']),
+                                     callback=self.extract_katalog_details)
             request.meta['parent_course'] = parent_course
             yield request
 
@@ -86,15 +96,16 @@ class CourseCatalogSpider(scrapy.Spider):
             lecture_id = url_groups.group(2)
         except:
             lecture_id = "UNKNOWN"
-        de = response.xpath("//div[@id='de_DE']/table[1]/tr") # collection of all the rows in the german description
-        en = response.xpath("//div[@id='en_EN']/table[1]/tr") # collection of all the rows in the english description
+        de = response.xpath("//div[@id='de_DE']/table[1]/tr")  # collection of all the rows in the german description
+        en = response.xpath("//div[@id='en_EN']/table[1]/tr")  # collection of all the rows in the english description
         description_DE = self.extract_descriptions(de)
         description_EN = self.extract_descriptions(en)
         description = {
             "de": description_DE,
             "en": description_EN
         }
-        yield Lecture(name=lecture_title, url=lecture_url, id=lecture_id, description=description, type="Lecture", parent_course=parent_course)
+        yield Lecture(name=lecture_title, url=lecture_url, id=lecture_id, description=description, type="Lecture",
+                      parent_course=parent_course)
 
     def extract_katalog_details(self, response):
         try:
@@ -112,7 +123,8 @@ class CourseCatalogSpider(scrapy.Spider):
         ahref_links = needed_fieldset.xpath('ul/li/a')
         module_links = ahref_links.getall()
         for module_link in ahref_links:
-            request = scrapy.Request(response.urljoin(module_link.attrib['href']), callback=self.extract_lectures_from_module)
+            request = scrapy.Request(response.urljoin(module_link.attrib['href']),
+                                     callback=self.extract_lectures_from_module)
             request.meta['parent_course'] = parent_course
             yield request
 
@@ -133,7 +145,8 @@ class CourseCatalogSpider(scrapy.Spider):
         lecture_links = ahref_links.getall()
 
         for lecture_link in ahref_links:
-            request = scrapy.Request(response.urljoin(lecture_link.attrib['href']), callback=self.extract_lecture_details)
+            request = scrapy.Request(response.urljoin(lecture_link.attrib['href']),
+                                     callback=self.extract_lecture_details)
             request.meta['parent_course'] = parent_course
             yield request
 

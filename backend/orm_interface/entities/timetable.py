@@ -1,6 +1,7 @@
 from sqlalchemy import Column, String, Date, ForeignKey, ARRAY
 from orm_interface.base import Base
 
+
 class Timetable(Base):
     __tablename__ = 'timetable'
     __table_args__ = {"extend_existing": True}
@@ -21,7 +22,8 @@ class Timetable(Base):
     lecture_id = Column(String, ForeignKey('lecture.id'))
     dates = Column(ARRAY(Date))
 
-    def __init__(self, id, day, time_from, time_to, rhythm, duration, duration_from, duration_to, room, status, comment, elearn, link, lecture_id, dates=[""]):
+    def __init__(self, id, day, time_from, time_to, rhythm, duration, duration_from, duration_to, room, status, comment,
+                 elearn, link, lecture_id, dates=[""]):
         self.id = id
         self.day = day
         self.time_from = time_from
