@@ -26,11 +26,12 @@ def run(config, insight_url, e3_url):
     lsf_data_post_processed = os.path.abspath(os.path.join(backend_directory, config['post_processed_lsf_data_directory']))
     vdb_data = os.path.abspath(os.path.join(backend_directory, config['scraped_vdb_data_directory']))
     vdb_data_post_processed = os.path.abspath(os.path.join(backend_directory, config['post_processed_vdb_data_directory']))
+    study_programs_json = os.path.abspath(os.path.join(backend_directory, "scrapers", "study_programs.json"))
 
     merged_data_directory = os.path.abspath(os.path.join(backend_directory, config['merged_data_directory']))
     merge_data_post_processing_directory = os.path.abspath(os.path.join(backend_directory, config['merge_data_post_processing_directory']))
 
-    clean_files([lsf_data, lsf_data_post_processed, vdb_data, vdb_data_post_processed, merged_data_directory])
+    clean_files([lsf_data, lsf_data_post_processed, vdb_data, vdb_data_post_processed, merged_data_directory, study_programs_json])
 
     lsf_scraper_directory = os.path.abspath(os.path.join(backend_directory, config['lsf_scraper_directory']))
     vdb_scraper_directory = os.path.abspath(os.path.join(backend_directory, config['vdb_scraper_directory']))
@@ -109,6 +110,8 @@ def run(config, insight_url, e3_url):
     os.remove(temp_e3)
     os.remove(temp_ratings)
     os.remove(temp_ratings_raw)
+
+    clean_files([lsf_data, lsf_data_post_processed, vdb_data, vdb_data_post_processed, merged_data_directory, study_programs_json])
 
     # 6. update statusMessage in config
     config["statusMessage"] = datetime.now().strftime("%Y-%m-%d %H:%M")
