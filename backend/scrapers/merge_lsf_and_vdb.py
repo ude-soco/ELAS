@@ -26,47 +26,53 @@ class MergeData():
         else:
             return (None, None)
 
+    # function to reverse the weights of the keywords extracted by YAKE
+    # In YAKE, the keyphrase with the lowest weight is the most important, but in the word cloud on the frontend,
+    # the largest (most important) keyword needs the biggest weight. So we reverse the weights, but not the keywords
+    def reverse_yake_weights(self, keyword_weights):
+        weights = [weight for keyword, weight in keyword_weights]
+        reverse_weights = weights[::-1]
+        reverse_keyphrase_weights = []
+
+        for i in range(len(keyword_weights)):
+            reverse_keyphrase_weights.append({
+                "text": keyword_weights[i][0],
+                "value": reverse_weights[i]
+            })
+
+        return reverse_keyphrase_weights
+
     def yake_keywords(self, lecture_description):
         max_ngram_size = 2
         num = 15
         custom_kwextractor = yake.KeywordExtractor(
             lan="en",
             n=max_ngram_size,
-            dedupLim=0.9,
-            dedupFunc='seqm',
-            windowsSize=1,
             top=num,
-            features=None,
             additional_stopwords=['description', 'literature', 'aufl', 'aufl.', 'auflage', 'und', 'learning', 'targets',
                                   'pre-qualifications', 'info', 'link', 'notice', 'springer', 'berlin']
         )
-        reg = '(Description:)(.*?)(Learning Targets:)(.*?)(Literature:)(.*?)(Pre-Qualifications:)(.*?)(Info Link:)(.*?)(Notice:)'
-        matches = re.findall(reg, lecture_description, re.DOTALL)
-        processed_lecture_description = lecture_description
         keyphrases = []
-        if len(matches) > 0 and len((matches[0][1] + matches[0][3]).strip()) > 0:
-            processed_lecture_description = ' '.join([matches[0][1], matches[0][3]])
         try:
             if len(lecture_description.strip()) > 0:
-                keyphrases = custom_kwextractor.extract_keywords(processed_lecture_description)
+                keyphrases = custom_kwextractor.extract_keywords(lecture_description)
         except Exception as e:
             print(str(e))
+
         lecture_keywords = []
         if len(keyphrases) > 0:
-            lecture_keywords = [{
-                "text": keyphrase_weight[0],
-                "value": keyphrase_weight[1]
-            } for keyphrase_weight in keyphrases]
+            lecture_keywords = self.reverse_yake_weights(keyphrases)
 
         return lecture_keywords
 
     def singlerank_keywords(self, lecture_description):
         num = 15
         pos = {'NOUN', 'PROPN', 'ADJ'}
+        window = 10
         extractor = SingleRank()
         extractor.load_document(input=lecture_description, language='en_core_web_sm')
         extractor.candidate_selection(pos=pos)
-        extractor.candidate_weighting(window=10, pos=pos)
+        extractor.candidate_weighting(window=window, pos=pos)
         keyphrases = extractor.get_n_best(n=num)
         lecture_keywords = [{
             "text": keyphrase_weight[0],
@@ -74,7 +80,7 @@ class MergeData():
         } for keyphrase_weight in keyphrases]
         return lecture_keywords
 
-    def get_keywords(self, lecture_description):
+    def get_keywords(self, lecture_description, lecture_name):
         keywords = []
         if len(lecture_description) == 0:
             return keywords
@@ -88,10 +94,10 @@ class MergeData():
 
         try:
             if len(lecture_description.strip()) <= 280:
-                print("using yake")
+                print("using yake for {}".format(lecture_name))
                 keywords = self.yake_keywords(processed_lecture_description)
             else:
-                print("using single rank")
+                print("using single rank for {}".format(lecture_name))
                 keywords = self.singlerank_keywords(processed_lecture_description)
         except Exception as e:
             print(str(e))
@@ -136,7 +142,7 @@ class MergeData():
                         })
                         lecture['description'] = vdb_json[closest_match]['description']['en'] # if it's a close enough match, then merge the descriptions anyway (English ones)
 
-                lecture["keywords"] = self.get_keywords(lecture_description=lecture["description"])
+                lecture["keywords"] = self.get_keywords(lecture_description=lecture["description"], lecture_name=lecture["name"])
 
             print(zero, less, more)
             # print(len(distant_matches))
