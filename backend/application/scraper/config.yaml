@@ -13,7 +13,7 @@ ratingsPassword: bachelor_thesis
 ratingsScraper: course-ratings
 scraped_lsf_data_directory: scrapers/lsf_scraper/lecture_results.json
 scraped_vdb_data_directory: scrapers/vdb_scraper/description_results.json
-statusMessage: 2022-04-07 15:12
+statusMessage: 2022-04-11 09:40
 temp_e3_directory: uni-due-course-catalog-scraper/temp_e3.json
 temp_ratings: course-ratings/course_ratings/data/temp_ratings.json
 temp_ratings_raw: course-ratings/temp_ratings_raw.json
