@@ -6,9 +6,12 @@ from Keyword_Extractor.graph_based.singlerank import SingleRank
 import re
 import os
 
-lsf_data_directory = os.path.abspath(os.path.join(os.path.dirname(__file__), "lsf_scraper", "lsf_scraper", "Data", "post_processed_lectures.json"))
-vdb_data_directory = os.path.abspath(os.path.join(os.path.dirname(__file__), "vdb_scraper", "vdb_scraper", "Data", "post_processed_descriptions.json"))
+lsf_data_directory = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "lsf_scraper", "lsf_scraper", "Data", "post_processed_lectures.json"))
+vdb_data_directory = os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "vdb_scraper", "vdb_scraper", "Data", "post_processed_descriptions.json"))
 merged_data_directory = os.path.abspath(os.path.join(os.path.dirname(__file__), "merged_data.json"))
+
 
 class MergeData():
     def clear_merged_data_directory(self):
@@ -105,7 +108,9 @@ class MergeData():
         return keywords
 
     def run(self):
-        with io.open(vdb_data_directory, encoding='UTF8') as vdb_data, io.open(lsf_data_directory, encoding='UTF8') as lsf_data, io.open(merged_data_directory, 'w', encoding='UTF8') as output_file:
+        with io.open(vdb_data_directory, encoding='UTF8') as vdb_data, io.open(lsf_data_directory,
+                                                                               encoding='UTF8') as lsf_data, io.open(
+                merged_data_directory, 'w', encoding='UTF8') as output_file:
             vdb_json = json.load(vdb_data)
             lsf_json = json.load(lsf_data)
 
@@ -115,17 +120,19 @@ class MergeData():
             somewhat_same = 0
             similarity_too_low = 0
 
-            lecture_name_list = list(vdb_json.keys()) # list of names of lectures in the Vorlesungsdatenbank data (descriptions)
+            lecture_name_list = list(
+                vdb_json.keys())  # list of names of lectures in the Vorlesungsdatenbank data (descriptions)
             distant_matches = []
-            zero, less, more = 0,0,0
+            zero, less, more = 0, 0, 0
 
             for lecture in lsf_json:
                 subject = lecture['name']
                 # if 'zu' in subject:
                 #     subject = ' '.join(subject.split(' ')[2:]).replace('"', '')
-                if subject in vdb_json.keys(): # checking if the subject from the lsf_data is in the keys of the vdb dictionary
+                if subject in vdb_json.keys():  # checking if the subject from the lsf_data is in the keys of the vdb dictionary
                     matches = matches + 1
-                    lecture['description'] = vdb_json[subject]['description']['en'] # en because only English description is relevant for us
+                    lecture['description'] = vdb_json[subject]['description'][
+                        'en']  # en because only English description is relevant for us
                     # print('exact match:\t{}\t---->\t{}'.format(subject, lsf_value['name']))
                 else:
                     result = self.similar(subject, lecture_name_list)
@@ -140,14 +147,17 @@ class MergeData():
                             "closest_match": closest_match,
                             "ratio": ratio
                         })
-                        lecture['description'] = vdb_json[closest_match]['description']['en'] # if it's a close enough match, then merge the descriptions anyway (English ones)
+                        lecture['description'] = vdb_json[closest_match]['description'][
+                            'en']  # if it's a close enough match, then merge the descriptions anyway (English ones)
 
-                lecture["keywords"] = self.get_keywords(lecture_description=lecture["description"], lecture_name=lecture["name"])
+                lecture["keywords"] = self.get_keywords(lecture_description=lecture["description"],
+                                                        lecture_name=lecture["name"])
 
             print(zero, less, more)
             # print(len(distant_matches))
             # pprint(distant_matches)
-            print('exact matches: {}, somewhat same: {}, no close enough match: {}'.format(matches, somewhat_same, similarity_too_low))
+            print('exact matches: {}, somewhat same: {}, no close enough match: {}'.format(matches, somewhat_same,
+                                                                                           similarity_too_low))
 
             json.dump(lsf_json, output_file, ensure_ascii=False)
             output_file.close()

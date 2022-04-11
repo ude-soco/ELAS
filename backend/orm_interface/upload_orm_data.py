@@ -54,7 +54,8 @@ class Uploader:
             studyprograms_json = json.load(studyprograms_data)
             for studyprogram in studyprograms_json:
                 if studyprogram['id'] not in studyprograms_dict.keys():
-                    studyprograms_dict[studyprogram['id']] = StudyProgram(studyprogram['id'], studyprogram['name'], studyprogram['url'])
+                    studyprograms_dict[studyprogram['id']] = StudyProgram(studyprogram['id'], studyprogram['name'],
+                                                                          studyprogram['url'])
             studyprograms_data.close()
 
         with io.open(DATA_DIRECTORY, 'r', encoding='utf8') as data_file:
@@ -64,7 +65,8 @@ class Uploader:
                 professors = lecture['persons']
                 for professor in professors:
                     if professor['id'] not in professors_dict.keys():
-                        professors_dict[professor['id']] = Professor(professor['id'], professor['name'], professor['url'])
+                        professors_dict[professor['id']] = Professor(professor['id'], professor['name'],
+                                                                     professor['url'])
 
             count = 0
             date_regex = "\s*(3[01]|[12][0-9]|0?[1-9])\.(1[012]|0?[1-9])\.((?:19|20)\d{2})\s*$"
@@ -91,9 +93,12 @@ class Uploader:
                 elif lecture_subject_type == 'Einführung' and 'Einfürhrung' not in lecture_name:
                     lecture_name = 'Einführung zu ' + lecture_name
 
-                temp_lecture = Lecture(id=lecture_id, name=lecture_name, url=lecture_url, subject_type=lecture_subject_type,
-                                       semester=lecture_semester,sws=lecture_sws, longtext=lecture_longtext, shorttext=lecture_shorttext,
-                                       language=lecture_language,hyperlink=lecture_hyperlink, description=lecture_description,
+                temp_lecture = Lecture(id=lecture_id, name=lecture_name, url=lecture_url,
+                                       subject_type=lecture_subject_type,
+                                       semester=lecture_semester, sws=lecture_sws, longtext=lecture_longtext,
+                                       shorttext=lecture_shorttext,
+                                       language=lecture_language, hyperlink=lecture_hyperlink,
+                                       description=lecture_description,
                                        keywords=lecture_keywords)
 
                 professors = lecture['persons']
@@ -111,7 +116,7 @@ class Uploader:
                         count += 1
 
                     duration = ''
-                    duration_from = duration_to = datetime.date(1999,2,4)
+                    duration_from = duration_to = datetime.date(1999, 2, 4)
                     if type(timetable_entry['duration']) == str:
                         if 'am' in timetable_entry['duration']:
                             duration = 'AM'
@@ -127,11 +132,15 @@ class Uploader:
                             duration_from = dates[0]
                             duration_to = dates[-1]
 
-                    temp_entry = Timetable(timetable_entry['id'], timetable_entry['day'], timetable_entry['time']['from'],
-                                               timetable_entry['time']['to'], timetable_entry['rhythm'], duration, duration_from, duration_to,
-                                               timetable_entry['room'], timetable_entry['status'], timetable_entry['comment'],
-                                               timetable_entry['elearn'], timetable_entry['einzeltermine_link'], lecture['id'],
-                                               dates)
+                    temp_entry = Timetable(timetable_entry['id'], timetable_entry['day'],
+                                           timetable_entry['time']['from'],
+                                           timetable_entry['time']['to'], timetable_entry['rhythm'], duration,
+                                           duration_from, duration_to,
+                                           timetable_entry['room'], timetable_entry['status'],
+                                           timetable_entry['comment'],
+                                           timetable_entry['elearn'], timetable_entry['einzeltermine_link'],
+                                           lecture['id'],
+                                           dates)
                     temp_lecture.timetables.append(temp_entry)
                 session.add(temp_lecture)
 

@@ -5,11 +5,13 @@ import os
 backend_directory = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", ".."))
 
 LECTURE_DATA = os.path.abspath(os.path.join(backend_directory, "scrapers", "lsf_scraper", "lecture_results.json"))
-OUTPUT_FILE = os.path.abspath(os.path.join(backend_directory, "scrapers", "lsf_scraper", "lsf_scraper", "Data", "post_processed_lectures.json"))
+OUTPUT_FILE = os.path.abspath(
+    os.path.join(backend_directory, "scrapers", "lsf_scraper", "lsf_scraper", "Data", "post_processed_lectures.json"))
 STUDY_PROGRAMS_FILE = os.path.abspath(os.path.join(backend_directory, "scrapers", "study_programs.json"))
 
+
 class ProcessLsfData:
-    def clear_output_directories(self): # clean the destination directory before filling it with new data
+    def clear_output_directories(self):  # clean the destination directory before filling it with new data
         open(OUTPUT_FILE, 'w').close()
         open(STUDY_PROGRAMS_FILE, 'w').close()
 
@@ -33,16 +35,16 @@ class ProcessLsfData:
             times = entry['time'].split('\xa0bis\xa0')
             if len(times) == 2:
                 time = {
-                    'from': times[0].replace('\xa0',''),
-                    'to': times[1].replace('\xa0',''),
+                    'from': times[0].replace('\xa0', ''),
+                    'to': times[1].replace('\xa0', ''),
                 }
                 entry['time'] = time
 
             durations = entry['duration'].split('\xa0bis\xa0')
             if len(durations) == 2:
                 duration = {
-                    'from': durations[0].replace('\xa0',''),
-                    'to': durations[1].replace('\xa0','')
+                    'from': durations[0].replace('\xa0', ''),
+                    'to': durations[1].replace('\xa0', '')
                 }
                 entry['duration'] = duration
 
@@ -81,7 +83,7 @@ class ProcessLsfData:
     def run(self):
         self.clear_output_directories()
         with io.open(LECTURE_DATA, encoding='utf8') as json_file:
-            data = json.load(json_file) # load raw scraped data
+            data = json.load(json_file)  # load raw scraped data
             subjects_dict = {}
             categories_dict = {}
             subjects_list = []
@@ -90,18 +92,20 @@ class ProcessLsfData:
 
             for entry in data:
                 if 'subject_type' in entry.keys():
-                    subjects_list.append(entry) # storing all lectures
+                    subjects_list.append(entry)  # storing all lectures
                 elif 'type' in entry.keys():
-                    einzeltermine_list.append(entry) # storing all einzeltermine
+                    einzeltermine_list.append(entry)  # storing all einzeltermine
                 elif 'catalog' in entry.keys():
                     studyprogram_list.append(entry)
 
-            merged_lectures = self.merge_lectures_with_same_id(subjects_list) # dictionary containing no duplicate lectures
-            einzeltermine_dict = self.merge_einzeltermine_with_same_subject_id(einzeltermine_list) # dictionary containing einzeltermine
+            merged_lectures = self.merge_lectures_with_same_id(
+                subjects_list)  # dictionary containing no duplicate lectures
+            einzeltermine_dict = self.merge_einzeltermine_with_same_subject_id(
+                einzeltermine_list)  # dictionary containing einzeltermine
 
             # print(merged_lectures)
             for key, value in merged_lectures.items():
-                merged_lectures[key] = self.process_timetable_of_subject(value) # process timetables of each lecture
+                merged_lectures[key] = self.process_timetable_of_subject(value)  # process timetables of each lecture
                 if key in einzeltermine_dict.keys():
                     merged_lectures[key] = self.assign_einzeltermine_to_correct_lecture(value, einzeltermine_dict[key])
             # print(merged_lectures)

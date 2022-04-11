@@ -20,11 +20,6 @@ class VdbScraperPipeline:
         return item
 
     def remove_html_formatting(self, description):
-        # to_remove = ['<td>', '</td>', '<p>', '</p>', '\\r', '\\n', '<td>', '</td>']
-        # for symbol in to_remove:
-        #     description = description.replace(symbol, '')
-        # return description
-        #
         cleaner = re.compile('<.*?>')
         cleantext = re.sub(cleaner, '', description)
         return cleantext
