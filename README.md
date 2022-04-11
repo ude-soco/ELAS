@@ -13,7 +13,7 @@ The aim of this IDEA lab is to provide the foundation for an Exploratory Learnin
 # Student projects
 
 - [E3Selector](https://github.com/ude-soco/ELAS/tree/main/frontend/src/components/Projects/E3Selector)
-- [StudyCompass](https://github.com/ude-soco/ELAS/tree/main/frontend/src/components/Projects/CourseInsights)
+- [StudyCompass](https://github.com/ude-soco/ELAS/tree/main/frontend/src/components/Projects/StudyCompass)
 - [Intogen](https://github.com/ude-soco/ELAS/tree/main/frontend/src/components/Projects/Intogen)
 
 
@@ -23,7 +23,7 @@ The aim of this IDEA lab is to provide the foundation for an Exploratory Learnin
 
 	- Backend installation
     	- Download and install [Python 3.10.4](https://www.python.org/downloads/)
-    	- Download and install [Postgresql 14.2](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
+    	- Download and install [PostgreSQL 14.2](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
     	- Open a command prompt, move inside `backend` folder, and follow the steps below by typing the commands in your command prompt.
     	- Install a python virtual environment
         	```sh
