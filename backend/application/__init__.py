@@ -3,7 +3,7 @@ from flask_cors import CORS
 
 from .extensions import jwt
 from .main import main
-from .resources.study_compass.course_insights import study_compass
+from .resources.study_compass.study_compass import study_compass
 from .resources.e3_selector.e3_selector import e3_selector
 from .resources.in_eval.in_eval import in_eval
 from .resources.intogen.intogen import intogen
