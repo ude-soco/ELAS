@@ -17,13 +17,15 @@ class CourseCatalogSpider(scrapy.Spider):
     # start_url_de = 'https://www.uni-due.de/vdb/studiengang/liste'
 
     def __init__(self, keywords_DE=None,
-                 keywords_EN=None):
+                 keywords_EN=None, all_engineering_studyprograms=False, *args, **kwargs):
         if keywords_EN is None:
             keywords_EN = ['applied cognitive and media science', 'applied computer sience',
                            'computer engineering']
         if keywords_DE is None:
             keywords_DE = ["angewandte informatik", "angewandte kognitions- und medienwissenschaft",
                            "computer engineering"]
+
+        self.all_engineering_studyprograms = all_engineering_studyprograms
         self.keywords = keywords_EN
 
     def parse(self, response):
@@ -38,11 +40,15 @@ class CourseCatalogSpider(scrapy.Spider):
             id_regex = "(studiengang/)(\d{1,})(/detail)"  # regex to detect id of study course from its URL
             url_groups = re.search(id_regex, url)
             id = url_groups.group(2)
-            for phrase in self.keywords:
-                print(phrase)
-                if phrase in name.lower():  # getting only those courses that we want, in this case: INKO courses
-                    study_courses.append(StudyCourse(name=name, url=url, id=id, type="StudyCourse"))
-                    break
+
+            if self.all_engineering_studyprograms: # if we have to scrape all engineering study programs
+                study_courses.append(StudyCourse(name=name, url=url, id=id, type="StudyCourse"))
+
+            else: # if we only have to scrape the INKO group of study programs
+                for phrase in self.keywords:
+                    if phrase in name.lower():  # getting only those courses that we want, in this case: INKO courses
+                        study_courses.append(StudyCourse(name=name, url=url, id=id, type="StudyCourse"))
+                        break
 
         for study_course in study_courses:
             page = study_course['url']
