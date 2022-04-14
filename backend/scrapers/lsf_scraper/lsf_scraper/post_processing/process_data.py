@@ -109,8 +109,8 @@ class ProcessLsfData:
                 if key in einzeltermine_dict.keys():
                     merged_lectures[key] = self.assign_einzeltermine_to_correct_lecture(value, einzeltermine_dict[key])
             # print(merged_lectures)
-            print(len(merged_lectures))
-            print(len(studyprogram_list))
+            print("{} lectures after merging duplicates".format(len(merged_lectures)))
+            print("{} study programs found".format(len(studyprogram_list)))
 
             final_merged_lectures_and_categories = []
 

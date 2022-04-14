@@ -22,7 +22,7 @@ class ProcessVdbData:
             data = json.load(json_file)
             lectures_dict = {}
 
-            print(len(data))
+            print("{} raw description data".format(len(data)))
             for entry in data:
                 if entry['name'] in lectures_dict.keys():
                     print('duplicate found {} originally in {}, also in {}'.format(entry['id'],
@@ -32,7 +32,7 @@ class ProcessVdbData:
                 else:
                     lectures_dict[entry['name']] = entry
 
-            print(len(lectures_dict))
+            print("{} data left after processing raw description data".format(len(lectures_dict)))
 
             with io.open(VDB_DESTINATION_DIRECTORY, 'w', encoding='UTF8') as output_file:
                 json.dump(lectures_dict, output_file, ensure_ascii=False)

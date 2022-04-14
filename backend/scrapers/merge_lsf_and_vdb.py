@@ -13,7 +13,7 @@ vdb_data_directory = os.path.abspath(
 merged_data_directory = os.path.abspath(os.path.join(os.path.dirname(__file__), "merged_data.json"))
 
 
-class MergeData():
+class MergeData:
     def clear_merged_data_directory(self):
         open(merged_data_directory, 'w').close()
 
@@ -114,8 +114,8 @@ class MergeData():
             vdb_json = json.load(vdb_data)
             lsf_json = json.load(lsf_data)
 
-            print(len(vdb_json))
-            print(len(lsf_json))
+            print("{} post processed descriptions".format(len(vdb_json)))
+            print("{} post processed lectures".format(len(lsf_json)))
             matches = 0
             somewhat_same = 0
             similarity_too_low = 0
@@ -123,7 +123,6 @@ class MergeData():
             lecture_name_list = list(
                 vdb_json.keys())  # list of names of lectures in the Vorlesungsdatenbank data (descriptions)
             distant_matches = []
-            zero, less, more = 0, 0, 0
 
             for lecture in lsf_json:
                 subject = lecture['name']
@@ -133,7 +132,6 @@ class MergeData():
                     matches = matches + 1
                     lecture['description'] = vdb_json[subject]['description'][
                         'en']  # en because only English description is relevant for us
-                    # print('exact match:\t{}\t---->\t{}'.format(subject, lsf_value['name']))
                 else:
                     result = self.similar(subject, lecture_name_list)
                     closest_match, ratio = result[0], result[1]
@@ -153,9 +151,6 @@ class MergeData():
                 lecture["keywords"] = self.get_keywords(lecture_description=lecture["description"],
                                                         lecture_name=lecture["name"])
 
-            print(zero, less, more)
-            # print(len(distant_matches))
-            # pprint(distant_matches)
             print('exact matches: {}, somewhat same: {}, no close enough match: {}'.format(matches, somewhat_same,
                                                                                            similarity_too_low))
 
