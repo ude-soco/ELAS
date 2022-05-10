@@ -39,6 +39,7 @@ The aim of this IDEA lab is to provide the foundation for an Exploratory Learnin
 		```sh
 		docker-compose up --build
 		```
+	- Follow the steps in the [🕸️ Scraping Tool](#🕸️-scraping-tool)
 
 
 <br/>
@@ -94,7 +95,7 @@ The aim of this IDEA lab is to provide the foundation for an Exploratory Learnin
      	- Application will open automatically in browser at [localhost:3000](http://localhost:3000)
 		- Read more about CSS framework [Material UI v4](https://v4.mui.com/getting-started/installation/)
 
-## 🕸️ Scraping tool
+## 🕸️ Scraping Tool
 
 - In the ELAS web application homepage, click `Login` button and create a new account
 - After successful login, click the circle button at the top right corner, open the menu, and click `Settings`
