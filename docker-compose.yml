@@ -1,12 +1,16 @@
 version: "3"
 
 services:
-  mongoDB:
-    image: mongo:4.4-bionic
+  db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234qweR
     ports:
-      - "27017:27017"
-    volumes:
-      - mongodbdata:/data/db
+      - '5432:5432'
+    volumes: 
+      - db:/var/lib/postgresql/data
     networks:
       - backend
 
@@ -19,14 +23,18 @@ services:
     environment:
       - FLASK_APP=application
       - FLASK_ENV=development
-      - MONGO_URI=mongodb://mongoDB:27017/ELAS
+      - POSTGRES_USER=postgres
+      - POSTGRES_HOST=db
+      - POSTGRES_DB=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_PASS=1234qweR
       - JWT_SECRET_KEY=secret
     ports:
       - "5000:5000"
     volumes:
       - ./backend/:/app/
     depends_on:
-      - mongoDB
+      - db
     networks:
       - backend
       - frontend
@@ -58,5 +66,5 @@ networks:
     driver: bridge
 
 volumes:
-  mongodbdata:
+  db:
     driver: local

@@ -34,7 +34,7 @@ export default function Admin(props) {
         .catch((error) => {
           console.log(error);
         });
-    }, 10000);
+    }, 5000);
     return () => clearInterval(interval);
   });
 
