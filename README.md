@@ -85,7 +85,7 @@ The aim of this IDEA lab is to provide the foundation for an Exploratory Learnin
      	- Open command prompt/terminal and follow the steps below:
        	- Download and install node packages
          	```sh
-			npm install
+			npm ci
          	```
        	- Run the script and starts the application
          	```sh
