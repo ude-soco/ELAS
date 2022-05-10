@@ -29,13 +29,13 @@ The aim of this IDEA lab is to provide the foundation for an Exploratory Learnin
 
    - Open a command prompt/terminal and move to the `ELAS\frontend` directory. Then type the following command:
 
-     ```sh
+     ```
      npm install
      ```
 
    - Move back to `ELAS` directory and type the following command in the command prompt/terminal:
 
-     ```sh
+     ```
      docker-compose up --build
      ```
 
@@ -43,49 +43,85 @@ The aim of this IDEA lab is to provide the foundation for an Exploratory Learnin
 
 <br/>
 
-1. Installation guide 🔨
+2. Manual Installation Guide 🔨
 
-   - Backend installation
+   	- Backend installation
 
-     - Download and install [Python 3.10.4](https://www.python.org/downloads/)
-     - Download and install [PostgreSQL 14.2](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
-     - Open a command prompt, move inside `backend` folder, and follow the steps below by typing the commands in your command prompt.
-     - Install a python virtual environment
-       `sh python -m venv venv `
-       - Activate the python virtual environment
-         `sh .\venv\Scripts\activate `
-     - Upgrade the pip version
-       `sh python -m pip install --upgrade pip `
-       - Install the required packages from the `requirements.txt` file
-         ```sh
-         pip install -r requirements.txt
-         ```
-       - Install Flask 2.1.0
-         `sh pip install Flask==2.1.0 psycopg2-binary Flask==2.1.0 flask-jwt-extended flask-bcrypt flask-cors --upgrade `
-     - Rename the files `example.env` to `.env` and `example.flaskenv` to `.flaskenv` respectively
-     - Open `.env` file, find `POSTGRES_PASS`, and type the password of your postgresql database between the single quotation mark
-     - Type the following command in a command prompt to run server
+     	- Download and install [Python 3.10.4](https://www.python.org/downloads/)
 
-       ```sh
-       python -m flask run --host=0.0.0.0
-       ```
+     	- Download and install [PostgreSQL 14.2](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
+
+		- Open a command prompt, move inside `backend` folder, and follow the steps below by typing the commands in your command prompt
+
+    		- Install a python virtual environment
+       
+				```
+				python -m venv venv
+				```
+
+			- Activate the python virtual environment
+
+				```
+				.\venv\Scripts\activate
+				```
+     		- Upgrade the pip version
+
+				```
+				python -m pip install --upgrade pip
+				```
+
+    		- Install the required packages from the `requirements.txt` file
+       
+				```
+				pip install -r requirements.txt
+				```
+    		- Install Flask 2.1.0
+       
+				```
+				pip install Flask==2.1.0 psycopg2-binary Flask==2.1.0 flask-jwt-extended flask-bcrypt flask-cors --upgrade
+				```
+
+    		- Import stopwords from nltk
+		
+				```
+				python -c "import nltk;nltk.download('stopwords')" && python -c "import nltk;nltk.download('punkt')" && python -c "import nltk;nltk.download('sentiwordnet')"
+				```
+	
+		- Rename the files `example.env` to `.env` and `example.flaskenv` to `.flaskenv` respectively
+    
+		- Open `.env` file, find `POSTGRES_PASS`, and type the password of your postgresql database between the single quotation mark
+    
+		- Type the following command in a command prompt to run server
+
+			```
+			python -m flask run --host=0.0.0.0
+			```
 
    - Frontend installation
 
-     - Download and install [NodeJS](https://nodejs.org/en/)
-     - Move to `frontend` folder and rename the file `example.env` to `.env`
-     - Open command prompt/terminal and follow the steps below:
-       - Download and install node packages
-         `sh npm install `
-       - Run the script and starts the application
-         ```sh
-         npm start
-         ```
-       - Stop the Frontend application by pressing `Cntl + c` inside the command prompt
-     - Application will open automatically in browser at [localhost:3000](http://localhost:3000)
-     - Read more about CSS framework [Material UI v4](https://v4.mui.com/getting-started/installation/)
+     	- Download and install [NodeJS](https://nodejs.org/en/)
 
-## 🕸️ Scraping tool
+     	- Move to `frontend` folder and rename the file `example.env` to `.env`
+
+     	- Open command prompt/terminal and follow the steps below:
+
+       		- Download and install node packages
+
+				```
+				npm ci
+				```
+       		- Run the script and starts the application
+
+				```
+				npm start
+				```
+       		- Stop the Frontend application by pressing `Cntl + c` inside the command prompt
+
+     		- Application will open automatically in browser at [localhost:3000](http://localhost:3000)
+
+		- Read more about CSS framework [Material UI v4](https://v4.mui.com/getting-started/installation/)
+
+## 🕸️ Scraping Tool
 
 - In the ELAS web application homepage, click `Login` button and create a new account
 - After successful login, click the circle button at the top right corner, open the menu, and click `Settings`
