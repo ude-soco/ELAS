@@ -30,7 +30,7 @@ The aim of this IDEA lab is to provide the foundation for an Exploratory Learnin
    - Open a command prompt/terminal and move to the `ELAS\frontend` directory. Then type the following command:
 
      ```
-     npm install
+     npm ci
      ```
 
    - Move back to `ELAS` directory and type the following command in the command prompt/terminal:
