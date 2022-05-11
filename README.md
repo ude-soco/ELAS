@@ -1,5 +1,5 @@
 <p align="center">
-<a href="https://www.uni-due.de/soco/teaching/courses/lab-idea-ss21.php" target="_blank" rel="noopener noreferrer">
+<a href="https://www.uni-due.de/soco/research/projects/elas.php" target="_blank" rel="noopener noreferrer">
 <img height="110px" src="img/cover.png" alt="re-frame logo">
 </a>
 </p>
