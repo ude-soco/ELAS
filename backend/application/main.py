@@ -3,6 +3,7 @@ from flask_jwt_extended import create_access_token
 from .extensions import bcrypt
 
 from orm_interface.entities.user import User
+from orm_interface.entities.course import Course
 from orm_interface.base import Base, Session, engine
 
 main = Blueprint("main", __name__)
