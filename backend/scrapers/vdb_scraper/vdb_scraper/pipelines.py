@@ -24,6 +24,7 @@ class VdbScraperPipeline:
         cleantext = re.sub(cleaner, '', description)
         return cleantext
 
+
 class CorrectSpellingOfParentCourse:
     def process_item(self, item, spider):
         if 'sience' in item['parent_course']['name'].lower():

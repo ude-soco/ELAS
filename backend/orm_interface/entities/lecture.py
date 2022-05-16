@@ -5,6 +5,7 @@ from orm_interface.base import Base
 from orm_interface.entities.timetable import Timetable
 from orm_interface.entities.professor import Professor
 
+
 class Lecture(Base):
     __tablename__ = 'lecture'
 

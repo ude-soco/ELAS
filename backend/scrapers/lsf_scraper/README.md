@@ -21,3 +21,16 @@ in `backend/scrapers/lsf_scraper/lsf_scraper/Data/post_processed_lectures.json`
 Note that the data stored in the JSON files is cleaned **before and after** the scraping. If you wish to explore the
 results after each scraping, you must delete the `clean_files()` function call
 in `backend/application/scraper/scrape_control.py` that occurs at the end of the scraping process.
+
+## To scrape all engineering courses:
+
+In the "default" state of the scraper, it scrapes only the courses under the INKO group of lectures using the following
+link:https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C290850&P.vx=kurz
+
+To scrape **all** engineering faculties and study programs from the
+link: https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081&P.vx=kurz, run the
+following command in `backend/scrapers/lsf_scraper`:
+
+`scrapy crawl main -a url="https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081&P.vx=kurz" -a all_engineering_faculties=True -o lecture_results.json`
+
+The "all_engineering_faculties" flag must be set to "True" **and** it must be the starting URL.

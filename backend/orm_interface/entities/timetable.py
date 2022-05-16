@@ -1,6 +1,7 @@
 from sqlalchemy import Column, String, Date, ForeignKey, ARRAY
 from orm_interface.base import Base
 
+
 class Timetable(Base):
     __tablename__ = 'timetable'
     __table_args__ = {"extend_existing": True}

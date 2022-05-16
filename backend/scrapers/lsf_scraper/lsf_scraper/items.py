@@ -14,6 +14,7 @@ class CourseCatalogItem(scrapy.Item):
     url = scrapy.Field()
     name = scrapy.Field()
 
+
 class StudyProgram(CourseCatalogItem):
     type = "studyprogram"
     # string, one of Bachelor, Master
@@ -66,11 +67,13 @@ class TimeEntry(scrapy.Item):
     elearn = scrapy.Field()
     einzeltermine_link = scrapy.Field()
 
+
 class Person(scrapy.Item):
     type = "person"
     id = scrapy.Field()
     name = scrapy.Field()
     url = scrapy.Field()
+
 
 class Einzeltermin(scrapy.Item):
     type = scrapy.Field()

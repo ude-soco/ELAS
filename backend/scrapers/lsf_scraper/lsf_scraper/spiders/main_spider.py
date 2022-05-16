@@ -17,86 +17,48 @@ class CourseCatalogSpider(scrapy.Spider):
     table_summary_for_basics = "Grunddaten zur Veranstaltung"
     table_summary_for_more = "Weitere Angaben zur Veranstaltung"
 
-    def __init__(self, url="", *args, **kwargs):
+    def __init__(self, url="", all_engineering_faculties=False, *args, **kwargs):
         self.start_urls = [url]
+        self.all_engineering_faculties = all_engineering_faculties
         super(CourseCatalogSpider, self).__init__(*args, **kwargs)
 
     def parse(self, response):
-        return self.extract_faculties(response)
+        if self.all_engineering_faculties:  # if we want to scrape all engineering faculties
+            return self.extract_faculties(response)
+        return self.extract_studyprograms(response)
 
-    def extract_faculties(self, response):
+    def extract_faculties(self,
+                          response):  # if we want to scrape all engineering faculties, we need to scrape all the study programs first
+        links = response.xpath("//a")
+        number_of_layers = response.url.count("%7C")
+        faculty_links = self.filter_links_by_layer(links, "%7C", number_of_layers + 1)
+        for faculty_link in faculty_links:
+            faculty_name = faculty_link.css('::text').get().strip()
+            page = response.urljoin(faculty_link.attrib['href'])
+            request = scrapy.Request(page, callback=self.extract_studyprograms)
+            request.meta["faculty_name"] = faculty_name
+            yield request
+
+    def extract_studyprograms(self, response):
         # width = 60
         links = response.xpath('//a')
-        filtered_links = self.filter_links_by_layer(links, "%7C", 3)
+        number_of_layers = response.url.count("%7C")
+        filtered_links = self.filter_links_by_layer(links, "%7C", number_of_layers + 1)
+        try:
+            parent_faculty_name = response.meta["faculty_name"]
+        except Exception:
+            parent_faculty_name = "INKO"
+
         for link in filtered_links:
             page = response.urljoin(link.attrib['href'])
             name = link.css('::text').get().strip()
             request = scrapy.Request(page, callback=self.extract_categories)
-            request.meta["catalog"] = "INKO"
+            request.meta["catalog"] = parent_faculty_name
             request.meta['faculty'] = link
             request.meta["id"] = self.extract_category_id(page)
             request.meta["name"] = name
             request.meta["root_id"] = self.extract_category_id(page)
             yield request
-
-    def extract_studyprograms(self, response):  # extract studyprograms
-        link = response.meta['faculty'].attrib['href']
-        number_of_layers = link.count('%7C')
-        studyprograms = []
-
-        links = response.xpath('//a')
-        studyprograms_element = self.filter_links_by_layer(links, "%7C", number_of_layers + 1)
-
-        # extrahiere informations for every strudyprogram
-        for studyprogram in studyprograms_element:
-            name = str(studyprogram.css('::text').get()).strip()
-            self.log("extracting " + str(name))
-            link = studyprogram.attrib['href']
-
-            type = name
-            # if "master " in name.lower():
-            #     type = "Master"
-            # elif "bachelor " in name.lower():
-            #     type = "Bachelor"
-            # else:
-            #     type = "not empty"
-
-            if type != "":
-                program = StudyProgram(url=link, name=name, program_type=type, categories=[])
-                program['id'] = self.extract_category_id(link)
-                program['parent_id'] = None
-                page = response.urljoin(link)
-                request = scrapy.Request(page, callback=self.extract_studyprogram_content)
-                request.meta['parent'] = program
-                yield request
-            else:
-                self.log("No type for: " + name)
-                page = response.urljoin(link)
-                request = scrapy.Request(page, callback=self.extract_studyprograms)
-                request.meta['faculty'] = studyprogram
-                yield request
-
-    def extract_studyprogram_content(self, response):
-        studyprogram = response.meta['parent']
-        number_of_layers = studyprogram['url'].count('%7C')
-        links = response.xpath('//a')
-
-        # extract categories
-        requests = []
-        category_links = self.filter_links_by_layer(links, '%7C', number_of_layers + 1)
-        for category_link in category_links:
-            url = category_link.attrib['href']
-            name = category_link.css('::text').get()
-            id = self.extract_category_id(url)
-            category = Category(url=url, name=name, categories=[], id=id, parent_id=studyprogram['id'])
-            studyprogram['categories'].append(category['id'])
-            page = response.urljoin(url)
-            request = scrapy.Request(page, callback=self.extract_categories)
-            request.meta['parent'] = category
-            yield request
-            requests.append(request)
-
-        yield studyprogram
 
     def extract_categories(self, response):
         try:

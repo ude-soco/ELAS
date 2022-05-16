@@ -16,6 +16,7 @@ STUDYPROGRAMS_DIRECTORY = os.path.abspath(os.path.join(backend_directory, "scrap
 Base.metadata.create_all(engine)
 session = Session()
 
+
 class Uploader:
     def delete_all_lectures(self):
         all_lectures = session.query(Lecture).all()
@@ -60,7 +61,7 @@ class Uploader:
 
         with io.open(DATA_DIRECTORY, 'r', encoding='utf8') as data_file:
             data_json = json.load(data_file)
-            print(len(data_json))
+            print("{} merged lectures to be uploaded".format(len(data_json)))
             for lecture in data_json:
                 professors = lecture['persons']
                 for professor in professors:
