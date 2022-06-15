@@ -1,3 +1,6 @@
+import sys
+sys.path.append("..")
+
 import io
 import json
 from difflib import SequenceMatcher
@@ -10,7 +13,8 @@ lsf_data_directory = os.path.abspath(
     os.path.join(os.path.dirname(__file__), "lsf_scraper", "lsf_scraper", "Data", "post_processed_lectures.json"))
 vdb_data_directory = os.path.abspath(
     os.path.join(os.path.dirname(__file__), "vdb_scraper", "vdb_scraper", "Data", "post_processed_descriptions.json"))
-merged_data_directory = os.path.abspath(os.path.join(os.path.dirname(__file__), "merged_data.json"))
+merged_data_directory = os.path.abspath(os.path.join(
+    os.path.dirname(__file__), "merged_data.json"))
 
 
 class MergeData:
@@ -58,7 +62,8 @@ class MergeData:
         keyphrases = []
         try:
             if len(lecture_description.strip()) > 0:
-                keyphrases = custom_kwextractor.extract_keywords(lecture_description)
+                keyphrases = custom_kwextractor.extract_keywords(
+                    lecture_description)
         except Exception as e:
             print(str(e))
 
@@ -73,7 +78,8 @@ class MergeData:
         pos = {'NOUN', 'PROPN', 'ADJ'}
         window = 10
         extractor = SingleRank()
-        extractor.load_document(input=lecture_description, language='en_core_web_sm')
+        extractor.load_document(input=lecture_description,
+                                language='en_core_web_sm')
         extractor.candidate_selection(pos=pos)
         extractor.candidate_weighting(window=window, pos=pos)
         keyphrases = extractor.get_n_best(n=num)
@@ -93,7 +99,8 @@ class MergeData:
         processed_lecture_description = lecture_description
 
         if len(matches) > 0 and len((matches[0][1] + matches[0][3]).strip()) > 0:
-            processed_lecture_description = ' '.join([matches[0][1], matches[0][3]])
+            processed_lecture_description = ' '.join(
+                [matches[0][1], matches[0][3]])
 
         try:
             if len(lecture_description.strip()) <= 280:
@@ -101,7 +108,8 @@ class MergeData:
                 keywords = self.yake_keywords(processed_lecture_description)
             else:
                 print("using single rank for {}".format(lecture_name))
-                keywords = self.singlerank_keywords(processed_lecture_description)
+                keywords = self.singlerank_keywords(
+                    processed_lecture_description)
         except Exception as e:
             print(str(e))
 
@@ -137,7 +145,7 @@ class MergeData:
                     closest_match, ratio = result[0], result[1]
                     if not closest_match:
                         similarity_too_low = similarity_too_low + 1
-                        print('no match for:\t{}'.format(subject))
+                        #print('no match for:\t{}'.format(subject))
                     else:
                         somewhat_same = somewhat_same + 1
                         distant_matches.append({
@@ -158,3 +166,8 @@ class MergeData:
             output_file.close()
             vdb_data.close()
             lsf_data.close()
+
+
+# if __name__ == '__main__':
+#     merge_script = MergeData()
+#     merge_script.run()

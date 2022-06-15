@@ -2,16 +2,20 @@ import io
 import json
 import os
 
-backend_directory = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", ".."))
+backend_directory = os.path.abspath(os.path.join(
+    os.path.dirname(__file__), "..", "..", "..", ".."))
 
-LECTURE_DATA = os.path.abspath(os.path.join(backend_directory, "scrapers", "lsf_scraper", "lecture_results.json"))
+LECTURE_DATA = os.path.abspath(os.path.join(
+    backend_directory, "scrapers", "lsf_scraper", "lecture_results.json"))
 OUTPUT_FILE = os.path.abspath(
     os.path.join(backend_directory, "scrapers", "lsf_scraper", "lsf_scraper", "Data", "post_processed_lectures.json"))
-STUDY_PROGRAMS_FILE = os.path.abspath(os.path.join(backend_directory, "scrapers", "study_programs.json"))
+STUDY_PROGRAMS_FILE = os.path.abspath(os.path.join(
+    backend_directory, "scrapers", "study_programs.json"))
 
 
 class ProcessLsfData:
-    def clear_output_directories(self):  # clean the destination directory before filling it with new data
+    # clean the destination directory before filling it with new data
+    def clear_output_directories(self):
         open(OUTPUT_FILE, 'w').close()
         open(STUDY_PROGRAMS_FILE, 'w').close()
 
@@ -19,12 +23,15 @@ class ProcessLsfData:
         seen_subjects_dict = {}
         for entry in subjects_list:
             if entry['id'] in seen_subjects_dict.keys():
-                seen_subjects_dict[entry['id']]['parent_id'].append(entry['parent_id'])
+                seen_subjects_dict[entry['id']]['parent_id'].append(
+                    entry['parent_id'])
                 if entry['root_id'] not in seen_subjects_dict[entry['id']]['root_id']:
-                    seen_subjects_dict[entry['id']]['root_id'].append(entry['root_id'])
+                    seen_subjects_dict[entry['id']]['root_id'].append(
+                        entry['root_id'])
             else:
                 seen_subjects_dict[entry['id']] = entry
-                seen_subjects_dict[entry['id']]['parent_id'] = [entry['parent_id']]
+                seen_subjects_dict[entry['id']]['parent_id'] = [
+                    entry['parent_id']]
                 seen_subjects_dict[entry['id']]['root_id'] = [entry['root_id']]
 
         return seen_subjects_dict
@@ -63,9 +70,11 @@ class ProcessLsfData:
         einzeltermine_dict = {}
         for einzeltermin in einzeltermine_list:
             if einzeltermin["subject_id"] in einzeltermine_dict.keys():
-                einzeltermine_dict[einzeltermin['subject_id']][einzeltermin['termin_id']] = einzeltermin
+                einzeltermine_dict[einzeltermin['subject_id']
+                                   ][einzeltermin['termin_id']] = einzeltermin
             else:
-                einzeltermine_dict[einzeltermin["subject_id"]] = {einzeltermin['termin_id']: einzeltermin}
+                einzeltermine_dict[einzeltermin["subject_id"]] = {
+                    einzeltermin['termin_id']: einzeltermin}
 
         return einzeltermine_dict
 
@@ -94,7 +103,8 @@ class ProcessLsfData:
                 if 'subject_type' in entry.keys():
                     subjects_list.append(entry)  # storing all lectures
                 elif 'type' in entry.keys():
-                    einzeltermine_list.append(entry)  # storing all einzeltermine
+                    # storing all einzeltermine
+                    einzeltermine_list.append(entry)
                 elif 'catalog' in entry.keys():
                     studyprogram_list.append(entry)
 
@@ -105,11 +115,14 @@ class ProcessLsfData:
 
             # print(merged_lectures)
             for key, value in merged_lectures.items():
-                merged_lectures[key] = self.process_timetable_of_subject(value)  # process timetables of each lecture
+                merged_lectures[key] = self.process_timetable_of_subject(
+                    value)  # process timetables of each lecture
                 if key in einzeltermine_dict.keys():
-                    merged_lectures[key] = self.assign_einzeltermine_to_correct_lecture(value, einzeltermine_dict[key])
+                    merged_lectures[key] = self.assign_einzeltermine_to_correct_lecture(
+                        value, einzeltermine_dict[key])
             # print(merged_lectures)
-            print("{} lectures after merging duplicates".format(len(merged_lectures)))
+            print("{} lectures after merging duplicates".format(
+                len(merged_lectures)))
             print("{} study programs found".format(len(studyprogram_list)))
 
             final_merged_lectures_and_categories = []
@@ -118,7 +131,8 @@ class ProcessLsfData:
                 final_merged_lectures_and_categories.append(value)
 
             with io.open(OUTPUT_FILE, 'w', encoding='UTF8') as output_file:
-                json.dump(final_merged_lectures_and_categories, output_file, ensure_ascii=False)
+                json.dump(final_merged_lectures_and_categories,
+                          output_file, ensure_ascii=False)
                 output_file.close()
 
             with io.open(STUDY_PROGRAMS_FILE, 'w', encoding='UTF8') as output_file:
@@ -126,3 +140,8 @@ class ProcessLsfData:
                 output_file.close()
 
             json_file.close()
+
+
+# if __name__ == "__main__":
+#     LsfDataProcessing = ProcessLsfData()
+#     LsfDataProcessing.run()
