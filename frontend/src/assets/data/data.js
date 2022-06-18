@@ -4,14 +4,17 @@ export const projectDetails = [
     image: "images/courseInsights.png",
     shortName: "studycompass",
     teamMembers: "Joshua Redmann, Christoph Vorer, Sofie Kalthof",
-    description: "The project idea is to provide a platform for students at the University of Duisburg-Essen to select the university’s courses within a few easy steps. Furthermore, the platform lets students easily make a schedule by observing various details such as overlapping course schedules, ratings of the courses, and links to LSF."
+    description:
+      "The project idea is to provide a platform for students at the University of Duisburg-Essen to select the university’s courses within a few easy steps. Furthermore, the platform lets students easily make a schedule by observing various details such as overlapping course schedules, ratings of the courses, and links to LSF.",
   },
   {
     name: "E3 Selector",
     image: "images/e3Selector.png",
     shortName: "e3selector",
-    teamMembers: "Charlotte Hartmann Paludo, Rouchda Pepouna Makwet, Nassim Guelbi",
-    description: "The project aims to help students choose a suitable course from the E3 Module and provide insightful information that will help orientation and perhaps further specialization at the University of Duisburg-Essen. This project consists of powerful filtering, searching, and sorting capabilities to make it easy for the students to search for interesting courses that fit their needs."
+    teamMembers:
+      "Charlotte Hartmann Paludo, Rouchda Pepouna Makwet, Nassim Guelbi",
+    description:
+      "The project aims to help students choose a suitable course from the E3 Module and provide insightful information that will help orientation and perhaps further specialization at the University of Duisburg-Essen. This project consists of powerful filtering, searching, and sorting capabilities to make it easy for the students to search for interesting courses that fit their needs.",
   },
   // {
   //   name: "Study Program Organization Assistant",
@@ -28,7 +31,15 @@ export const projectDetails = [
     image: "images/intogen.png",
     shortName: "intogen",
     teamMembers: "Dilara Ince, Clarissa Kümhof, Willi Dick",
-    description: "This project aims to identify and improve students’ learning styles through David Kolb’s learning cycle (Kolb’s 40-item questionnaire) to suggest courses according to their preferred learning styles. In addition, this project allows the students to overview their learning types present in other courses, study programs, and countries."
+    description:
+      "This project aims to identify and improve students’ learning styles through David Kolb’s learning cycle (Kolb’s 40-item questionnaire) to suggest courses according to their preferred learning styles. In addition, this project allows the students to overview their learning types present in other courses, study programs, and countries.",
+  },
+  {
+    name: "UDE Recommender",
+    image: "images/Recommendation.jpg",
+    shortName: "ude-recommender",
+    teamMembers: "Shoeb",
+    description: "No description",
   },
   // {
   //   name: "studySoon",
@@ -43,4 +54,4 @@ export const projectDetails = [
   //   shortName: "ineval",
   //   description: "InEval is an online platform that helps both sides of the educational system (i.e. professors and students) to understand better the evaluation of the professor’s performance through visualizing."
   // }
-]
+];
