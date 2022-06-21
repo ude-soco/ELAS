@@ -1,7 +1,7 @@
 import { Grid } from "@material-ui/core";
 import React from "react";
 
-const UDERecommender = () => {
+const CourseRecommender = () => {
   return (
     <Grid container style={{ paddingTop: 16 }}>
       <Grid item xs={0} md={1} />
@@ -13,4 +13,4 @@ const UDERecommender = () => {
   );
 };
 
-export default UDERecommender;
+export default CourseRecommender;

@@ -13,7 +13,8 @@ import Intogen from "./Projects/Intogen/Intogen";
 import Footer from "./Website/Footer/Footer";
 import Admin from "./Website/Admin/Admin";
 import Registration from "./Website/Registration/Registration";
-import UDERecommender from "./Projects/UDERecommender/UDERecommender";
+import CourseRecommender from "./Projects/CourseRecommender/CourseRecommender";
+import UDEStudyCompass from "./Projects/UDEStudyCompass/UDEStudyCompass";
 
 const useStyles = makeStyles((theme) => ({
   containerHeader: {
@@ -68,8 +69,13 @@ export default function App() {
           />
           <Route
             exact
-            path="/ude-recommender"
-            render={() => <UDERecommender classes={classes} />}
+            path="/course-recommender"
+            render={() => <CourseRecommender classes={classes} />}
+          />
+          <Route
+            exact
+            path="/ude-studycompass"
+            render={() => <UDEStudyCompass />}
           />
 
           {!isLoggedIn ? (

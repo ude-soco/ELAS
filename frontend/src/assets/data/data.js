@@ -1,11 +1,21 @@
 export const projectDetails = [
   {
-    name: "Study Compass",
+    name: "Old Study Compass",
     image: "images/courseInsights.png",
     shortName: "studycompass",
     teamMembers: "Joshua Redmann, Christoph Vorer, Sofie Kalthof",
     description:
       "The project idea is to provide a platform for students at the University of Duisburg-Essen to select the university’s courses within a few easy steps. Furthermore, the platform lets students easily make a schedule by observing various details such as overlapping course schedules, ratings of the courses, and links to LSF.",
+  },
+  ,
+  {
+    name: "Study Compass",
+    image: "images/courseInsights.png",
+    shortName: "ude-studycompass",
+    teamMembers:
+      "Kingson Chidubem Nwoke, Daniel Meier, Hakan Ok, Mengchen Li, Rana Nazire Karaca, Fatema Alagha, Mhd Ismail al Sayad",
+    description:
+      "The project idea is to provide a platform for students at the University of Duisburg-Essen to select the university's courses within a few easy steps. Furthermore, the platform lets students easily make a schedule by observing various details such as overlapping course schedules, ratings of the courses, and links to LSF.",
   },
   {
     name: "E3 Selector",
@@ -35,9 +45,9 @@ export const projectDetails = [
       "This project aims to identify and improve students’ learning styles through David Kolb’s learning cycle (Kolb’s 40-item questionnaire) to suggest courses according to their preferred learning styles. In addition, this project allows the students to overview their learning types present in other courses, study programs, and countries.",
   },
   {
-    name: "UDE Recommender",
-    image: "images/Recommendation.jpg",
-    shortName: "ude-recommender",
+    name: "Course Recommender",
+    image: "images/recommendation.jpg",
+    shortName: "course-recommender",
     teamMembers: "Shoeb",
     description: "No description",
   },
