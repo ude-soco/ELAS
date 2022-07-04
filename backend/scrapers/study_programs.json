@@ -1,0 +1,561 @@
+[{
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C290536%7C288600&P.vx=kurz",
+    "catalog": "Wirtschaftsingenieurwesen",
+    "id": "288600",
+    "name": "Bachelor Richtung Informationstechnik und Wirtschaft",
+    "root_id": "288600",
+    "categories": ["291101", "290466", "290348", "288347", "291912", "289480", "292031", "291700", "292881", "288346", "291364", "288369"],
+    "subjects": ["365016"]
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C290536%7C290895&P.vx=kurz",
+    "catalog": "Wirtschaftsingenieurwesen",
+    "id": "290895",
+    "name": "Veranstaltungen alter Wirtschaftsingenieur",
+    "root_id": "290895",
+    "categories": [],
+    "subjects": ["358171", "358174"]
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C290536%7C291243&P.vx=kurz",
+    "catalog": "Wirtschaftsingenieurwesen",
+    "id": "291243",
+    "name": "Master Richtung Informationstechnik und Wirtschaft",
+    "root_id": "291243",
+    "categories": ["289709", "289639", "288989", "291054", "291055", "289226", "291049", "290028", "290817", "289782", "295964", "289976", "288296", "297741"],
+    "subjects": ["364385"]
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C290536%7C290809&P.vx=kurz",
+    "catalog": "Wirtschaftsingenieurwesen",
+    "id": "290809",
+    "name": "Master Richtung Energie und Wirtschaft",
+    "root_id": "290809",
+    "categories": ["289634", "290093"],
+    "subjects": ["364385"]
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C290536%7C291358&P.vx=kurz",
+    "catalog": "Wirtschaftsingenieurwesen",
+    "id": "291358",
+    "name": "Master Richtung Maschinenbau und Wirtschaft",
+    "root_id": "291358",
+    "categories": ["292365", "289338", "289917", "289908", "290050", "290343"],
+    "subjects": ["364385"]
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C290536%7C292608&P.vx=kurz",
+    "catalog": "Wirtschaftsingenieurwesen",
+    "id": "292608",
+    "name": "Bachelor Richtung Maschinenbau und Wirtschaft",
+    "root_id": "292608",
+    "categories": ["292513", "292063", "291988", "290293", "289609", "292373", "291691", "291478", "288263", "290922", "289721", "289391", "290061", "289736", "292278", "302063", "291593", "291366", "292008"],
+    "subjects": ["359196", "365016"]
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C290536%7C290754&P.vx=kurz",
+    "catalog": "Wirtschaftsingenieurwesen",
+    "id": "290754",
+    "name": "Bachelor Richtung Energie und Wirtschaft",
+    "root_id": "290754",
+    "categories": ["291883", "292422", "290963", "290517", "288251", "288620", "291698", "289442", "288625", "289741", "291710", "296577", "291613", "291360", "291637"],
+    "subjects": ["365016"]
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C290536%7C290736&P.vx=kurz",
+    "catalog": "Wirtschaftsingenieurwesen",
+    "id": "290736",
+    "name": "Master Richtung Informationstechnik und Wirtschaft (PO19)",
+    "root_id": "290736",
+    "categories": ["291504", "291703", "289099", "293583"],
+    "subjects": ["369471", "364385"]
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C290536%7C290739&P.vx=kurz",
+    "catalog": "Wirtschaftsingenieurwesen",
+    "id": "290739",
+    "name": "Master Richtung Energie und Wirtschaft (PO19)",
+    "root_id": "290739",
+    "categories": ["290828", "288525"],
+    "subjects": ["369471", "364385"]
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C290536%7C288641&P.vx=kurz",
+    "catalog": "Wirtschaftsingenieurwesen",
+    "id": "288641",
+    "name": "M-AEM (MB) Master Automotive Engineering and Management (Vertiefungsrichtung Maschinenbau)",
+    "root_id": "288641",
+    "categories": ["291649", "291790", "291793"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C290536%7C291419&P.vx=kurz",
+    "catalog": "Wirtschaftsingenieurwesen",
+    "id": "291419",
+    "name": "M-AEM (MB) Master Automotive Engineering and Management (Vertiefungsrichtung Maschinenbau) (PO19)",
+    "root_id": "291419",
+    "categories": ["290862", "290830", "290834"],
+    "subjects": ["369471"]
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C290536%7C291414&P.vx=kurz",
+    "catalog": "Wirtschaftsingenieurwesen",
+    "id": "291414",
+    "name": "M-AEM (ET) Master Automotive Engineering and Management (Vertiefungsrichtung Elektrotechnik) (PO19)",
+    "root_id": "291414",
+    "categories": ["290734", "290861", "290843"],
+    "subjects": ["369471"]
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C290536%7C289101&P.vx=kurz",
+    "catalog": "Wirtschaftsingenieurwesen",
+    "id": "289101",
+    "name": "M-AEM (ET) Master Automotive Engineering and Management (Vertiefungsrichtung Elektrotechnik)",
+    "root_id": "289101",
+    "categories": ["290029", "292320", "292494"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C290536%7C288536&P.vx=kurz",
+    "catalog": "Wirtschaftsingenieurwesen",
+    "id": "288536",
+    "name": "Master Richtung Maschinenbau und Wirtschaft (PO19)",
+    "root_id": "288536",
+    "categories": ["288572", "288571", "292978"],
+    "subjects": ["369471", "364385"]
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C290536%7C288540&P.vx=kurz",
+    "catalog": "Wirtschaftsingenieurwesen",
+    "id": "288540",
+    "name": "Bachelor Richtung Maschinenbau und Wirtschaft (PO19)",
+    "root_id": "288540",
+    "categories": ["290997", "290791", "291194", "291762", "289482", "291760", "298437", "290038", "290793"],
+    "subjects": ["365016"]
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C290536%7C290741&P.vx=kurz",
+    "catalog": "Wirtschaftsingenieurwesen",
+    "id": "290741",
+    "name": "Bachelor Richtung Informationstechnik und Wirtschaft (PO19)",
+    "root_id": "290741",
+    "categories": ["290966", "291187", "300963", "300964", "289987", "299142"],
+    "subjects": ["365016"]
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C290850%7C290451&P.vx=kurz",
+    "catalog": "Informatik und Angewandte Kognitionswissenschaft",
+    "id": "290451",
+    "name": "Neben-/Wahlpflichtfach Psychologie in den Studiengängen, Pädagogik, Sozialwissenschaften und Wirtschaftswissenschaften",
+    "root_id": "290451",
+    "categories": [],
+    "subjects": ["358131"]
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C292586%7C292290&P.vx=kurz",
+    "catalog": "Technologie und Didaktik der Technik",
+    "id": "292290",
+    "name": "Technik im Sachunterricht",
+    "root_id": "292290",
+    "categories": ["298603", "291748"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C292586%7C290732&P.vx=kurz",
+    "catalog": "Technologie und Didaktik der Technik",
+    "id": "290732",
+    "name": "Bachelor (LHRSGe)",
+    "root_id": "290732",
+    "categories": ["291385", "291389", "291387"],
+    "subjects": ["364592", "369426"]
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C292586%7C292347&P.vx=kurz",
+    "catalog": "Technologie und Didaktik der Technik",
+    "id": "292347",
+    "name": "Master (LHRSGe)",
+    "root_id": "292347",
+    "categories": ["290611", "298552", "290589", "292677"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C292586%7C292244&P.vx=kurz",
+    "catalog": "Technologie und Didaktik der Technik",
+    "id": "292244",
+    "name": "Master (LGyGe)",
+    "root_id": "292244",
+    "categories": ["290610", "298560", "290591", "292704"],
+    "subjects": ["359997"]
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C289791%7C289983&P.vx=kurz",
+    "catalog": "Maschinenbau",
+    "id": "289983",
+    "name": "ISE Master of Science \"Management and Technology of Water and Waste Water \" (PO 08)",
+    "root_id": "289983",
+    "categories": ["291065"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C292586%7C290735&P.vx=kurz",
+    "catalog": "Technologie und Didaktik der Technik",
+    "id": "290735",
+    "name": "Bachelor (LGyGe)",
+    "root_id": "290735",
+    "categories": ["290743", "291383", "291386"],
+    "subjects": ["364592", "369426"]
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C289791%7C289583&P.vx=kurz",
+    "catalog": "Maschinenbau",
+    "id": "289583",
+    "name": "Semesterübergreifende Seminare und Kolloquien",
+    "root_id": "289583",
+    "categories": [],
+    "subjects": ["361588", "358888", "360923", "358924", "358607"]
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C289791%7C290680&P.vx=kurz",
+    "catalog": "Maschinenbau",
+    "id": "290680",
+    "name": "Master of Science Maschinenbau",
+    "root_id": "290680",
+    "categories": ["289035", "292354", "290278", "290622", "292479", "289783", "292312"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C289791%7C288777&P.vx=kurz",
+    "catalog": "Maschinenbau",
+    "id": "288777",
+    "name": "ISE Master of Science in Mechanical Engineering (PO 08)",
+    "root_id": "288777",
+    "categories": ["291686"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C289791%7C291594&P.vx=kurz",
+    "catalog": "Maschinenbau",
+    "id": "291594",
+    "name": "Bachelor of Science Maschinenbau",
+    "root_id": "291594",
+    "categories": ["288237", "289971", "288727", "288224", "292500", "288438"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C289791%7C291711&P.vx=kurz",
+    "catalog": "Maschinenbau",
+    "id": "291711",
+    "name": "Master of Science Technische Logistik (PO19)",
+    "root_id": "291711",
+    "categories": ["290913", "292882", "290920", "290915"],
+    "subjects": ["369278", "369276"]
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C289791%7C289034&P.vx=kurz",
+    "catalog": "Maschinenbau",
+    "id": "289034",
+    "name": "Master of Science Technische Logistik",
+    "root_id": "289034",
+    "categories": ["291462", "290528", "288333"],
+    "subjects": ["358824"]
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C289791%7C290200&P.vx=kurz",
+    "catalog": "Maschinenbau",
+    "id": "290200",
+    "name": "ISE Master of Science Metallurgy and Metal Forming (PO 19)",
+    "root_id": "290200",
+    "categories": ["291422", "291425", "291225"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C289791%7C289250&P.vx=kurz",
+    "catalog": "Maschinenbau",
+    "id": "289250",
+    "name": "Master of Science Maschinenbau (PO19)",
+    "root_id": "289250",
+    "categories": ["290442", "290444", "290428", "292104", "290471", "290472", "292118"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C289791%7C290599&P.vx=kurz",
+    "catalog": "Maschinenbau",
+    "id": "290599",
+    "name": "ISE Master of Science Mechanical Engineering (PO 19)",
+    "root_id": "290599",
+    "categories": ["290534"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C289791%7C291694&P.vx=kurz",
+    "catalog": "Maschinenbau",
+    "id": "291694",
+    "name": "ISE Master of Science  Mechanical Engineering (PO 15)",
+    "root_id": "291694",
+    "categories": ["291119", "288467"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C289791%7C289100&P.vx=kurz",
+    "catalog": "Maschinenbau",
+    "id": "289100",
+    "name": "ISE Master of Science Metallurgy and Metal Forming (PO 15)",
+    "root_id": "289100",
+    "categories": ["291347", "297717", "291914", "290955"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C289791%7C291443&P.vx=kurz",
+    "catalog": "Maschinenbau",
+    "id": "291443",
+    "name": "ISE Master of Science Mechanical Engineering (PO 15)",
+    "root_id": "291443",
+    "categories": ["292460", "288702", "291155"],
+    "subjects": ["358332", "358375"]
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C289791%7C290201&P.vx=kurz",
+    "catalog": "Maschinenbau",
+    "id": "290201",
+    "name": "ISE Master of Science Management and Technology of Water and Waste Water (PO 19)",
+    "root_id": "290201",
+    "categories": ["290414", "288890", "290411", "290433"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C289791%7C290902&P.vx=kurz",
+    "catalog": "Maschinenbau",
+    "id": "290902",
+    "name": "ISE Master of Science Management and Technology of Water and Waste Water  (PO 15)",
+    "root_id": "290902",
+    "categories": ["289286", "291896", "289306"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C289791%7C290220&P.vx=kurz",
+    "catalog": "Maschinenbau",
+    "id": "290220",
+    "name": "ISE Master of Science \"Management and Technology of Water and Waste Water \" (PO 15)",
+    "root_id": "290220",
+    "categories": ["292557", "294453", "297715"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C289791%7C290194&P.vx=kurz",
+    "catalog": "Maschinenbau",
+    "id": "290194",
+    "name": "ISE Bachelor of Science Steel Technology and Metal Forming (PO 15)",
+    "root_id": "290194",
+    "categories": ["290556", "302241", "288451", "289328", "292174"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C289791%7C289986&P.vx=kurz",
+    "catalog": "Maschinenbau",
+    "id": "289986",
+    "name": "ISE Bachelor of Science Metallurgy and Metal Forming (PO 19)",
+    "root_id": "289986",
+    "categories": ["290552", "290415", "290412", "290417"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C289791%7C289985&P.vx=kurz",
+    "catalog": "Maschinenbau",
+    "id": "289985",
+    "name": "ISE Bachelor of Science Mechanical Engineering (PO 19)",
+    "root_id": "289985",
+    "categories": ["290595", "290553", "290551", "290550"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C289791%7C289946&P.vx=kurz",
+    "catalog": "Maschinenbau",
+    "id": "289946",
+    "name": "ISE Bachelor of Science Mechanical Engineering (PO 15)",
+    "root_id": "289946",
+    "categories": ["290304", "289717", "292015", "289895"],
+    "subjects": ["359895"]
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C288821%7C291232&P.vx=kurz",
+    "catalog": "Elektrotechnik und Informationstechnik",
+    "id": "291232",
+    "name": "Kolloquien in der Abteilung Elektrotechnik und Informationstechnik",
+    "root_id": "291232",
+    "categories": [],
+    "subjects": ["358748", "358977", "358750"]
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C289791%7C290329&P.vx=kurz",
+    "catalog": "Maschinenbau",
+    "id": "290329",
+    "name": "ISE Bachelor of Science Metallurgy and Metal Forming (PO 15)",
+    "root_id": "290329",
+    "categories": ["289536", "290751", "290508", "289802"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C289791%7C289254&P.vx=kurz",
+    "catalog": "Maschinenbau",
+    "id": "289254",
+    "name": "Bachelor of Science Maschinenbau (PO19)",
+    "root_id": "289254",
+    "categories": ["291718", "291279", "291702", "292189", "292191"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C288821%7C297137&P.vx=kurz",
+    "catalog": "Elektrotechnik und Informationstechnik",
+    "id": "297137",
+    "name": "EIT Probestudium für Schüler",
+    "root_id": "297137",
+    "categories": [],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C288821%7C290616&P.vx=kurz",
+    "catalog": "Elektrotechnik und Informationstechnik",
+    "id": "290616",
+    "name": "International Studies in Engineering ISE (PO 19)",
+    "root_id": "290616",
+    "categories": ["290615", "290594"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C288821%7C291876&P.vx=kurz",
+    "catalog": "Elektrotechnik und Informationstechnik",
+    "id": "291876",
+    "name": "Master-Studiengänge (PO 19)",
+    "root_id": "291876",
+    "categories": ["289652", "288713"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C288821%7C292165&P.vx=kurz",
+    "catalog": "Elektrotechnik und Informationstechnik",
+    "id": "292165",
+    "name": "International Studies in Engineering ISE (PO 15)",
+    "root_id": "292165",
+    "categories": ["291670", "288374"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C288821%7C289019&P.vx=kurz",
+    "catalog": "Elektrotechnik und Informationstechnik",
+    "id": "289019",
+    "name": "flexING",
+    "root_id": "289019",
+    "categories": [],
+    "subjects": ["360853", "358407", "361360"]
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C288821%7C291459&P.vx=kurz",
+    "catalog": "Elektrotechnik und Informationstechnik",
+    "id": "291459",
+    "name": "Master of Science Medizintechnik",
+    "root_id": "291459",
+    "categories": ["289749", "289742", "290857"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C288821%7C289344&P.vx=kurz",
+    "catalog": "Elektrotechnik und Informationstechnik",
+    "id": "289344",
+    "name": "Bachelor of Science Medizintechnik",
+    "root_id": "289344",
+    "categories": ["290371", "288285", "291759", "290988", "292495", "291099", "292360"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C288821%7C290649&P.vx=kurz",
+    "catalog": "Elektrotechnik und Informationstechnik",
+    "id": "290649",
+    "name": "Master-Studiengänge (PO 12)",
+    "root_id": "290649",
+    "categories": ["290063", "291766"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C288821%7C288327&P.vx=kurz",
+    "catalog": "Elektrotechnik und Informationstechnik",
+    "id": "288327",
+    "name": "Bachelor-Studiengänge (PO 12)",
+    "root_id": "288327",
+    "categories": ["288383"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C288821%7C292051&P.vx=kurz",
+    "catalog": "Elektrotechnik und Informationstechnik",
+    "id": "292051",
+    "name": "Bachelor-Studiengänge (PO 12 / PO 19)",
+    "root_id": "292051",
+    "categories": ["290515", "290507", "288824", "289949"],
+    "subjects": ["358581"]
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C290850%7C290203&P.vx=kurz",
+    "catalog": "Informatik und Angewandte Kognitionswissenschaft",
+    "id": "290203",
+    "name": "International Studies in Engineering (ISE)",
+    "root_id": "290203",
+    "categories": ["292498", "292467", "292522", "291699", "289891", "289893"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C290850%7C292447&P.vx=kurz",
+    "catalog": "Informatik und Angewandte Kognitionswissenschaft",
+    "id": "292447",
+    "name": "Angewandte Kognitions- und Medienwissenschaft, Bachelor of Science, PO 2019",
+    "root_id": "292447",
+    "categories": ["292473", "291549", "302773", "302774", "290149", "290147"],
+    "subjects": ["360197"]
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C290850%7C289943&P.vx=kurz",
+    "catalog": "Informatik und Angewandte Kognitionswissenschaft",
+    "id": "289943",
+    "name": "Angewandte Kognitions- und Medienwissenschaft, Master of Science, PO 2014",
+    "root_id": "289943",
+    "categories": ["290033", "292516", "291087", "290782", "292474", "291814", "291477"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C290850%7C288275&P.vx=kurz",
+    "catalog": "Informatik und Angewandte Kognitionswissenschaft",
+    "id": "288275",
+    "name": "Angewandte Kognitions- und Medienwissenschaft, Master of Science, PO 2019",
+    "root_id": "288275",
+    "categories": ["289562", "289557", "289558", "289409", "289410", "289404", "289406"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C290850%7C291848&P.vx=kurz",
+    "catalog": "Informatik und Angewandte Kognitionswissenschaft",
+    "id": "291848",
+    "name": "Angewandte Kognitions- und Medienwissenschaft, Bachelor of Science, PO 2014",
+    "root_id": "291848",
+    "categories": ["288783", "288253", "288675", "288329", "289235", "290540", "288279", "292249", "288231", "289683"],
+    "subjects": ["360197"]
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C288821%7C300306&P.vx=kurz",
+    "catalog": "Elektrotechnik und Informationstechnik",
+    "id": "300306",
+    "name": "Allgemeine Hinweise",
+    "root_id": "300306",
+    "categories": [],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C290850%7C302776&P.vx=kurz",
+    "catalog": "Informatik und Angewandte Kognitionswissenschaft",
+    "id": "302776",
+    "name": "Cyber-Physical Systems - Ingenieurwissenschaften, Master of Science",
+    "root_id": "302776",
+    "categories": ["302782", "302783", "302784", "302785", "302786"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C290850%7C302775&P.vx=kurz",
+    "catalog": "Informatik und Angewandte Kognitionswissenschaft",
+    "id": "302775",
+    "name": "Cyber-Physical Systems - Informatik, Master of Science",
+    "root_id": "302775",
+    "categories": ["302778", "302777", "302779", "302780", "302781"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C290850%7C289364&P.vx=kurz",
+    "catalog": "Informatik und Angewandte Kognitionswissenschaft",
+    "id": "289364",
+    "name": "Angewandte Informatik, Master of Science, PO 2012",
+    "root_id": "289364",
+    "categories": ["291382", "290870", "291596", "292202", "290846", "290759", "290822", "289465", "291343", "289843", "298036"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C290850%7C290353&P.vx=kurz",
+    "catalog": "Informatik und Angewandte Kognitionswissenschaft",
+    "id": "290353",
+    "name": "Angewandte Informatik, Master of Science, PO 2019",
+    "root_id": "290353",
+    "categories": ["289456", "289457", "289452", "289454", "289443", "289474", "289446"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C290850%7C289001&P.vx=kurz",
+    "catalog": "Informatik und Angewandte Kognitionswissenschaft",
+    "id": "289001",
+    "name": "Angewandte Informatik, Bachelor of Science, PO 2019",
+    "root_id": "289001",
+    "categories": ["292580", "290956", "291548", "302767", "302768", "302769", "302770", "302772", "295803", "292581", "295790"],
+    "subjects": ["364462", "360197", "377033"]
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C290850%7C290756&P.vx=kurz",
+    "catalog": "Informatik und Angewandte Kognitionswissenschaft",
+    "id": "290756",
+    "name": "Angewandte Informatik, Bachelor of Science, PO 2012",
+    "root_id": "290756",
+    "categories": ["294826", "292420", "291611", "289153", "289423", "300245", "290380", "295609"],
+    "subjects": ["360197"]
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C288810%7C290404&P.vx=kurz",
+    "catalog": "Materialtechnik",
+    "id": "290404",
+    "name": "ISE Master of Science Metallurgy and Metal Forming (PO 08)",
+    "root_id": "290404",
+    "categories": ["290808", "299429", "291417", "288259"],
+    "subjects": []
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C290536%7C290742&P.vx=kurz",
+    "catalog": "Wirtschaftsingenieurwesen",
+    "id": "290742",
+    "name": "Bachelor Richtung Energie und Wirtschaft (PO19)",
+    "root_id": "290742",
+    "categories": ["290681", "290994", "292088", "300962", "292254", "300946", "289466", "298445"],
+    "subjects": ["365016", "369563"]
+}, {
+    "url": "https://campus.uni-due.de/lsf/rds?state=wtree&search=1&trex=step&root120212=288350%7C292081%7C288810%7C290077&P.vx=kurz",
+    "catalog": "Materialtechnik",
+    "id": "290077",
+    "name": "ISE Bachelor of Science Metallurgy and Metal Forming (PO 08)",
+    "root_id": "290077",
+    "categories": ["290122", "292067", "288260", "290897"],
+    "subjects": ["358590"]
+}]

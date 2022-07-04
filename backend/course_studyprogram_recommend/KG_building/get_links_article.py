@@ -33,13 +33,13 @@ class WikipediaFilterLinks(object):
             link_entry = {}
             try:
                 link_entry['name'] = key
-                link_entry['summary'] = wikipedia.summary(key)  
+                link_entry['abstract'] = wikipedia.summary(key)  
                 i = i+1
                 self.filtered_links.append(key)
                 self.link_infos.append(link_entry)
             except Exception as e:
                 print(e)
-                # self.relevant_keywords_list
+
         print("get {} text from wikipedia".format(i))
 
     def delete_nodes(self, entity, entity_type_name):  # delete one entity and its relationships
@@ -61,7 +61,7 @@ class WikipediaFilterLinks(object):
                     if node == item['name']:
                         cql = """MATCH (n:relevant_keywords)
                             WHERE n.name='{name}'
-                            set n.summary='{summary}'""".format(name=item['name'].replace("'", ""), summary=item['summary'].replace("'", "").replace("\n", ""))
+                            set n.abstract='{abstract}'""".format(name=item['name'].replace("'", ""), abstract=item['abstract'].replace("'", "").replace("\n", ""))
                         try:
                             self.graph.run(cql)
                         except Exception as e:

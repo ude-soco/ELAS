@@ -23,6 +23,7 @@ class WikipediaFilter(object):
         self.category_infos = []
         self.link_infos = []
         self.filtered_keywords = []
+        self.title_list = []
     
     def access_keywords(self):
         nodes = self.graph.nodes
@@ -39,9 +40,11 @@ class WikipediaFilter(object):
             link_entry = {}
             try:
                 category_entry['name'] = key
-                category_entry['summary'] = wikipedia.summary(key)
+                category_entry['WikipediaPage'] = str(wikipedia.page(key))
+                category_entry['title'] = str(wikipedia.page(key)).split("\'")[1]
+                category_entry['abstract'] = wikipedia.summary(key)
                 category_entry['category_amount'] = len(wikipedia.page(key).categories)
-                category_entry['categories'] = wikipedia.page(key).categories  
+                category_entry['categories'] = wikipedia.page(key).categories   
 
                 link_entry['name'] = key
                 link_entry['text'] = wikipedia.page(key).content  
@@ -50,6 +53,7 @@ class WikipediaFilter(object):
 
                 self.filtered_keywords.append(key)
                 self.category_infos.append(category_entry)
+                self.title_list.append(category_entry['title'])
                 self.link_infos.append(link_entry)
 
             except Exception as e:
@@ -71,6 +75,7 @@ class WikipediaFilter(object):
         self.export_data(self.category_infos, '/wiki_entry_categories_summary.json')
         self.export_data(self.link_infos, '/wiki_entry_links_text.json')
         self.export_data(self.filtered_keywords, '/wiki_filterd_keywords.json')
+        self.export_data(self.title_list, '/wiki_titleOf_keywords.json')
 
 
 if __name__ == '__main__':

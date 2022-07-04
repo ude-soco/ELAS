@@ -43,6 +43,19 @@ class LectureExtractor(object):
         self.lecture_belongs_to_studyprograms = []
         self.lecture_taucht_by_professor = []
 
+    def normalize(self, dic):
+        #This function is used to map the weight of the interests to [1,5]
+        # {'learning analytics': 9, 'open assessment': 1}
+        # dict = ([('Learning analytics', 9), ('Open assessment', 1), ('Learning environment', 5), ('Peer assessment', 9)])
+        maxnum = sorted(dic.items(), key=lambda items: items[1], # key of sorting is the second element in dic which is the numbers(weights) of each keyword
+                    reverse=True)[:1][0][1]
+        for k, v in dic.items():
+            f = v / maxnum * 5
+            dic[k] = round(f, 1)
+            if dic[k] < 1:
+                dic[k] = 1
+        return dic
+
     def extrac_studyprogram(self):
         print("extract info from study_program.json")
         with open(STUDY_PROGRAMS_DATA, 'r', encoding='utf8') as s_file:
@@ -170,10 +183,10 @@ class LectureExtractor(object):
             cql = """MATCH(p:{head_type}),(q:{tail_type})
                     WHERE p.name = '{head}' AND q.name='{tail}'
                     MERGE (p)-[r:{relation}] -> (q)
-                    SET r.value = '{value}' """.format(
+                    SET r.weight = '{weight}' """.format(
                 head_type=head_type, tail_type=tail_type, head=head.replace(
                     "'", ""),
-                tail=tail.replace("'", ""), value=value, relation=relation
+                tail=tail.replace("'", ""), weight=value, relation=relation
             )
             try:
                 self.graph.run(cql)
@@ -204,8 +217,8 @@ class LectureExtractor(object):
 
     def create_relationships(self):  # create all relationships
         self.write_weighted_edges(self.lecture_has_key, 'lecture', 'keyword')
-        self.write_edges(self.lecture_belongs_to_studyprograms,
-                         'lecture', 'study_program')
+        # self.write_edges(self.lecture_belongs_to_studyprograms,
+                        #  'lecture', 'study_program')
         # self.write_edges(self.lecture_taucht_by_professor,
         #                  'lecture', 'professor')
 
@@ -227,6 +240,8 @@ class LectureExtractor(object):
     #     t.setDaemon(False)
     #     t.start()
 
+    
+
     def export_data(self, data, path):
         #print("export data")
         if isinstance(data[0], str):
@@ -244,7 +259,7 @@ class LectureExtractor(object):
                          '/lecture_has_key.json')
         self.export_data(self.lecture_belongs_to_studyprograms,
                          '/lecture_belongs_to_studyprograms.json')
-        #self.export_data(self.lecture_taucht_by_professor,
+        # self.export_data(self.lecture_taucht_by_professor,
         #                 '/lecture_taucht_by_professor.json')
 
     def run(self):
@@ -254,18 +269,20 @@ class LectureExtractor(object):
         print("{} study_program entities extracted, ".format(
             len(self.study_programs)))
         print("{} keyword entities extracted, ".format(len(self.keywords)))
-       # print("{} professor entities extracted.".format(len(self.professors)))
-        self.create_entities()
+        # print("{} professor entities extracted.".format(len(self.professors)))
+        self.export_entities_relationships()
+
+        # self.create_entities()
         self.create_relationships()
 
-        self.set_attributes_study_programs()
-        self.set_attributes_lectures()
-        self.set_attributes_professors()
+        # self.set_attributes_study_programs()
+        # self.set_attributes_lectures()
+        # self.set_attributes_professors()
 
-        self.export_entities_relationships()
+        
 
 
 if __name__ == '__main__':
-    print(OUTPUT_DATA)
-    # extractor = LectureExtractor()
-    # extractor.run()
+    # print(OUTPUT_DATA)
+    extractor = LectureExtractor()
+    extractor.run()
