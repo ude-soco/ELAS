@@ -18,7 +18,7 @@ OUTPUT_DATA = os.path.abspath(os.path.join(
 class WikipediaFilter(object):
     def __init__(self):
         super(WikipediaFilter, self).__init__()
-        self.graph = Graph('http://localhost:7474/', auth=("neo4j", "1234"))
+        self.graph = Graph('http://localhost:7474/', auth=("neo4j", "1234qweR"))
         self.keyword_list = []
         self.category_infos = []
         self.link_infos = []
