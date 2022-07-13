@@ -1,6 +1,9 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import create_access_token
 from .extensions import bcrypt
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
 from orm_interface.entities.user import User
 from orm_interface.base import Base, Session, engine
@@ -10,6 +13,28 @@ main = Blueprint("main", __name__)
 
 Base.metadata.create_all(engine)
 session = Session()
+
+
+@main.route("/", methods=["GET"])
+def adminUser():
+    email = os.environ.get('ADMIN')
+    password = os.environ.get('ADMIN_PASS')
+    firstname = "Admin"
+    lastname = "Admin"
+
+    user = session.query(User).filter(User.email == email).first()
+
+    if user is None:
+        hash_password = bcrypt.generate_password_hash(password).decode("utf-8")
+        new_user = User(
+            firstname=firstname, lastname=lastname, email=email, password=hash_password
+        )
+        session.add(new_user)
+        session.commit()
+        return jsonify({"success": "User registered"})
+
+    else:
+        return jsonify({"error": "User is already registered"})
 
 
 @main.route("/login", methods=["POST"])

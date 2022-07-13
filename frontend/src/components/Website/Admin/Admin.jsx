@@ -26,7 +26,7 @@ export default function Admin(props) {
 
   useEffect(() => {
     let interval = setInterval(() => {
-      fetch("http://localhost:5000/commence_scraping")
+      fetch(`${process.env.REACT_APP_BASE_URL}/commence_scraping`)
         .then((response) => response.json())
         .then((data) => {
           handleScrape(data.statusMessage);
@@ -42,7 +42,7 @@ export default function Admin(props) {
     e.preventDefault();
     e.target.reset();
 
-    fetch("http://localhost:5000/commence_scraping", {
+    fetch(`${process.env.REACT_APP_BASE_URL}/commence_scraping`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -129,10 +129,10 @@ export default function Admin(props) {
                     color="primary"
                     className={classes.button}
                     endIcon={<ArrowForwardIcon />}
-                    disabled={
-                      scrapeState === "running..." ||
-                      scrapeState === "checking..."
-                    }
+                    // disabled={
+                    //   scrapeState === "running..." ||
+                    //   scrapeState === "checking..."
+                    // }
                     type="submit"
                   >
                     Scrape Now

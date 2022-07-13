@@ -1,4 +1,4 @@
-FROM node:14-slim
+FROM node:16-slim
 
 EXPOSE 3000
 
@@ -10,4 +10,4 @@ RUN npm ci
 
 COPY . .
 
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]

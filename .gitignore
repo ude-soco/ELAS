@@ -108,3 +108,4 @@ dist
 */venv/*
 .flaskenv
 __pycache__/
+frontend/build/

@@ -25,11 +25,16 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^5.0.1",
     "react-wordcloud": "^1.2.7",
+    "serve": "^14.0.0",
     "uuid": "^8.3.2",
     "web-vitals": "^1.1.1"
   },
+  "engines": {
+    "node": "16.14.2"
+  },
   "scripts": {
-    "start": "react-scripts start",
+    "dev": "react-scripts start",
+    "start": "serve -s build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

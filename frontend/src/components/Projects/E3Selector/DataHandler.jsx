@@ -6,7 +6,7 @@
 class DataHandler {
 	import_courses(){
 		  
-		fetch("http://localhost:5000/e3selector/e3_courses_and_rating")
+		fetch(`${process.env.REACT_APP_BASE_URL}/e3selector/e3_courses_and_rating`)
 		.then(response => 
 			response.json())
 		.then(data => {
@@ -43,8 +43,8 @@ class DataHandler {
 
 		this.sortState = require("./data/sorting.json");
 
-		this.backendURL = "http://localhost:5000/e3selector"; // CHANGE ME IN PRODUCTION
-		this.frontendURL = "http://localhost:3000/e3selector"; // CHANGE ME IN PRODUCTION
+		this.backendURL = `${process.env.REACT_APP_BASE_URL}/e3selector`; // CHANGE ME IN PRODUCTION
+		this.frontendURL = `${process.env.REACT_APP_BASE_URL}/e3selector`; // CHANGE ME IN PRODUCTION
 		this.tryToLoadSharedState();
 	}
 
