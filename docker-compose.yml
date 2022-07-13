@@ -1,4 +1,4 @@
-version: "3"
+version: "3.7"
 
 services:
   db:
@@ -9,7 +9,7 @@ services:
       - POSTGRES_PASSWORD=1234qweR
     ports:
       - '5432:5432'
-    volumes: 
+    volumes:
       - db:/var/lib/postgresql/data
     networks:
       - backend
@@ -52,8 +52,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./frontend/src:/app/src:ro
-      - ./frontend/public:/app/public:ro
+      - ./frontend:/app
     depends_on:
       - elas-backend
     networks:

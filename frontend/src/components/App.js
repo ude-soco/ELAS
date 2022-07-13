@@ -1,10 +1,7 @@
-import { Redirect, Route, Switch } from "react-router-dom";
-import Home from "./Website/Home/Home";
-import NavigationBar from "./Website/NavigationBar/NavigationBar";
-import { Grid } from "@material-ui/core";
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import ScrollToTop from "./Reuseable/ScrollToTop/ScrollToTop";
+import NavigationBar from "./Website/NavigationBar/NavigationBar";
+import Home from "./Website/Home/Home";
 import Login from "./Website/Login/Login";
 import AuthorizedRoute from "../assets/functions/AuthorizedRoute";
 import StudyCompass from "./Projects/StudyCompass/StudyCompass";
@@ -14,19 +11,12 @@ import Footer from "./Website/Footer/Footer";
 import Admin from "./Website/Admin/Admin";
 import Registration from "./Website/Registration/Registration";
 import CourseRecommender from "./Projects/CourseRecommender/CourseRecommender";
-import UDEStudyCompass from "./Projects/UDEStudyCompass/UDEStudyCompass";
+import { Redirect, Route, Switch } from "react-router-dom";
+import { CssBaseline, Grid } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import StudyCompassHomepage from "./Projects/UDEStudyCompass/StudyCompassHomepage";
 
 const useStyles = makeStyles((theme) => ({
-  containerHeader: {
-    marginTop: theme.spacing(4),
-    paddingRight: theme.spacing(4),
-    paddingLeft: theme.spacing(4),
-  },
-  gridContainer: {
-    marginTop: theme.spacing(8),
-    position: "relative",
-    minHeight: "100vh",
-  },
   container: {
     margin: theme.spacing(5, 4, 0, 4),
   },
@@ -38,9 +28,14 @@ export default function App() {
 
   return (
     <>
+      <CssBaseline />
       <NavigationBar />
       <Switch>
-        <Grid container direction="column" className={classes.gridContainer}>
+        <Grid
+          container
+          direction="column"
+          style={{ position: "relative", minHeight: "83vh" }}
+        >
           <Route exact path="/" render={() => <Home classes={classes} />} />
           <Route
             exact
@@ -75,7 +70,7 @@ export default function App() {
           <Route
             exact
             path="/ude-studycompass"
-            render={() => <UDEStudyCompass />}
+            render={() => <StudyCompassHomepage />}
           />
 
           {!isLoggedIn ? (

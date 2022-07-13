@@ -4,10 +4,27 @@
  */
 
 class DataHandler {
+	import_courses(){
+		  
+		fetch("http://localhost:5000/e3selector/e3_courses_and_rating")
+		.then(response => 
+			response.json())
+		.then(data => {
+			//instead of applyfilter from json , make it in a promise and process it here 
+			this.applyFilters(data)
+			
+		})
+		.catch(error=>{
+			
+			console.log(error)
+		})
+	}
 
 	/* set up initial values, try to restore a previous session state */
 	constructor() {
-		this.data = require("./data/e3_courses.json");
+		/*Data from the json file was preciously used */
+		/*this.data = require("./data/e3_courses.json"); */
+		this.import_courses();
 
 		this.courseList = [];
 		this.selectedList = [];
@@ -18,7 +35,7 @@ class DataHandler {
 		this.smallCourseThreshold = 10;
 
 		this.filterState = JSON.parse(localStorage.getItem("e3filters")) || require("./data/filters.json");
-		this.applyFilters();
+
 
 		const preSelectedCourses = JSON.parse(localStorage.getItem("e3selected")) || [];
 
@@ -91,7 +108,7 @@ class DataHandler {
 		}
 
 		this.saveFilterState();
-		this.applyFilters();
+		this.import_courses();
 	}
 
 	saveFilterState() {
@@ -202,8 +219,8 @@ class DataHandler {
 		return this.filterState;
 	}
 
-	applyFilters() {
-		this.courseList = this.data.filter(course => {
+	applyFilters(data) {
+		this.courseList = data.filter(course => {
 			var fitting = true; // if this is true after the loop body, the course fits the filter parameters
 
 			// Search

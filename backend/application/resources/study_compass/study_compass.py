@@ -1,3 +1,4 @@
+from time import time
 from flask import Blueprint, jsonify, request
 from orm_interface.base import Session
 from orm_interface.entities.lecture import Lecture
@@ -103,26 +104,62 @@ def get_lectures_with_root_id():
     lectures = studyprogram.lectures
     response = []
     for lecture in lectures:
-        timetables = lecture.timetables
-        response_timetables = []
-        for timetable in timetables:
-            response_timetables.append({
-                "id": timetable.id,
-                "comment": timetable.comment,
-                "day": timetable.day,
-                "duration": {
-                    "from": timetable.duration_from,
-                    "to": timetable.duration_to
-                },
-                "elearn": timetable.elearn,
-                "rhythm": timetable.rhythm,
-                "room": timetable.room,
-                "status": timetable.status,
-                "time": {
-                    "from": timetable.time_from,
-                    "to": timetable.time_to
-                }
-            })
+        found_lecture = session.query(Lecture).filter(Lecture.id==lecture.id).first()
+        if not lecture:
+            return "not found"
+
+        lecture_professors = lecture.professors
+        professors = [{
+            "name": professor.name,
+            "url": professor.url
+        } for professor in lecture_professors]
+
+        lecture_studyprograms = lecture.root_id
+        study_programs = [{
+            "name": studyprogram.name,
+            "url": studyprogram.url
+        } for studyprogram in lecture_studyprograms]
+
+        found_lecture_timetables = found_lecture.timetables
+        timetables_extended = [{
+            "id": timetable.id,
+            "comment": timetable.comment,
+            "day": timetable.day,
+            "duration": {
+                "from": timetable.duration_from,
+                "to": timetable.duration_to
+            },
+            "elearn": timetable.elearn,
+            "rhythm": timetable.rhythm,
+            "room": timetable.room,
+            "dates": timetable.dates,
+            "status": timetable.status,
+            "time": {
+                "from": timetable.time_from,
+                "to": timetable.time_to
+            }
+        } for timetable in found_lecture_timetables]
+
+        # timetables = lecture.timetables
+        # response_timetables = []
+        # for timetable in timetables:
+        #     response_timetables.append({
+        #         "id": timetable.id,
+        #         "comment": timetable.comment,
+        #         "day": timetable.day,
+        #         "duration": {
+        #             "from": timetable.duration_from,
+        #             "to": timetable.duration_to
+        #         },
+        #         "elearn": timetable.elearn,
+        #         "rhythm": timetable.rhythm,
+        #         "room": timetable.room,
+        #         "status": timetable.status,
+        #         "time": {
+        #             "from": timetable.time_from,
+        #             "to": timetable.time_to
+        #         }
+        #     })
         response.append({
             "id": lecture.id,
             "url": lecture.url,
@@ -133,7 +170,10 @@ def get_lectures_with_root_id():
             "shorttext": lecture.shorttext,
             "language": lecture.language,
             "description": lecture.description,
-            "timetable": response_timetables,
-            "keywords": lecture.keywords
+            "keywords": lecture.keywords,
+            "professors": professors,
+            "study_programs": study_programs,
+            # "timetable": response_timetables,
+            "timetable": timetables_extended
         })
     return jsonify(response)

@@ -10,7 +10,7 @@
 2. Make sure you've installed the [latest version (ver.14) of Postgres](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
 3. Create a virtual environment `python -m venv venv`
 4. Activate the virtual environment `.\venv\Scripts\activate`
-5. Run `pip install requirements.txt`. This should install all requirements.
+5. Run `pip install -r requirements.txt`. This should install all requirements.
 6. Set up a database with a name and a password
    1. Make a duplicate of `exmaple.env` and `example.flaskenv` file in the same directory and rename to `.env`
    2. Update the `.env` file with the password of your postgres database

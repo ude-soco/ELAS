@@ -180,7 +180,7 @@ class CourseCatalogSpider(scrapy.Spider):
                 time = self.clear_string(table.xpath(entry_element_str + "/td[3]/text()").get())
                 rhythm = self.clear_string(table.xpath(entry_element_str + "/td[4]/text()").get())
                 duration = self.clear_string(table.xpath(entry_element_str + "/td[5]/text()").get())
-                room = self.clear_string(table.xpath(entry_element_str + "/td[6]/text()").get())
+                room = self.clear_string(table.xpath(entry_element_str + "/td[6]/a[1]/text()").get()) # TODO: Changed
                 status = self.clear_string(table.xpath(entry_element_str + "/td[8]/text()").get())
                 comment = self.clear_string(table.xpath(entry_element_str + "/td[9]/text()").get())
                 elearn = self.clear_string(table.xpath(entry_element_str + "/td[12]/text()").get())

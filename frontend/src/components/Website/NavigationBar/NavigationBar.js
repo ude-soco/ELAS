@@ -1,29 +1,15 @@
-import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React, {useState} from "react";
+import {makeStyles} from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
-import {
-  Box,
-  CssBaseline,
-  Divider,
-  Grid,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Menu,
-  MenuItem,
-} from "@material-ui/core";
-import { useHistory } from "react-router-dom";
+import {Divider, Grid, ListItemIcon, ListItemText, Menu, MenuItem,} from "@material-ui/core";
+import {useHistory} from "react-router-dom";
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
 import SettingsIcon from "@material-ui/icons/Settings";
 import Avatar from "@material-ui/core/Avatar";
-import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
   title: {
     marginLeft: theme.spacing(2),
     color: theme.palette.primary.main,
@@ -61,47 +47,26 @@ export default function NavigationBar(props) {
   };
 
   return (
-    <Box className={classes.root}>
-      <CssBaseline/>
-      <AppBar
-        position="fixed"
-        color="inherit"
-        style={{backgroundColor: "#fff"}}
-      >
+    <>
+      <AppBar position="sticky" color="inherit" style={{backgroundColor: "#fff"}}>
         <Toolbar>
           <Grid container>
             <Grid item xs className={classes.title} alignItems="center">
-              <img
-                src="/images/logos/cover.png"
-                height="35"
-                alt="ELAS Logo"
-                onClick={() => history.push("/")}
-                style={{cursor: "pointer"}}
-              />
+              <img src="/images/logos/cover.png" height="35" alt="ELAS Logo" onClick={() => history.push("/")}
+                   style={{cursor: "pointer"}}/>
             </Grid>
             {isLoggedIn ? (
               <Grid item>
                 <Grid container alignItems="center">
                   <Grid item>
-                    <Avatar
-                      className={classes.avatarName}
-                      onClick={toggleProfileList}
-                    >
-                      A
-                    </Avatar>
-                    <Menu
-                      id="simple-menu"
-                      anchorEl={openProfile}
-                      getContentAnchorEl={null}
-                      keepMounted
-                      anchorOrigin={{vertical: "bottom", horizontal: "left"}}
-                      transformOrigin={{vertical: "top", horizontal: "left"}}
-                      open={Boolean(openProfile)}
-                      onClose={() => setOpenProfile(null)}
-                    >
+                    <Avatar className={classes.avatarName} onClick={toggleProfileList}> A </Avatar>
+                    <Menu anchorEl={openProfile} getContentAnchorEl={null} keepMounted
+                          anchorOrigin={{vertical: "bottom", horizontal: "left"}}
+                          transformOrigin={{vertical: "top", horizontal: "left"}}
+                          open={Boolean(openProfile)} onClose={() => setOpenProfile(null)}>
                       <MenuItem onClick={openAdmin}>
                         <ListItemIcon>
-                          <SettingsIcon color="primary"/>{" "}
+                          <SettingsIcon color="primary"/>
                         </ListItemIcon>
                         <ListItemText primary="Settings"/>
                       </MenuItem>
@@ -116,19 +81,12 @@ export default function NavigationBar(props) {
                       </MenuItem>
                     </Menu>
                   </Grid>
-                  <Grid item style={{marginLeft: 16}}>
-                    <Typography variant="h6">Admin</Typography>
-                  </Grid>
                 </Grid>
               </Grid>
             ) : (
               <Grid item>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className={classes.primaryButton}
-                  onClick={() => history.push('/login')}
-                >
+                <Button variant="contained" color="primary" className={classes.primaryButton}
+                        onClick={() => history.push('/login')}>
                   Login
                 </Button>
               </Grid>
@@ -136,6 +94,6 @@ export default function NavigationBar(props) {
           </Grid>
         </Toolbar>
       </AppBar>
-    </Box>
+    </>
   );
 }

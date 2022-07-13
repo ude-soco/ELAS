@@ -1,13 +1,12 @@
 export const projectDetails = [
-  {
-    name: "Old Study Compass",
-    image: "images/courseInsights.png",
-    shortName: "studycompass",
-    teamMembers: "Joshua Redmann, Christoph Vorer, Sofie Kalthof",
-    description:
-      "The project idea is to provide a platform for students at the University of Duisburg-Essen to select the university’s courses within a few easy steps. Furthermore, the platform lets students easily make a schedule by observing various details such as overlapping course schedules, ratings of the courses, and links to LSF.",
-  },
-  ,
+  // {
+  //   name: "Old Study Compass",
+  //   image: "images/courseInsights.png",
+  //   shortName: "studycompass",
+  //   teamMembers: "Joshua Redmann, Christoph Vorer, Sofie Kalthof",
+  //   description:
+  //     "The project idea is to provide a platform for students at the University of Duisburg-Essen to select the university’s courses within a few easy steps. Furthermore, the platform lets students easily make a schedule by observing various details such as overlapping course schedules, ratings of the courses, and links to LSF.",
+  // },
   {
     name: "Study Compass",
     image: "images/courseInsights.png",

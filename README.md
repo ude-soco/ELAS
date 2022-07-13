@@ -43,83 +43,87 @@ The aim of this IDEA lab is to provide the foundation for an Exploratory Learnin
 
 <br/>
 
-2. Manual Installation Guide 🔨
+2.  Manual Installation Guide 🔨
 
-   	- Backend installation
+        - Backend installation
 
-     	- Download and install [Python 3.10.4](https://www.python.org/downloads/)
+    - Download and install [Python 3.10.4](https://www.python.org/downloads/)
 
-     	- Download and install [PostgreSQL 14.2](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
+    - Download and install [PostgreSQL 14.2](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
 
-		- Open a command prompt, move inside `backend` folder, and follow the steps below by typing the commands in your command prompt
+    - Open a command prompt, move inside `backend` folder, and follow the steps below by typing the commands in your command prompt
 
-    		- Install a python virtual environment
-       
-				```
-				python -m venv venv
-				```
+      - Install a python virtual environment
 
-			- Activate the python virtual environment
+        ```
+        python -m venv venv
+        ```
 
-				```
-				.\venv\Scripts\activate
-				```
-     		- Upgrade the pip version
+      - Activate the python virtual environment
 
-				```
-				python -m pip install --upgrade pip
-				```
+        ```
+        .\venv\Scripts\activate
+        ```
 
-    		- Install the required packages from the `requirements.txt` file
-       
-				```
-				pip install -r requirements.txt
-				```
-    		- Install Flask 2.1.0
-       
-				```
-				pip install Flask==2.1.0 psycopg2-binary Flask==2.1.0 flask-jwt-extended flask-bcrypt flask-cors --upgrade
-				```
+      - Upgrade the pip version
 
-    		- Import stopwords from nltk
-		
-				```
-				python -c "import nltk;nltk.download('stopwords')" && python -c "import nltk;nltk.download('punkt')" && python -c "import nltk;nltk.download('sentiwordnet')"
-				```
-	
-		- Rename the files `example.env` to `.env` and `example.flaskenv` to `.flaskenv` respectively
-    
-		- Open `.env` file, find `POSTGRES_PASS`, and type the password of your postgresql database between the single quotation mark
-    
-		- Type the following command in a command prompt to run server
+        ```
+        python -m pip install --upgrade pip
+        ```
 
-			```
-			python -m flask run --host=0.0.0.0
-			```
+      - Install the required packages from the `requirements.txt` file
 
-   - Frontend installation
+        ```
+        pip install -r requirements.txt
+        ```
 
-     	- Download and install [NodeJS](https://nodejs.org/en/)
+      - Install Flask 2.1.0
 
-     	- Move to `frontend` folder and rename the file `example.env` to `.env`
+        ```
+        pip install Flask==2.1.0 psycopg2-binary flask-jwt-extended flask-bcrypt flask-cors --upgrade
+        ```
 
-     	- Open command prompt/terminal and follow the steps below:
+      - Import stopwords from nltk
 
-       		- Download and install node packages
+        ```
+        python -c "import nltk;nltk.download('stopwords')" && python -c "import nltk;nltk.download('punkt')" && python -c "import nltk;nltk.download('sentiwordnet')"
+        ```
 
-				```
-				npm ci
-				```
-       		- Run the script and starts the application
+    - Rename the files `example.env` to `.env` and `example.flaskenv` to `.flaskenv` respectively
 
-				```
-				npm start
-				```
-       		- Stop the Frontend application by pressing `Cntl + c` inside the command prompt
+    - Open `.env` file, find `POSTGRES_PASS`, and type the password of your postgresql database between the single quotation mark
 
-     		- Application will open automatically in browser at [localhost:3000](http://localhost:3000)
+    - Type the following command in a command prompt to run server
 
-		- Read more about CSS framework [Material UI v4](https://v4.mui.com/getting-started/installation/)
+      ```
+      python -m flask run --host=0.0.0.0
+      ```
+
+    - Frontend installation
+
+          - Download and install [NodeJS](https://nodejs.org/en/)
+
+          - Move to `frontend` folder and rename the file `example.env` to `.env`
+
+          - Open command prompt/terminal and follow the steps below:
+
+      - Download and install node packages
+
+        ```
+        npm ci
+        ```
+
+      - Run the script and starts the application
+
+        ```
+        npm start
+        ```
+
+      - Stop the Frontend application by pressing `Cntl + c` inside the command prompt
+
+      - Application will open automatically in browser at [localhost:3000](http://localhost:3000)
+
+      - Read more about CSS framework [Material UI v4](https://v4.mui.com/getting-started/installation/)
 
 ## 🕸️ Scraping Tool
 
