@@ -77,12 +77,6 @@ The Interactive Data Exploration and Analytics (IDEA) lab course offered at the 
               pip install -r requirements-windows.txt   # For Windows
               ```
 
-            - Import stopwords from nltk
-
-              ```
-              python -c "import nltk;nltk.download('stopwords')" && python -c "import nltk;nltk.download('punkt')" && python -c "import nltk;nltk.download('sentiwordnet')"
-              ```
-
         - Rename the files `example.env` to `.env` and `example.flaskenv` to `.flaskenv` respectively
 
         - Open `.env` file, find `POSTGRES_PASS`, and type the password of your postgresql database between the single
