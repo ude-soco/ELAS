@@ -34,7 +34,7 @@ export default function Admin(props) {
         .catch((error) => {
           console.log(error);
         });
-    }, 5000);
+    }, 2500);
     return () => clearInterval(interval);
   });
 
@@ -129,10 +129,10 @@ export default function Admin(props) {
                     color="primary"
                     className={classes.button}
                     endIcon={<ArrowForwardIcon />}
-                    // disabled={
-                    //   scrapeState === "running..." ||
-                    //   scrapeState === "checking..."
-                    // }
+                    disabled={
+                      scrapeState === "running..." ||
+                      scrapeState === "checking..."
+                    }
                     type="submit"
                   >
                     Scrape Now

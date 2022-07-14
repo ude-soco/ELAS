@@ -1,13 +1,21 @@
-import React, {useEffect, useState} from "react";
-import {CircularProgress, DialogContent, Divider, Grid, IconButton, TextField, Typography,} from "@material-ui/core";
-import {Autocomplete} from "@material-ui/lab";
+import React, { useEffect, useState } from "react";
+import {
+  CircularProgress,
+  DialogContent,
+  Divider,
+  Grid,
+  IconButton,
+  TextField,
+  Typography,
+} from "@material-ui/core";
+import { Autocomplete } from "@material-ui/lab";
 import Button from "@material-ui/core/Button";
 import SearchIcon from "@material-ui/icons/Search";
 import Backend from "../../../assets/functions/Backend";
 import Dialog from "@material-ui/core/Dialog";
 import CloseIcon from "@material-ui/icons/Close";
 import CourseList from "./components/CourseList";
-import {parseDate} from "./components/utils/functions";
+import { parseDate } from "./components/utils/functions";
 
 const StudyCompassHomepage = () => {
   const [courseList, setCourseList] = useState([]);
@@ -16,19 +24,17 @@ const StudyCompassHomepage = () => {
   const [studyProgramView, setStudyProgramsView] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
-  useEffect(() => {
-    Backend.get("/studycompass/get_studyprograms").then((response) => {
-      const { data } = response;
-      setStudyPrograms(data);
-    });
+  useEffect(async () => {
+    let response = await Backend.get("/studycompass/get_studyprograms");
+    setStudyPrograms(response.data);
   }, []);
 
   const handleSearchCourses = async (studyProgramId) => {
-    const courses = await Backend.get(
+    const response = await Backend.get(
       "/studycompass/get_lectures_with_root_id",
-      {params: {id: studyProgramId}}
-    ).then((response) => response.data);
-    let newCourseList = prepareCourses(courses);
+      { params: { id: studyProgramId } }
+    );
+    let newCourseList = prepareCourses(response.data);
     setCourseList(newCourseList);
     setStudyProgramsView((prevState) => !prevState);
   };
@@ -41,7 +47,7 @@ const StudyCompassHomepage = () => {
             container
             direction="column"
             alignItems="center"
-            style={{padding: 70}}
+            style={{ padding: 70 }}
           >
             <Typography variant="h6" style={{ fontWeight: "bold" }}>
               Welcome to
@@ -294,7 +300,7 @@ export const prepareCourses = (courses) => {
       time.dates.forEach((date) => {
         let startDate = parseDate(date, timeFrom);
         let endDate = parseDate(date, timeTo);
-        newDateArray.push({startDate, endDate});
+        newDateArray.push({ startDate, endDate });
       });
       newTimetable.push({
         ...time,
@@ -304,7 +310,7 @@ export const prepareCourses = (courses) => {
         },
         time: {
           from: time.time.from.split(" ")[0],
-          to: time.time.to.split(" ")[0]
+          to: time.time.to.split(" ")[0],
         },
         dates: newDateArray,
       });
@@ -316,4 +322,4 @@ export const prepareCourses = (courses) => {
     });
   });
   return newCourseList;
-}
+};

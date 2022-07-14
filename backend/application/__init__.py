@@ -1,5 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
+import nltk
+import ssl
 
 from .extensions import jwt
 from .main import main
@@ -26,5 +28,16 @@ def create_app(config_object="application.settings"):
     app.register_blueprint(intogen, url_prefix="/intogen")
     app.register_blueprint(spoa, url_prefix="/spoa")
     app.register_blueprint(study_soon, url_prefix="/studysoon")
+
+    try:
+        _create_unverified_https_context = ssl._create_unverified_context
+    except AttributeError:
+        pass
+    else:
+        ssl._create_default_https_context = _create_unverified_https_context
+
+    nltk.download('stopwords')
+    nltk.download('punkt')
+    nltk.download('sentiwordnet')
 
     return app
