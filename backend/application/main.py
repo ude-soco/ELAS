@@ -34,7 +34,7 @@ def adminUser():
         return jsonify({"success": "User registered"})
 
     else:
-        return jsonify({"error": "User is already registered"})
+        return jsonify({"success": "Server initialized"})
 
 
 @main.route("/login", methods=["POST"])
