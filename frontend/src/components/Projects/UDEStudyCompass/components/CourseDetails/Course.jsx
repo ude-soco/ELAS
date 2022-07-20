@@ -1,5 +1,17 @@
 import React, {useEffect, useMemo, useState} from "react";
-import {Avatar, Collapse, Divider, Grid, IconButton, Paper, Tooltip, Typography,} from "@material-ui/core";
+import {
+  Avatar,
+  Collapse,
+  Divider,
+  Grid,
+  IconButton,
+  ListItemIcon,
+  Menu,
+  MenuItem,
+  Paper,
+  Tooltip,
+  Typography,
+} from "@material-ui/core";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import CourseDescription from "./CourseDescription";
@@ -9,6 +21,11 @@ import {getRandomColor, validateSubjectType} from "../utils/functions";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import CourseTimetable from "./CourseTimetable";
 import Button from "@material-ui/core/Button";
+import AddIcon from '@material-ui/icons/Add';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import DeleteIcon from "@material-ui/icons/Delete";
+import MoreIcon from '@material-ui/icons/More';
+import CloseIcon from "@material-ui/icons/Close";
 
 const Course = (props) => {
   const {course, handleCourse, selected, resolveConflict, handleResolvedConflict, handleUpdateSelectedCourses} = props;
@@ -34,6 +51,7 @@ const Course = (props) => {
   });
   const [expand, setExpand] = useState(false);
   const [more, setMore] = useState(false);
+  const [openMenu, setOpenMenu] = useState(null);
   const avatarColor = useMemo(() => getRandomColor(), []);
 
   useEffect(() => {
@@ -56,6 +74,15 @@ const Course = (props) => {
     }
   }, [course, resolveConflict]);
 
+  const handleToggleMenu = (event) => {
+    setOpenMenu(prevState => {
+      if (prevState !== null) {
+        return null
+      }
+      return event.currentTarget
+    })
+  }
+
   const handleSelectedTime = (time) => {
     let timeItem = {
       time: `${time[0].day} ${time[0].time.from}-${time[0].time.to}`,
@@ -72,20 +99,20 @@ const Course = (props) => {
 
   return (
     <>
-      <Grid item xs={12} style={{ paddingBottom: 8 }}>
-        <Paper style={{ padding: "16px 8px 16px 4px" }}>
+      <Grid item xs={12} style={{paddingBottom: 8}}>
+        <Paper style={{padding: "16px 8px 16px 4px"}}>
           <Grid container alignItems="center">
             <Grid item xs={1}>
               <Grid container justify="center">
                 <IconButton
                   onClick={() =>
-                    handleCourse({ ...course, selectedTime: selectedTime })
+                    handleCourse({...course, selectedTime: selectedTime})
                   }
                 >
                   {selected ? (
-                    <RemoveCircleIcon style={{ color: "red" }} />
+                    <RemoveCircleIcon style={{color: "red"}}/>
                   ) : (
-                    <AddBoxIcon style={{ color: "orange" }} />
+                    <AddBoxIcon style={{color: "orange"}}/>
                   )}
                 </IconButton>
               </Grid>
@@ -93,7 +120,7 @@ const Course = (props) => {
 
             <Grid item xs={2}>
               <Grid container>
-                <Grid item style={{ paddingRight: 8 }}>
+                <Grid item style={{paddingRight: 8}}>
                   <Typography color="textSecondary" variant="button">
                     {selectedTime.time}
                   </Typography>
@@ -106,7 +133,7 @@ const Course = (props) => {
                           <Typography>More time slots available!</Typography>
                         }
                       >
-                        <InfoOutlinedIcon color="disabled" />
+                        <InfoOutlinedIcon color="disabled"/>
                       </Tooltip>
                     </Grid>
                   </>
@@ -117,7 +144,7 @@ const Course = (props) => {
             </Grid>
 
             <Grid item xs={1}>
-              <Grid container style={{ paddingLeft: 12 }}>
+              <Grid container style={{paddingLeft: 12}}>
                 <Typography color="textSecondary" variant="button">
                   {course.sws}
                 </Typography>
@@ -128,12 +155,12 @@ const Course = (props) => {
               item
               xs={5}
               onClick={() => setExpand((prevState) => !prevState)}
-              style={{ cursor: "pointer" }}
+              style={{cursor: "pointer"}}
             >
               <Grid container>
                 <Typography
                   color="textSecondary"
-                  style={{ fontWeight: "bold" }}
+                  style={{fontWeight: "bold"}}
                 >
                   {course.name}
                 </Typography>
@@ -177,7 +204,7 @@ const Course = (props) => {
                   <Grid
                     container
                     spacing={3}
-                    style={{ padding: "36px 40px 40px 40px" }}
+                    style={{padding: "36px 40px 40px 40px"}}
                   >
                     <Grid item xs={12}>
                       <Typography variant="h5" gutterBottom>
@@ -188,9 +215,9 @@ const Course = (props) => {
                     {/* Left side*/}
                     <Grid item xs={selected ? 12 : 4}>
                       <Grid container>
-                        <Grid container style={{ paddingBottom: 24 }}>
-                          <Grid item xs={12} style={{ paddingBottom: 8 }}>
-                            <Typography style={{ fontWeight: "bold" }}>
+                        <Grid container style={{paddingBottom: 24}}>
+                          <Grid item xs={12} style={{paddingBottom: 8}}>
+                            <Typography style={{fontWeight: "bold"}}>
                               Professor(s) / Assistant(s)
                             </Typography>
                           </Grid>
@@ -199,10 +226,10 @@ const Course = (props) => {
                               return (
                                 <Grid
                                   container
-                                  style={{ paddingBottom: 8 }}
+                                  style={{paddingBottom: 8}}
                                   alignItems="center"
                                 >
-                                  <Grid item style={{ marginRight: 16 }}>
+                                  <Grid item style={{marginRight: 16}}>
                                     <Avatar
                                       style={{
                                         backgroundColor: avatarColor,
@@ -226,28 +253,87 @@ const Course = (props) => {
                           timetable={courseDetails.timetable}
                           handleSelectedTime={handleSelectedTime}
                         />
+                        {!selected ? (
+                          <Grid container style={{marginTop: 24}}>
+                            <Button onClick={() => handleCourse({...course, selectedTime: selectedTime})}
+                                    startIcon={<AddIcon/>} variant="contained"
+                                    style={{backgroundColor: "#FB9B0E", color: "white"}}>
+                              Add course
+                            </Button>
+                          </Grid>
+                        ) : <></>}
                       </Grid>
                     </Grid>
 
                     {selected ? (
                       <>
-                        <Grid
-                          container
-                          justify="flex-end"
-                          style={{ paddingTop: 16 }}
-                        >
-                          <Button
-                            variant={more ? "outlined" : "contained"}
-                            style={{
-                              borderColor: more ? "#FB9B0E" : "",
-                              backgroundColor: more ? "#FFFFFF" : "#FB9B0E",
-                              color: more ? "#FB9B0E" : "#FFFFFF",
-                            }}
-                            onClick={() => setMore((prevState) => !prevState)}
-                          >
-                            {more ? "Hide details" : "More details"}
+                        <Grid container justify="space-between" alignItems="center" style={{paddingTop: 8}}>
+                          <Button style={{color: "#FB9B0E"}} onClick={() => {
+                            if (handleResolvedConflict) {
+                              handleResolvedConflict("");
+                            }
+                            setExpand((prevState) => !prevState);
+                          }} startIcon={<CloseIcon/>}>
+                            Close
                           </Button>
+                          <Tooltip title={<Typography>Show menu</Typography>} arrow>
+                            <IconButton onClick={handleToggleMenu}>
+                              <MoreVertIcon/>
+                            </IconButton>
+                          </Tooltip>
+                          <Menu anchorEl={openMenu} open={Boolean(openMenu)} onClose={handleToggleMenu}
+                                getContentAnchorEl={null}
+                                anchorOrigin={{vertical: "bottom", horizontal: "right"}}
+                                transformOrigin={{vertical: "top", horizontal: "right"}}>
+                            <MenuItem onClick={() => {
+                              setMore((prevState) => !prevState)
+                              handleToggleMenu()
+                            }}>
+                              <ListItemIcon>
+                                <MoreIcon fontSize="small" style={{color: "#FB9B0E"}}/>
+                              </ListItemIcon>
+                              <Typography variant="inherit">{more ? "Hide details" : "More details"}</Typography>
+                            </MenuItem>
+                            <Divider style={{marginTop: 4, marginBottom: 4}}/>
+                            <MenuItem onClick={() => {
+                              handleCourse({...course, selectedTime: selectedTime})
+                              handleToggleMenu()
+                            }}>
+                              <ListItemIcon>
+                                <DeleteIcon fontSize="small" style={{color: "red"}}/>
+                              </ListItemIcon>
+                              <Typography variant="inherit">Remove</Typography>
+                            </MenuItem>
+                          </Menu>
                         </Grid>
+
+                        {/*<Grid*/}
+                        {/*  container*/}
+                        {/*  justify="space-between"*/}
+                        {/*  style={{paddingTop: 16}}*/}
+                        {/*>*/}
+                        {/*  <Grid item>*/}
+                        {/*    <Button onClick={() => handleCourse({...course, selectedTime: selectedTime})}*/}
+                        {/*            startIcon={<DeleteIcon/>} variant="outlined"*/}
+                        {/*            style={{borderColor: "red", color: "red"}}>*/}
+                        {/*      Remove course*/}
+                        {/*    </Button>*/}
+                        {/*  </Grid>*/}
+                        {/*  <Grid item>*/}
+                        {/*    <Button*/}
+                        {/*      variant={more ? "outlined" : "contained"}*/}
+                        {/*      style={{*/}
+                        {/*        borderColor: more ? "#FB9B0E" : "",*/}
+                        {/*        backgroundColor: more ? "#FFFFFF" : "#FB9B0E",*/}
+                        {/*        color: more ? "#FB9B0E" : "#FFFFFF",*/}
+                        {/*      }}*/}
+                        {/*      onClick={() => setMore((prevState) => !prevState)}*/}
+                        {/*    >*/}
+                        {/*      {more ? "Hide details" : "More details"}*/}
+                        {/*    </Button>*/}
+                        {/*  </Grid>*/}
+                        {/*</Grid>*/}
+
 
                         {more ? (
                           <>
