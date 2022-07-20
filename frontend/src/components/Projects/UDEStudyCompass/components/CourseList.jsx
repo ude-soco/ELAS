@@ -4,7 +4,6 @@ import CreateIcon from "@material-ui/icons/Create";
 import Backend from "../../../../assets/functions/Backend";
 import SemesterOverview from "./SemesterOverview";
 import Course from "./CourseDetails/Course";
-import TodayIcon from "@material-ui/icons/Today";
 import CloseIcon from "@material-ui/icons/Close";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import Schedule from "./Schedule";
@@ -14,7 +13,7 @@ import Header from "./Header";
 import {prepareCourses} from "../StudyCompassHomepage";
 
 const CourseList = (props) => {
-  const { courseList, selectStudyProgram, setStudyProgramsView } = props;
+  const {courseList, selectStudyProgram, setStudyProgramsView} = props;
 
   const [state, setState] = useState({
     courses: [],
@@ -58,15 +57,15 @@ const CourseList = (props) => {
       (item) => item.id === courseId
     );
     tempSelectedCourses[courseIndex].selectedTime = updates;
-    setState({ ...state, selectedCourses: tempSelectedCourses });
+    setState({...state, selectedCourses: tempSelectedCourses});
   };
 
   const handleSortCourses = (sortedCourses) => {
-    setState({ ...state, courses: sortedCourses });
+    setState({...state, courses: sortedCourses});
   };
 
   const handleSortSelectedCourses = (sortedCourses) => {
-    setState({ ...state, selectedCourses: sortedCourses });
+    setState({...state, selectedCourses: sortedCourses});
   };
 
   const handleSearchCourse = (event) => {
@@ -115,21 +114,21 @@ const CourseList = (props) => {
   };
 
   const handleApplyFilters = async (event, filterData) => {
-    setOpen({ ...open, filters: open.filters ? false : event.currentTarget });
+    setOpen({...open, filters: open.filters ? false : event.currentTarget});
     setFilterSelections(filterData);
     let tempCourses = await prefilterCourses(
       selectStudyProgram.id,
       state.selectedCourses,
       filterData
     );
-    setState({ ...state, courses: tempCourses });
+    setState({...state, courses: tempCourses});
   };
 
   const prefilterCourses = async (studyProgramId, selectedCourses, filter) => {
     const courses = await Backend.get(
       "/studycompass/get_lectures_with_root_id",
       {
-        params: { id: studyProgramId },
+        params: {id: studyProgramId},
       }
     ).then((response) => response.data);
 
@@ -187,7 +186,7 @@ const CourseList = (props) => {
     }
 
     let results = tempSchedule.filter(
-      (item) => !selectedCourses.find(({ id }) => item.id === id)
+      (item) => !selectedCourses.find(({id}) => item.id === id)
     );
 
     return prepareCourses(results);
@@ -199,8 +198,8 @@ const CourseList = (props) => {
 
   return (
     <>
-      <Grid container style={{ padding: 40 }}>
-        <Grid item xs style={{ paddingBottom: 30 }}>
+      <Grid container style={{padding: 40}}>
+        <Grid item xs style={{paddingBottom: 30}}>
           <Grid container justify="space-between" alignItems="center">
             <Grid item>
               <img
@@ -209,22 +208,6 @@ const CourseList = (props) => {
                 alt="StudyCompass Logo"
               />
             </Grid>
-            <Grid item>
-              <Grid container alignItems="center" justify="flex-end">
-                <Grid item xs={8}>
-                  <Typography style={{ color: "#6D6D6D" }} align="right">
-                    {selectStudyProgram.name}
-                  </Typography>
-                </Grid>
-                <Grid item>
-                  <Tooltip title="Change study program">
-                    <IconButton onClick={() => setStudyProgramsView(false)}>
-                      <CreateIcon />
-                    </IconButton>
-                  </Tooltip>
-                </Grid>
-              </Grid>
-            </Grid>
           </Grid>
         </Grid>
 
@@ -232,7 +215,7 @@ const CourseList = (props) => {
           {/* Left side*/}
           <Grid item xs={4}>
             <Grid container>
-              <Grid item xs={12} style={{ paddingBottom: 24 }}>
+              <Grid item xs={12} style={{paddingBottom: 24}}>
                 <SemesterOverview
                   handleOpenSchedule={handleOpenSchedule}
                   swsCount={state.swsCount}
@@ -241,7 +224,7 @@ const CourseList = (props) => {
                 />
               </Grid>
 
-              <Grid item xs={12} style={{ paddingBottom: 8 }}>
+              <Grid item xs={12} style={{paddingBottom: 8}}>
                 <Typography variant="h6" color="textSecondary">
                   Your selected courses
                 </Typography>
@@ -274,12 +257,29 @@ const CourseList = (props) => {
           <Grid item xs={8}>
             {open.schedule ? (
               <>
-                <Grid container justify="flex-end" style={{ paddingBottom: 24 }}>
+                <Grid container justify="space-between" style={{paddingBottom: 24}}>
+                  <Grid item>
+                    <Grid container alignItems="center" justify="flex-end">
+                      <Grid item>
+                        <Typography style={{color: "#6D6D6D"}} align="right">
+                          Study program: <b>{selectStudyProgram.name}</b>
+                        </Typography>
+                      </Grid>
+                      <Grid item>
+                        <Tooltip title={<Typography>Change study program</Typography>} arrow>
+                          <IconButton onClick={() => setStudyProgramsView(false)}>
+                            <CreateIcon/>
+                          </IconButton>
+                        </Tooltip>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+
                   <Grid item>
                     <Button
                       variant="contained"
                       style={{backgroundColor: "#FB9B0E", color: "white"}}
-                      startIcon={<CloseIcon />}
+                      startIcon={<CloseIcon/>}
                       onClick={handleOpenSchedule}
                     >
                       Close
@@ -289,30 +289,32 @@ const CourseList = (props) => {
               </>
             ) : (
               <>
-                <Grid
-                  container
-                  justify="flex-end"
-                  style={{ paddingBottom: 24 }}
-                >
-                  {/*<Grid item xs>*/}
-                  {/*  <Button*/}
-                  {/*    style={{ backgroundColor: "#FB9B0E", color: "white" }}*/}
-                  {/*    startIcon={<TodayIcon />}*/}
-                  {/*    variant="contained"*/}
-                  {/*    onClick={handleOpenSchedule}*/}
-                  {/*  >*/}
-                  {/*    Show schedule*/}
-                  {/*  </Button>*/}
-                  {/*</Grid>*/}
+                <Grid container justify="space-between">
+                  <Grid item>
+                    <Grid container alignItems="center" justify="flex-end">
+                      <Grid item>
+                        <Typography style={{color: "#6D6D6D"}} align="right">
+                          Study program: <b>{selectStudyProgram.name}</b>
+                        </Typography>
+                      </Grid>
+                      <Grid item>
+                        <Tooltip title={<Typography>Change study program</Typography>} arrow>
+                          <IconButton onClick={() => setStudyProgramsView(false)}>
+                            <CreateIcon/>
+                          </IconButton>
+                        </Tooltip>
+                      </Grid>
+                    </Grid>
+                  </Grid>
 
                   <Grid item>
                     <Grid container>
                       <Button
-                        style={{ marginRight: 16 }}
-                        startIcon={<FilterListIcon />}
+                        style={{marginRight: 16}}
+                        startIcon={<FilterListIcon/>}
                         disabled={open.filters}
                         onClick={() =>
-                          setOpen({ ...open, filters: !open.filters })
+                          setOpen({...open, filters: !open.filters})
                         }
                       >
                         Filters
@@ -323,7 +325,7 @@ const CourseList = (props) => {
                         variant="outlined"
                         size="small"
                         value={searchCourse}
-                        style={{ backgroundColor: "#FFF" }}
+                        style={{backgroundColor: "#FFF"}}
                         onChange={handleSearchCourse}
                       />
                     </Grid>
@@ -333,7 +335,7 @@ const CourseList = (props) => {
             )}
 
             {/* Filters */}
-            <Grid item xs={12} style={{ paddingBottom: 24 }}>
+            <Grid item xs={12} style={{paddingBottom: 24}}>
               <Collapse in={open.filters}>
                 <Filters
                   courses={courseList}
@@ -344,7 +346,7 @@ const CourseList = (props) => {
 
             {/* Schedule component */}
             {open.schedule ? (
-              <Schedule handleResolvedConflict={handleResolvedConflict} currentSchedule={currentSchedule} />
+              <Schedule handleResolvedConflict={handleResolvedConflict} currentSchedule={currentSchedule}/>
             ) : (
               <>
                 <Header

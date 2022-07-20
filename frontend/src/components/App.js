@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import ScrollToTop from "./Reuseable/ScrollToTop/ScrollToTop";
 import NavigationBar from "./Website/NavigationBar/NavigationBar";
 import Home from "./Website/Home/Home";
@@ -15,6 +15,7 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import { CssBaseline, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import StudyCompassHomepage from "./Projects/UDEStudyCompass/StudyCompassHomepage";
+import Backend from "../assets/functions/Backend";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -25,6 +26,10 @@ const useStyles = makeStyles((theme) => ({
 export default function App() {
   const classes = useStyles();
   const isLoggedIn = !!sessionStorage.getItem("elas_userLoggedIn");
+
+  useEffect(async () => {
+    await Backend.get("/");
+  }, [])
 
   return (
     <>
