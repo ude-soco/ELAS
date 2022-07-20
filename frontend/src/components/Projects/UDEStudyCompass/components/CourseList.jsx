@@ -193,6 +193,10 @@ const CourseList = (props) => {
     return prepareCourses(results);
   };
 
+  const handleOpenSchedule = () => {
+    setOpen({...open, schedule: !open.schedule})
+  }
+
   return (
     <>
       <Grid container style={{ padding: 40 }}>
@@ -230,6 +234,7 @@ const CourseList = (props) => {
             <Grid container>
               <Grid item xs={12} style={{ paddingBottom: 24 }}>
                 <SemesterOverview
+                  handleOpenSchedule={handleOpenSchedule}
                   swsCount={state.swsCount}
                   selectedCourses={state.selectedCourses}
                   setCurrentSchedule={setCurrentSchedule}
@@ -269,21 +274,15 @@ const CourseList = (props) => {
           <Grid item xs={8}>
             {open.schedule ? (
               <>
-                <Grid container style={{ paddingBottom: 24 }}>
+                <Grid container justify="flex-end" style={{ paddingBottom: 24 }}>
                   <Grid item>
                     <Button
-                      variant="outlined"
-                      style={{
-                        borderColor: "#FB9B0E",
-                        color: "#FB9B0E",
-                        backgroundColor: "white",
-                      }}
+                      variant="contained"
+                      style={{backgroundColor: "#FB9B0E", color: "white"}}
                       startIcon={<CloseIcon />}
-                      onClick={() =>
-                        setOpen({ ...open, schedule: !open.schedule })
-                      }
+                      onClick={handleOpenSchedule}
                     >
-                      Close schedule
+                      Close
                     </Button>
                   </Grid>
                 </Grid>
@@ -292,21 +291,19 @@ const CourseList = (props) => {
               <>
                 <Grid
                   container
-                  justify="space-between"
+                  justify="flex-end"
                   style={{ paddingBottom: 24 }}
                 >
-                  <Grid item xs>
-                    <Button
-                      style={{ backgroundColor: "#FB9B0E", color: "white" }}
-                      startIcon={<TodayIcon />}
-                      variant="contained"
-                      onClick={() =>
-                        setOpen({ ...open, schedule: !open.schedule })
-                      }
-                    >
-                      Show schedule
-                    </Button>
-                  </Grid>
+                  {/*<Grid item xs>*/}
+                  {/*  <Button*/}
+                  {/*    style={{ backgroundColor: "#FB9B0E", color: "white" }}*/}
+                  {/*    startIcon={<TodayIcon />}*/}
+                  {/*    variant="contained"*/}
+                  {/*    onClick={handleOpenSchedule}*/}
+                  {/*  >*/}
+                  {/*    Show schedule*/}
+                  {/*  </Button>*/}
+                  {/*</Grid>*/}
 
                   <Grid item>
                     <Grid container>

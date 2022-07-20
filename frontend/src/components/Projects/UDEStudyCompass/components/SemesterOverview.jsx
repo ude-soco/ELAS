@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { Grid, Paper, Tooltip, Typography } from "@material-ui/core";
+import React, {useEffect, useState} from "react";
+import {Grid, Paper, Tooltip, Typography} from "@material-ui/core";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import WarningIcon from "@material-ui/icons/Warning";
-import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
-import { v4 as uuidv4 } from "uuid";
+import {v4 as uuidv4} from "uuid";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+import Button from "@material-ui/core/Button";
+import TodayIcon from "@material-ui/icons/Today";
 
 const SemesterOverview = (props) => {
-  const { swsCount, selectedCourses, setCurrentSchedule } = props;
+  const {handleOpenSchedule, swsCount, selectedCourses, setCurrentSchedule} = props;
   const [conflicts, setConflicts] = useState([]);
   const [conflictFeedback, setConflictFeedback] = useState(false);
   const [resolveFeedback, setResolveFeedback] = useState(false);
@@ -73,36 +74,36 @@ const SemesterOverview = (props) => {
     });
 
     const filteredCurrentSchedule = tempSchedule.filter(
-      (elem) => !conflicts.find(({ id }) => elem.id === id)
+      (elem) => !conflicts.find(({id}) => elem.id === id)
     );
 
     let newSchedule = [...filteredCurrentSchedule, ...conflicts];
 
-    return { conflicts, newSchedule };
+    return {conflicts, newSchedule};
   };
 
   return (
     <>
-      <Grid item style={{ paddingBottom: 8 }}>
+      <Grid item style={{paddingBottom: 8}}>
         <Typography variant="h6" color="textSecondary">
           Your semester overview
         </Typography>
       </Grid>
 
       <Grid item>
-        <Paper style={{ padding: 32 }}>
+        <Paper style={{padding: 32}}>
           <Grid container justify="space-between" alignItems="center">
-            <Grid item xs={6} style={{ paddingRight: 32 }}>
+            <Grid item xs={6} style={{paddingRight: 32}}>
               <Grid container alignItems="center" justify="center">
-                <Grid item style={{ marginRight: 16 }}>
+                <Grid item style={{marginRight: 16}}>
                   <Typography variant="h1" color="primary">
                     {swsCount}
                   </Typography>
                 </Grid>
-                <Grid item style={{ width: 24 }}>
+                <Grid item style={{width: 24}}>
                   <Typography
                     color="textSecondary"
-                    style={{ fontWeight: "bold" }}
+                    style={{fontWeight: "bold"}}
                   >
                     Hours weekly load
                   </Typography>
@@ -111,58 +112,74 @@ const SemesterOverview = (props) => {
             </Grid>
 
             <Grid item xs={6}>
-              <Grid container direction="column" alignItems="center">
-                {conflicts.length === 0 ? (
-                  <>
-                    <Grid item>
-                      <CheckCircleIcon
-                        fontSize="large"
-                        style={{ color: "green" }}
-                      />
-                    </Grid>
-                    <Grid item xs>
-                      <Typography
-                        color="textSecondary"
-                        align="center"
-                        style={{ fontWeight: "bold" }}
-                      >
-                        No schedule overlaps
-                      </Typography>
-                    </Grid>
-                  </>
-                ) : (
-                  <>
-                    <Grid item>
-                      <WarningIcon fontSize="large" style={{ color: "red" }} />
-                    </Grid>
-                    <Grid item xs>
-                      <Grid container alignItems="center">
-                        <Grid item style={{ paddingRight: 4 }}>
-                          <Typography
-                            color="textSecondary"
-                            align="center"
-                            style={{ fontWeight: "bold" }}
-                          >
-                            Schedule overlapped!
-                          </Typography>
-                        </Grid>
-                        <Grid item>
-                          <Tooltip
-                            arrow
-                            title={
-                              <Typography>
-                                Check schedule to fix overlapping!
-                              </Typography>
-                            }
-                          >
-                            <InfoOutlinedIcon color="disabled" />
-                          </Tooltip>
-                        </Grid>
-                      </Grid>
-                    </Grid>
-                  </>
-                )}
-              </Grid>
+              {conflicts.length === 0 ? (
+                <Grid container justify="center" alignItems="center">
+                  <Grid item style={{paddingTop: 4, marginRight: 8}}>
+                    <CheckCircleIcon fontSize="large" style={{color: "green"}}/>
+                  </Grid>
+                  <Grid item>
+                    <Button style={{backgroundColor: "#FB9B0E", color: "white"}} startIcon={<TodayIcon/>}
+                            variant="contained" onClick={handleOpenSchedule}>
+                      Calender
+                    </Button>
+                  </Grid>
+                  <Grid item xs={12} style={{paddingTop: 4}}>
+                    <Typography color="textSecondary" align="center" style={{fontWeight: "bold"}}>
+                      No schedule overlaps
+                    </Typography>
+                  </Grid>
+                </Grid>
+              ) : (
+                <Grid container justify="center" alignItems="center">
+                  <Grid item style={{paddingTop: 4, marginRight: 8}}>
+                    <WarningIcon fontSize="large" style={{color: "red"}}/>
+                  </Grid>
+                  <Grid item>
+                    <Tooltip arrow title={<Typography> Click here to fix schedule overlapping! </Typography>}>
+                      <Button style={{backgroundColor: "red", color: "white"}} startIcon={<TodayIcon/>}
+                              variant="contained" onClick={handleOpenSchedule}>
+                        Calender
+                      </Button>
+                    </Tooltip>
+                  </Grid>
+                  <Grid item xs={12} style={{paddingTop: 4}}>
+                    <Typography color="textSecondary" align="center" style={{fontWeight: "bold"}}>
+                      Schedule overlapped!
+                    </Typography>
+                  </Grid>
+                </Grid>
+                // <Tooltip
+                //   arrow
+                //   title={
+                //     <Typography>
+                //       Click here to fix schedule overlapping!
+                //     </Typography>
+                //   }
+                // >
+                //   <Card style={{backgroundColor: "#FFDCD4"}}>
+                //     <CardActionArea style={{padding: 16}} onClick={handleOpenSchedule}>
+                //       <Grid container direction="column" alignItems="center">
+                //         <Grid item>
+                //           <WarningIcon fontSize="large" style={{color: "red"}}/>
+                //         </Grid>
+                //         <Grid item xs>
+                //           <Grid container alignItems="center">
+                //             <Grid item style={{paddingRight: 4}}>
+                //               <Typography
+                //                 color="textSecondary"
+                //                 align="center"
+                //                 style={{fontWeight: "bold"}}
+                //               >
+                //                 Schedule overlapped!
+                //               </Typography>
+                //             </Grid>
+                //           </Grid>
+                //         </Grid>
+                //       </Grid>
+                //     </CardActionArea>
+                //   </Card>
+                // </Tooltip>
+              )}
             </Grid>
           </Grid>
         </Paper>
@@ -170,9 +187,9 @@ const SemesterOverview = (props) => {
 
       <Snackbar
         open={conflictFeedback}
-        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+        anchorOrigin={{vertical: "bottom", horizontal: "center"}}
       >
-        <MuiAlert severity="error">
+        <MuiAlert severity="error" style={{backgroundColor: "#FFDCD4"}}>
           Schedule conflicts detected! Check schedule!
         </MuiAlert>
       </Snackbar>
@@ -181,7 +198,7 @@ const SemesterOverview = (props) => {
         open={resolveFeedback}
         onClose={() => setResolveFeedback((prevState) => !prevState)}
         autoHideDuration={3000}
-        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+        anchorOrigin={{vertical: "bottom", horizontal: "center"}}
       >
         <MuiAlert>Conflicts resolved!</MuiAlert>
       </Snackbar>
